@@ -1,5 +1,8 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "consumable")
 public class ConsumableEntity {
@@ -26,52 +38,4 @@ public class ConsumableEntity {
 	
 	@Column
 	private float value;
-	
-	//Constructeur
-	public ConsumableEntity(String name, ResourceEntity resource, float value) {
-		super();
-		this.name = name;
-		this.resource = resource;
-		this.value = value;
-	}
-	
-	public ConsumableEntity(int id, String name, ResourceEntity resource, float value) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.resource = resource;
-		this.value = value;
-	}
-	
-	//Méthodes
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public ResourceEntity getResource() {
-		return resource;
-	}
-
-	public void setResource(ResourceEntity resource) {
-		this.resource = resource;
-	}
-
-	public float getValue() {
-		return value;
-	}
-
-	public void setValue(float value) {
-		this.value = value;
-	}
-	
-	
 }

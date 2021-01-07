@@ -42,7 +42,7 @@ public class MaintenanceEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="typeId", nullable = false)
-	private TypeOperation typeId;
+	private TypeOperationEntity typeId;
 	
 	@ManyToOne
 	@JoinColumn(name="statusId", nullable = false)
@@ -50,7 +50,7 @@ public class MaintenanceEntity {
 	
 	//Constructeur
 	public MaintenanceEntity(int id, Calendar dateStart, Calendar dateEnd, ResourceEntity resourceId, UserEntity userId,
-			String note, boolean success, TypeOperation typeId, MaintenanceStatusEntity statusId) {
+			String note, boolean success, TypeOperationEntity typeId, MaintenanceStatusEntity statusId) {
 		super();
 		this.id = id;
 		this.dateStart = dateStart;
@@ -121,11 +121,11 @@ public class MaintenanceEntity {
 		this.success = success;
 	}
 
-	public TypeOperation getTypeId() {
+	public TypeOperationEntity getTypeId() {
 		return typeId;
 	}
 
-	public void setTypeId(TypeOperation typeId) {
+	public void setTypeId(TypeOperationEntity typeId) {
 		this.typeId = typeId;
 	}
 

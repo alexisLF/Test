@@ -1,5 +1,6 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="userGroup")
 public class GroupEntity {
@@ -24,36 +34,4 @@ public class GroupEntity {
 	
 	@OneToMany(targetEntity=UserEntity.class, mappedBy="groupId")
 	private List<UserEntity> userList = new ArrayList<UserEntity>();
-	
-	public GroupEntity(int id, String name, int site, List<UserEntity> userList) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.site = site;
-		this.userList = userList;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getSite() {
-		return site;
-	}
-
-	public void setSite(int site) {
-		this.site = site;
-	}
 }

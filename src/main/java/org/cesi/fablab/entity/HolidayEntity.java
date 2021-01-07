@@ -1,6 +1,8 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
@@ -15,6 +17,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "holiday")
 public class HolidayEntity {
@@ -34,52 +45,6 @@ public class HolidayEntity {
 	@ManyToOne
 	@JoinColumn(name="siteId", nullable = false)
 	private SiteEntity siteId;
-	
-	//Constructeur
-	public HolidayEntity(Calendar dateStart, Calendar dateEnd, SiteEntity siteId) {
-		super();
-		this.dateStart = dateStart;
-		this.dateEnd = dateEnd;
-		this.siteId = siteId;
-	}
-	
-	public HolidayEntity(int id, Calendar dateStart, Calendar dateEnd, SiteEntity siteId) {
-		super();
-		this.id = id;
-		this.dateStart = dateStart;
-		this.dateEnd = dateEnd;
-		this.siteId = siteId;
-	}
-	
-	
-	//Méthodes
-	public int getId() {
-		return id;
-	}
-	
-	public java.util.Calendar getDateStart() {
-		return dateStart;
-	}
-
-	public void setDateStart(java.util.Calendar dateStart) {
-		this.dateStart = dateStart;
-	}
-
-	public java.util.Calendar getDateEnd() {
-		return dateEnd;
-	}
-
-	public void setDateEnd(java.util.Calendar dateEnd) {
-		this.dateEnd = dateEnd;
-	}
-
-	public SiteEntity getSiteId() {
-		return siteId;
-	}
-
-	public void setSiteId(SiteEntity siteId) {
-		this.siteId = siteId;
-	}
 	
 	
 }

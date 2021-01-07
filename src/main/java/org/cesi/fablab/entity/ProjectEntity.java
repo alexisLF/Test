@@ -1,5 +1,6 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -18,6 +19,15 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name="project")
 public class ProjectEntity {
@@ -78,131 +88,4 @@ public class ProjectEntity {
 				inverseJoinColumns = @JoinColumn( name = "userId"))
 	private List<UserEntity> collaboratorList = new ArrayList<UserEntity>();
 	
-	//Constructeur
-	
-	public ProjectEntity(int id, String title, String description, Calendar dateStart, Calendar dateEnd,
-			List<SkillEntity> skills, List<TagEntity> tags, List<DocumentEntity> documents,
-			List<ResourceEntity> resourceList, UserEntity creatorId, boolean status, boolean publicAccess,
-			List<UserEntity> collaboratorList) {
-		super();
-		this.id = id;
-		this.title = title;
-		this.description = description;
-		this.dateStart = dateStart;
-		this.dateEnd = dateEnd;
-		this.skills = skills;
-		this.tags = tags;
-		this.documents = documents;
-		this.resourceList = resourceList;
-		this.creatorId = creatorId;
-		this.status = status;
-		this.publicAccess = publicAccess;
-		this.collaboratorList = collaboratorList;
-	}
-	
-	//Méthodes
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public java.util.Calendar getDateStart() {
-		return dateStart;
-	}
-
-	public void setDateStart(java.util.Calendar dateStart) {
-		this.dateStart = dateStart;
-	}
-
-	public java.util.Calendar getDateEnd() {
-		return dateEnd;
-	}
-
-	public void setDateEnd(java.util.Calendar dateEnd) {
-		this.dateEnd = dateEnd;
-	}
-
-	public List<SkillEntity> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(List<SkillEntity> skills) {
-		this.skills = skills;
-	}
-
-	public List<TagEntity> getTags() {
-		return tags;
-	}
-
-	public void setTags(List<TagEntity> tags) {
-		this.tags = tags;
-	}
-
-	public List<DocumentEntity> getDocuments() {
-		return documents;
-	}
-
-	public void setDocuments(List<DocumentEntity> documents) {
-		this.documents = documents;
-	}
-
-	public List<ResourceEntity> getResourceList() {
-		return resourceList;
-	}
-
-	public void setResourceList(List<ResourceEntity> resourceList) {
-		this.resourceList = resourceList;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
-
-	public boolean isPublicAccess() {
-		return publicAccess;
-	}
-
-	public void setPublicAccess(boolean publicAccess) {
-		this.publicAccess = publicAccess;
-	}
-
-	public UserEntity getCreatorId() {
-		return creatorId;
-	}
-
-	public void setCreatorId(UserEntity creatorId) {
-		this.creatorId = creatorId;
-	}
-
-	public List<UserEntity> getCollaboratorList() {
-		return collaboratorList;
-	}
-
-	public void setCollaboratorList(List<UserEntity> collaboratorList) {
-		this.collaboratorList = collaboratorList;
-	}
 }

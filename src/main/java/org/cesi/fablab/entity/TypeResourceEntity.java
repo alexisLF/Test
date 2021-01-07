@@ -9,9 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -24,20 +22,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="capacitation")
-public class CapacitationEntity {
+@Table(name = "typeResource")
+public class TypeResourceEntity {
+	//Propriété
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
-	@Column(name="description", columnDefinition="TEXT")
-	private String description;
-	@ManyToMany
-	@JoinTable(name = "userRoleCapacitation", 
-	joinColumns = @JoinColumn(name = "capacitationId" ), 
-	inverseJoinColumns = @JoinColumn(name = "roleId"))
-	private List<CapacitationEntity> RoleList = new ArrayList<CapacitationEntity>();
 	
-	
+	@OneToMany( targetEntity=ResourceEntity.class, mappedBy="type" )
+    private List<ResourceEntity> roomList = new ArrayList<ResourceEntity>();
 }

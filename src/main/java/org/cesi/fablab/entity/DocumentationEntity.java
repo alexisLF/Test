@@ -1,5 +1,6 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +16,15 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "documentation")
 public class DocumentationEntity {
@@ -35,70 +45,5 @@ public class DocumentationEntity {
                 joinColumns = @JoinColumn( name = "documentId" ),
                 inverseJoinColumns = @JoinColumn( name = "fileId" ) )
     private List<FileEntity> files = new ArrayList<FileEntity>();
-
-	//Constructeur
-	public DocumentationEntity(int id, String description, String useCondition, List<ResourceEntity> resourceId,
-			List<FileEntity> files) {
-		super();
-		this.id = id;
-		this.description = description;
-		this.useCondition = useCondition;
-		this.resourceList = resourceId;
-		this.files = files;
-	}
-
-	
-	//Methode 
-	
-	public int getId() {
-		return id;
-	}
-	
-	public List<ResourceEntity> getResourceList() {
-		return resourceList;
-	}
-
-
-	public void setResourceList(List<ResourceEntity> resourceList) {
-		this.resourceList = resourceList;
-	}
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getUseCondition() {
-		return useCondition;
-	}
-
-	public void setUseCondition(String useCondition) {
-		this.useCondition = useCondition;
-	}
-
-	public List<ResourceEntity> getResourceId() {
-		return resourceList;
-	}
-
-	public void setResourceId(List<ResourceEntity> resourceList) {
-		this.resourceList = resourceList;
-	}
-
-	public List<FileEntity> getFiles() {
-		return files;
-	}
-
-	public void setFiles(List<FileEntity> files) {
-		this.files = files;
-	}
-	
 	
 }

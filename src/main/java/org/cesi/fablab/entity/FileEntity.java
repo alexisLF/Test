@@ -1,5 +1,6 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "file")
 public class FileEntity {
@@ -30,47 +40,5 @@ public class FileEntity {
     		joinColumns = @JoinColumn( name = "fileId" ),
             inverseJoinColumns = @JoinColumn( name = "documentId" ) )
     private List<DocumentationEntity> users = new ArrayList<DocumentationEntity>();
-	
-	//Constructeur
-	public FileEntity(int id, String name, String url, List<DocumentationEntity> users) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.url = url;
-		this.users = users;
-	}
-	
-	//Méthodes
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public List<DocumentationEntity> getUsers() {
-		return users;
-	}
-
-	public void setUsers(List<DocumentationEntity> users) {
-		this.users = users;
-	}
 	
 }

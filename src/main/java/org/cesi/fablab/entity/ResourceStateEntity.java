@@ -1,5 +1,6 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "resourceState")
 public class ResourceStateEntity {
@@ -23,50 +33,4 @@ public class ResourceStateEntity {
 	
 	@OneToMany( targetEntity=ResourceEntity.class, mappedBy="state" )
     private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
-	
-	
-	//Constructeur
-	public ResourceStateEntity(String name, List<ResourceEntity> resourceList) {
-		super();
-		this.name = name;
-		this.resourceList = resourceList;
-	}
-	
-	public ResourceStateEntity(int id, String name, List<ResourceEntity> resourceList) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.resourceList = resourceList;
-	}
-
-	
-	//Méthode
-	
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<ResourceEntity> getResourceList() {
-		return resourceList;
-	}
-
-	public void setResourceList(List<ResourceEntity> resourceList) {
-		this.resourceList = resourceList;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	
-	
-	
 }

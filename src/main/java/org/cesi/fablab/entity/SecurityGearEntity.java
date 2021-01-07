@@ -1,5 +1,6 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,15 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "securitygear")
 public class SecurityGearEntity {
@@ -29,42 +39,4 @@ public class SecurityGearEntity {
                 joinColumns = @JoinColumn( name = "securityGearId" ),
                 inverseJoinColumns = @JoinColumn( name = "resourceId" ) )
     private List<ResourceEntity> resource = new ArrayList<ResourceEntity>();
-	
-	//Constructeur
-	public SecurityGearEntity(int id, String name, List<ResourceEntity> resource) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.resource = resource;
-	}
-	
-		
-	//Méthodes
-	
-	public int getId() {
-		return id;
-	}
-	
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<ResourceEntity> getResource() {
-		return resource;
-	}
-
-	public void setResource(List<ResourceEntity> resource) {
-		this.resource = resource;
-	}
-	
-	
-	
 }

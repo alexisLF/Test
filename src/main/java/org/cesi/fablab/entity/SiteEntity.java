@@ -1,5 +1,6 @@
 package org.cesi.fablab.entity;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "site")
 public class SiteEntity {
@@ -37,57 +47,4 @@ public class SiteEntity {
 	public void setHolidayList(List<HolidayEntity> holidayList) {
 		this.holidayList = holidayList;
 	}
-	
-	//constructeur
-
-	public SiteEntity(String name, String description) {
-		super();
-		this.name = name;
-		this.description = description;
-	}
-
-	public SiteEntity(int id, String name, String description, List<HolidayEntity> holidayList, List<RoomEntity> roomList) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.holidayList = holidayList;
-		this.roomList = roomList;
-	}
-	
-	//Méthodes
-	
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<RoomEntity> getRoomList() {
-		return roomList;
-	}
-
-	public void setRoomList(List<RoomEntity> roomList) {
-		this.roomList = roomList;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-	
-	
 }
