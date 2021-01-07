@@ -24,7 +24,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "reservation")
 public class ReservationEntity {
-	// Propriété
+// Propriété
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;

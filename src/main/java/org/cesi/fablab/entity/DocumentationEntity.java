@@ -26,7 +26,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "documentation")
 public class DocumentationEntity {
-	// Propriété
+// Propriété
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
