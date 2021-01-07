@@ -6,7 +6,6 @@ stages:
 checkstyle:
     stage: test
     script:
-        - 'mvn checkstyle:checkstyle'
-        - cat checkstyle-result.xml
+        - 'mvn -Pcicdprofile checkstyle:checkstyle'
     allow_failure: false
 
