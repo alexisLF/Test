@@ -23,16 +23,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "MaintenanceStatus")
 public class MaintenanceStatusEntity {
-	
-	
 	//Propriété
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
 	@Column
 	private String name;
-	
-	@OneToMany( targetEntity=MaintenanceEntity.class, mappedBy="status" )
+	@OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "status")
     private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
-}	
+}
