@@ -6,6 +6,6 @@ stages:
 checkstyle:
     stage: test
     script:
-        - 'mvn -Pcicdprofile checkstyle:checkstyle'
+        - 'mvn checkstyle:check -Dcheckstyle.config.location=google_checks.xml -Dcheckstyle.violationSeverity=warning'
     allow_failure: false
 
