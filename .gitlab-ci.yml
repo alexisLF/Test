@@ -6,6 +6,6 @@ stages:
 checkstyle:
     stage: test
     script:
-        - 'mvn checkstyle:check -e -Dcheckstyle.violationSeverity=warning'
+        - 'mvn checkstyle:checkstyle -e -Dcheckstyle.violationSeverity=error'
     allow_failure: false
 
