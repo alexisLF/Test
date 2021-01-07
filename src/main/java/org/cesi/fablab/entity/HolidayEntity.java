@@ -11,11 +11,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Holiday {
+@Table(name = "holiday")
+public class HolidayEntity {
+	//Propriété
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
@@ -30,24 +33,30 @@ public class Holiday {
 	
 	@ManyToOne
 	@JoinColumn(name="siteId", nullable = false)
-	private Site siteId;
-
-	public Holiday(int id, Calendar dateStart, Calendar dateEnd, Site siteId) {
+	private SiteEntity siteId;
+	
+	//Constructeur
+	public HolidayEntity(Calendar dateStart, Calendar dateEnd, SiteEntity siteId) {
+		super();
+		this.dateStart = dateStart;
+		this.dateEnd = dateEnd;
+		this.siteId = siteId;
+	}
+	
+	public HolidayEntity(int id, Calendar dateStart, Calendar dateEnd, SiteEntity siteId) {
 		super();
 		this.id = id;
 		this.dateStart = dateStart;
 		this.dateEnd = dateEnd;
 		this.siteId = siteId;
 	}
-
+	
+	
+	//Méthodes
 	public int getId() {
 		return id;
 	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
+	
 	public java.util.Calendar getDateStart() {
 		return dateStart;
 	}
@@ -64,11 +73,11 @@ public class Holiday {
 		this.dateEnd = dateEnd;
 	}
 
-	public Site getSiteId() {
+	public SiteEntity getSiteId() {
 		return siteId;
 	}
 
-	public void setSiteId(Site siteId) {
+	public void setSiteId(SiteEntity siteId) {
 		this.siteId = siteId;
 	}
 	
