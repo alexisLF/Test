@@ -1,6 +1,5 @@
 package org.cesi.fablab.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,25 +23,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="document")
+@Table(name = "document")
 public class DocumentEntity {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column
 	private String name;
-	
-	@Column(columnDefinition="TEXT")
+
+	@Column(columnDefinition = "TEXT")
 	private String description;
-	
+
 	@Column
 	private String path;
 
 	@ManyToMany
-	@JoinTable( name= "documentProjet",
-				joinColumns = @JoinColumn(name="documentId"),
-				inverseJoinColumns = @JoinColumn( name = "projetId"))
+	@JoinTable(name = "documentProjet", joinColumns = @JoinColumn(name = "documentId"), inverseJoinColumns = @JoinColumn(name = "projetId"))
 	private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
 }

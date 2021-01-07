@@ -21,20 +21,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="TypeOperation")
+@Table(name = "TypeOperation")
 public class TypeOperationEntity {
-	
-	//Propriété
+	// Propriété
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Column
 	private String name;
-	
+
 	@Column
 	private String description;
-	
-	@OneToMany( targetEntity=MaintenanceEntity.class, mappedBy="type" )
-    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
+
+	@OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "type")
+	private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 }

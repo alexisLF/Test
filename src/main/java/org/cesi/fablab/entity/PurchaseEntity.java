@@ -1,9 +1,5 @@
 package org.cesi.fablab.entity;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -26,19 +22,19 @@ import lombok.Setter;
 @Entity
 @Table(name = "purchase")
 public class PurchaseEntity {
-	//Propriété
+	// Propriété
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
 	@Basic
 	private java.sql.Date purchaseDate;
 	@ManyToOne
-	@JoinColumn(name="resourceId", nullable = false)
+	@JoinColumn(name = "resourceId", nullable = false)
 	private ResourceEntity ressource;
-	
+
 	@ManyToOne
-	@JoinColumn(name="deliveryId", nullable = false)
+	@JoinColumn(name = "deliveryId", nullable = false)
 	private DeliveryStatusEntity delivery;
 }

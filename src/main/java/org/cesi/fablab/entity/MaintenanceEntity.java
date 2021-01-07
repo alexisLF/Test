@@ -22,41 +22,41 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Maintenance")
+@Table(name = "Maintenance")
 public class MaintenanceEntity {
-	
-	//Propriété
+
+	// Propriété
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Calendar dateStart;
-	
+
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Calendar dateEnd;
-	
+
 	@ManyToOne
-	@JoinColumn(name="resourceId", nullable = false)
+	@JoinColumn(name = "resourceId", nullable = false)
 	private ResourceEntity resource;
-	
+
 	@ManyToOne
-	@JoinColumn(name="userId", nullable = false)
+	@JoinColumn(name = "userId", nullable = false)
 	private UserEntity user;
-	
+
 	@Column
 	private String note;
-	
+
 	@Column
 	private boolean success;
-	
+
 	@ManyToOne
-	@JoinColumn(name="typeId", nullable = false)
+	@JoinColumn(name = "typeId", nullable = false)
 	private TypeOperationEntity type;
-	
+
 	@ManyToOne
-	@JoinColumn(name="statusId", nullable = false)
-	private MaintenanceStatusEntity status;	
+	@JoinColumn(name = "statusId", nullable = false)
+	private MaintenanceStatusEntity status;
 }

@@ -1,6 +1,5 @@
 package org.cesi.fablab.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,13 +23,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "resourceState")
 public class ResourceStateEntity {
-	//Propriété
+	// Propriété
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
-	
-	@OneToMany( targetEntity=ResourceEntity.class, mappedBy="state" )
-    private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+
+	@OneToMany(targetEntity = ResourceEntity.class, mappedBy = "state")
+	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 }

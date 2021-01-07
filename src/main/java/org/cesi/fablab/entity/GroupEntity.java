@@ -1,6 +1,5 @@
 package org.cesi.fablab.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +21,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="userGroup")
+@Table(name = "userGroup")
 public class GroupEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,7 +30,7 @@ public class GroupEntity {
 	private String name;
 	@Column
 	private int site;
-	
-	@OneToMany(targetEntity=UserEntity.class, mappedBy="group")
+
+	@OneToMany(targetEntity = UserEntity.class, mappedBy = "group")
 	private List<UserEntity> usersList = new ArrayList<UserEntity>();
 }

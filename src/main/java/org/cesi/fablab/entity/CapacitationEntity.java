@@ -1,6 +1,5 @@
 package org.cesi.fablab.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,20 +23,16 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="capacitation")
+@Table(name = "capacitation")
 public class CapacitationEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
-	@Column(name="description", columnDefinition="TEXT")
+	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 	@ManyToMany
-	@JoinTable(name = "userRoleCapacitation", 
-	joinColumns = @JoinColumn(name = "capacitationId" ), 
-	inverseJoinColumns = @JoinColumn(name = "roleId"))
+	@JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "capacitationId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
 	private List<CapacitationEntity> RolesList = new ArrayList<CapacitationEntity>();
-	
-	
 }

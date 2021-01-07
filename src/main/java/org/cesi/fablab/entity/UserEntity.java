@@ -26,10 +26,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="user")
+@Table(name = "user")
 public class UserEntity {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String mail;
@@ -47,25 +47,23 @@ public class UserEntity {
 	private String avatar;
 	@Column
 	private int credit;
-	
+
 	@ManyToOne
-	@JoinColumn(name="group_id", nullable=false)
+	@JoinColumn(name = "group_id", nullable = false)
 	private GroupEntity group;
-	
+
 	@ManyToOne
-	@JoinColumn(name="role_id", nullable=false)
+	@JoinColumn(name = "role_id", nullable = false)
 	private RoleEntity role;
-	
-	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="user" )
-    private List<ReservationEntity> reservationsList = new ArrayList<ReservationEntity>();
-	
-	@OneToMany( targetEntity=ProjectEntity.class, mappedBy="creator" )
-    private List<ProjectEntity> projectCollaboratorsList = new ArrayList<ProjectEntity>();
-	
+
+	@OneToMany(targetEntity = ReservationEntity.class, mappedBy = "user")
+	private List<ReservationEntity> reservationsList = new ArrayList<ReservationEntity>();
+
+	@OneToMany(targetEntity = ProjectEntity.class, mappedBy = "creator")
+	private List<ProjectEntity> projectCollaboratorsList = new ArrayList<ProjectEntity>();
+
 	@ManyToMany
-	@JoinTable( name= "projectCollaborator",
-				joinColumns = @JoinColumn(name="userId"),
-				inverseJoinColumns = @JoinColumn( name = "projectId"))
+	@JoinTable(name = "projectCollaborator", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "projectId"))
 	private List<UserEntity> projectsList = new ArrayList<UserEntity>();
-	
+
 }

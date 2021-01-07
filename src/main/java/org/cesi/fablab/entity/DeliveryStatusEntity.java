@@ -24,14 +24,12 @@ import lombok.Setter;
 @Entity
 @Table(name = "deliveryStatus")
 public class DeliveryStatusEntity {
-	
 	//Propriété
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
-	
-	@OneToMany( targetEntity=PurchaseEntity.class, mappedBy="delivery" )
-    private List<PurchaseEntity> purchasesList = new ArrayList<PurchaseEntity>();
+	@OneToMany(targetEntity = PurchaseEntity.class, mappedBy = "delivery")
+	private List<PurchaseEntity> purchasesList = new ArrayList<PurchaseEntity>();
 }

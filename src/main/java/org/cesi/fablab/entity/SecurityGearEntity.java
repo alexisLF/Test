@@ -1,6 +1,5 @@
 package org.cesi.fablab.entity;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,17 +25,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "securitygear")
 public class SecurityGearEntity {
-	
-	//Propriété
+	// Propriété
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
-	
+
 	@ManyToMany
-    @JoinTable( name = "documentFiles",
-                joinColumns = @JoinColumn( name = "securityGearId" ),
-                inverseJoinColumns = @JoinColumn( name = "resourceId" ) )
-    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+	@JoinTable(name = "documentFiles", joinColumns = @JoinColumn(name = "securityGearId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
+	private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 }

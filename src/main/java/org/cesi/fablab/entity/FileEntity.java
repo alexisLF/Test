@@ -26,19 +26,17 @@ import lombok.Setter;
 @Entity
 @Table(name = "file")
 public class FileEntity {
-	//Propriété
+	// Propriété
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
 	@Column
 	private String url;
-	
+
 	@ManyToMany
-    @JoinTable( name = "documentFiles",
-    		joinColumns = @JoinColumn( name = "fileId" ),
-            inverseJoinColumns = @JoinColumn( name = "documentId" ) )
-    private List<DocumentationEntity> usersList = new ArrayList<DocumentationEntity>();
-	
+	@JoinTable(name = "documentFiles", joinColumns = @JoinColumn(name = "fileId"), inverseJoinColumns = @JoinColumn(name = "documentId"))
+	private List<DocumentationEntity> usersList = new ArrayList<DocumentationEntity>();
+
 }

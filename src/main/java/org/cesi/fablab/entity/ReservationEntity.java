@@ -1,9 +1,5 @@
 package org.cesi.fablab.entity;
 
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.List;
-
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,11 +23,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @Entity
 @Table(name = "reservation")
-public class ReservationEntity
-{
-	//Propriété
+public class ReservationEntity {
+	// Propriété
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String title;
@@ -40,7 +35,7 @@ public class ReservationEntity
 	@Column
 	private int priority;
 	@ManyToOne
-	@JoinColumn(name="userId", nullable = false)
+	@JoinColumn(name = "userId", nullable = false)
 	private UserEntity user;
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
@@ -49,6 +44,6 @@ public class ReservationEntity
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Calendar dateEnd;
 	@ManyToOne
-	@JoinColumn(name="resourceId", nullable = false)
+	@JoinColumn(name = "resourceId", nullable = false)
 	private ResourceEntity resource;
 }
