@@ -27,9 +27,9 @@ public class TagEntity {
 	@JoinTable( name= "tagProjet",
 				joinColumns = @JoinColumn(name="tagId"),
 				inverseJoinColumns = @JoinColumn( name = "projetId"))
-	private List<ProjetEntity> projets = new ArrayList<ProjetEntity>();
+	private List<ProjectEntity> projets = new ArrayList<ProjectEntity>();
 	
-	public TagEntity(int id, String name, List<ProjetEntity> projets) {
+	public TagEntity(int id, String name, List<ProjectEntity> projets) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -52,11 +52,11 @@ public class TagEntity {
 		this.name = name;
 	}
 	
-	public List<ProjetEntity> getProjets() {
+	public List<ProjectEntity> getProjets() {
 		return projets;
 	}
 
-	public void setProjets(List<ProjetEntity> projets) {
+	public void setProjets(List<ProjectEntity> projets) {
 		this.projets = projets;
 	}
 

@@ -34,9 +34,9 @@ public class DocumentEntity {
 	@JoinTable( name= "documentProjet",
 				joinColumns = @JoinColumn(name="documentId"),
 				inverseJoinColumns = @JoinColumn( name = "projetId"))
-	private List<ProjetEntity> projets = new ArrayList<ProjetEntity>();
+	private List<ProjectEntity> projets = new ArrayList<ProjectEntity>();
 	
-	public DocumentEntity(int id, String name, String description, String path, List<ProjetEntity> projets) {
+	public DocumentEntity(int id, String name, String description, String path, List<ProjectEntity> projets) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -77,11 +77,11 @@ public class DocumentEntity {
 		this.path = path;
 	}
 
-	public List<ProjetEntity> getProjets() {
+	public List<ProjectEntity> getProjets() {
 		return projets;
 	}
 
-	public void setProjets(List<ProjetEntity> projets) {
+	public void setProjets(List<ProjectEntity> projets) {
 		this.projets = projets;
 	}
 	
