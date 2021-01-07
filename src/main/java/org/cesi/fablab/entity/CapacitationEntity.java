@@ -25,14 +25,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "capacitation")
 public class CapacitationEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String name;
-	@Column(name = "description", columnDefinition = "TEXT")
-	private String description;
-	@ManyToMany
-	@JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "capacitationId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
-	private List<CapacitationEntity> RolesList = new ArrayList<CapacitationEntity>();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+    @ManyToMany
+    @JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "capacitationId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
+    private List<CapacitationEntity> RolesList = new ArrayList<CapacitationEntity>();
 }

@@ -26,20 +26,20 @@ import lombok.Setter;
 @Table(name = "room")
 public class RoomEntity {
 // Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	@Column
-	private String floor;
+    @Column
+    private String floor;
 
-	@ManyToOne
-	@JoinColumn(name = "siteId", nullable = false)
-	private SiteEntity site;
+    @ManyToOne
+    @JoinColumn(name = "siteId", nullable = false)
+    private SiteEntity site;
 
-	@OneToMany(targetEntity = ResourceEntity.class, mappedBy = "room")
-	private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+    @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "room")
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 }

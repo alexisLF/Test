@@ -23,14 +23,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "userGroup")
 public class GroupEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String name;
-	@Column
-	private int site;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
+    @Column
+    private int site;
 
-	@OneToMany(targetEntity = UserEntity.class, mappedBy = "group")
-	private List<UserEntity> usersList = new ArrayList<UserEntity>();
+    @OneToMany(targetEntity = UserEntity.class, mappedBy = "group")
+    private List<UserEntity> usersList = new ArrayList<UserEntity>();
 }

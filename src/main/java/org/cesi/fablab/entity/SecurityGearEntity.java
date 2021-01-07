@@ -25,14 +25,14 @@ import lombok.Setter;
 @Entity
 @Table(name = "securitygear")
 public class SecurityGearEntity {
-	// Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String name;
+    // Propriété
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
 
-	@ManyToMany
-	@JoinTable(name = "documentFiles", joinColumns = @JoinColumn(name = "securityGearId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
-	private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+    @ManyToMany
+    @JoinTable(name = "documentFiles", joinColumns = @JoinColumn(name = "securityGearId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 }

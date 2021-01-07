@@ -26,20 +26,20 @@ import lombok.Setter;
 @Table(name = "document")
 public class DocumentEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	@Column(columnDefinition = "TEXT")
-	private String description;
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-	@Column
-	private String path;
+    @Column
+    private String path;
 
-	@ManyToMany
-	@JoinTable(name = "documentProjet", joinColumns = @JoinColumn(name = "documentId"), inverseJoinColumns = @JoinColumn(name = "projetId"))
-	private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
+    @ManyToMany
+    @JoinTable(name = "documentProjet", joinColumns = @JoinColumn(name = "documentId"), inverseJoinColumns = @JoinColumn(name = "projetId"))
+    private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
 }

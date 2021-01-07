@@ -26,18 +26,18 @@ import lombok.Setter;
 @Entity
 @Table(name = "userRole")
 public class RoleEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String name;
-	@Column(name = "description", columnDefinition = "TEXT")
-	private String description;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
 
-	@OneToMany(targetEntity = UserEntity.class, mappedBy = "role")
-	private List<UserEntity> userList = new ArrayList<UserEntity>();
+    @OneToMany(targetEntity = UserEntity.class, mappedBy = "role")
+    private List<UserEntity> userList = new ArrayList<UserEntity>();
 
-	@ManyToMany
-	@JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "roleId"), inverseJoinColumns = @JoinColumn(name = "capacitationId"))
-	private List<CapacitationEntity> CapacitationList = new ArrayList<CapacitationEntity>();
+    @ManyToMany
+    @JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "roleId"), inverseJoinColumns = @JoinColumn(name = "capacitationId"))
+    private List<CapacitationEntity> CapacitationList = new ArrayList<CapacitationEntity>();
 }

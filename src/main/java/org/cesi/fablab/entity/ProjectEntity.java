@@ -29,51 +29,51 @@ import lombok.Setter;
 @Entity
 @Table(name = "project")
 public class ProjectEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String title;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String title;
 
-	@Column(columnDefinition = "TEXT")
-	private String description;
+    @Column(columnDefinition = "TEXT")
+    private String description;
 
-	@Basic
-	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Calendar dateStart;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Calendar dateStart;
 
-	@Basic
-	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Calendar dateEnd;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Calendar dateEnd;
 
-	@ManyToMany
-	@JoinTable(name = "skillProject", joinColumns = @JoinColumn(name = "projetId"), inverseJoinColumns = @JoinColumn(name = "skillId"))
-	private List<SkillEntity> skillsList = new ArrayList<SkillEntity>();
+    @ManyToMany
+    @JoinTable(name = "skillProject", joinColumns = @JoinColumn(name = "projetId"), inverseJoinColumns = @JoinColumn(name = "skillId"))
+    private List<SkillEntity> skillsList = new ArrayList<SkillEntity>();
 
-	@ManyToMany
-	@JoinTable(name = "tagProjet", joinColumns = @JoinColumn(name = "projetId"), inverseJoinColumns = @JoinColumn(name = "tagId"))
-	private List<TagEntity> tagsList = new ArrayList<TagEntity>();
+    @ManyToMany
+    @JoinTable(name = "tagProjet", joinColumns = @JoinColumn(name = "projetId"), inverseJoinColumns = @JoinColumn(name = "tagId"))
+    private List<TagEntity> tagsList = new ArrayList<TagEntity>();
 
-	@ManyToMany
-	@JoinTable(name = "documentProjet", joinColumns = @JoinColumn(name = "projetId"), inverseJoinColumns = @JoinColumn(name = "documentId"))
-	private List<DocumentEntity> documentsList = new ArrayList<DocumentEntity>();
+    @ManyToMany
+    @JoinTable(name = "documentProjet", joinColumns = @JoinColumn(name = "projetId"), inverseJoinColumns = @JoinColumn(name = "documentId"))
+    private List<DocumentEntity> documentsList = new ArrayList<DocumentEntity>();
 
-	@ManyToMany
-	@JoinTable(name = "resourceProject", joinColumns = @JoinColumn(name = "projectId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
-	private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+    @ManyToMany
+    @JoinTable(name = "resourceProject", joinColumns = @JoinColumn(name = "projectId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
-	@ManyToOne
-	@JoinColumn(name = "creatorId", nullable = false)
-	private UserEntity creator;
+    @ManyToOne
+    @JoinColumn(name = "creatorId", nullable = false)
+    private UserEntity creator;
 
-	@Column
-	private boolean status;
+    @Column
+    private boolean status;
 
-	@Column
-	private boolean publicAccess;
+    @Column
+    private boolean publicAccess;
 
-	@ManyToMany
-	@JoinTable(name = "projectCollaborator", joinColumns = @JoinColumn(name = "projectId"), inverseJoinColumns = @JoinColumn(name = "userId"))
-	private List<UserEntity> collaboratorList = new ArrayList<UserEntity>();
+    @ManyToMany
+    @JoinTable(name = "projectCollaborator", joinColumns = @JoinColumn(name = "projectId"), inverseJoinColumns = @JoinColumn(name = "userId"))
+    private List<UserEntity> collaboratorList = new ArrayList<UserEntity>();
 
 }

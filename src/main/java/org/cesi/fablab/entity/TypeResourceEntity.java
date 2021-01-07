@@ -24,12 +24,12 @@ import lombok.Setter;
 @Table(name = "typeResource")
 public class TypeResourceEntity {
 // Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
 
-	@OneToMany(targetEntity = ResourceEntity.class, mappedBy = "type")
-	private List<ResourceEntity> roomsList = new ArrayList<ResourceEntity>();
+    @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "type")
+    private List<ResourceEntity> roomsList = new ArrayList<ResourceEntity>();
 }

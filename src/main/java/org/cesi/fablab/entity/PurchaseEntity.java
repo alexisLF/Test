@@ -22,19 +22,19 @@ import lombok.Setter;
 @Entity
 @Table(name = "purchase")
 public class PurchaseEntity {
-	// Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String name;
-	@Basic
-	private java.sql.Date purchaseDate;
-	@ManyToOne
-	@JoinColumn(name = "resourceId", nullable = false)
-	private ResourceEntity ressource;
+    // Propriété
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
+    @Basic
+    private java.sql.Date purchaseDate;
+    @ManyToOne
+    @JoinColumn(name = "resourceId", nullable = false)
+    private ResourceEntity ressource;
 
-	@ManyToOne
-	@JoinColumn(name = "deliveryId", nullable = false)
-	private DeliveryStatusEntity delivery;
+    @ManyToOne
+    @JoinColumn(name = "deliveryId", nullable = false)
+    private DeliveryStatusEntity delivery;
 }

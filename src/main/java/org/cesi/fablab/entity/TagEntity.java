@@ -26,14 +26,14 @@ import lombok.Setter;
 @Table(name = "tag")
 public class TagEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	@ManyToMany
-	@JoinTable(name = "tagProjet", joinColumns = @JoinColumn(name = "tagId"), inverseJoinColumns = @JoinColumn(name = "projectId"))
-	private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
+    @ManyToMany
+    @JoinTable(name = "tagProjet", joinColumns = @JoinColumn(name = "tagId"), inverseJoinColumns = @JoinColumn(name = "projectId"))
+    private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
 }

@@ -23,13 +23,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "resourceState")
 public class ResourceStateEntity {
-	// Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String name;
+    // Propriété
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
 
-	@OneToMany(targetEntity = ResourceEntity.class, mappedBy = "state")
-	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+    @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "state")
+    private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 }

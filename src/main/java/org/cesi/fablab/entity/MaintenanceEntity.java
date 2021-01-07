@@ -25,38 +25,38 @@ import lombok.Setter;
 @Table(name = "Maintenance")
 public class MaintenanceEntity {
 
-	// Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    // Propriété
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Basic
-	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Calendar dateStart;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Calendar dateStart;
 
-	@Basic
-	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Calendar dateEnd;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Calendar dateEnd;
 
-	@ManyToOne
-	@JoinColumn(name = "resourceId", nullable = false)
-	private ResourceEntity resource;
+    @ManyToOne
+    @JoinColumn(name = "resourceId", nullable = false)
+    private ResourceEntity resource;
 
-	@ManyToOne
-	@JoinColumn(name = "userId", nullable = false)
-	private UserEntity user;
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    private UserEntity user;
 
-	@Column
-	private String note;
+    @Column
+    private String note;
 
-	@Column
-	private boolean success;
+    @Column
+    private boolean success;
 
-	@ManyToOne
-	@JoinColumn(name = "typeId", nullable = false)
-	private TypeOperationEntity type;
+    @ManyToOne
+    @JoinColumn(name = "typeId", nullable = false)
+    private TypeOperationEntity type;
 
-	@ManyToOne
-	@JoinColumn(name = "statusId", nullable = false)
-	private MaintenanceStatusEntity status;
+    @ManyToOne
+    @JoinColumn(name = "statusId", nullable = false)
+    private MaintenanceStatusEntity status;
 }

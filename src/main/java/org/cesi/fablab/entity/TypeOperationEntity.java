@@ -24,16 +24,16 @@ import lombok.Setter;
 @Table(name = "TypeOperation")
 public class TypeOperationEntity {
 // Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Column
-	private String name;
+    @Column
+    private String name;
 
-	@Column
-	private String description;
+    @Column
+    private String description;
 
-	@OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "type")
-	private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
+    @OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "type")
+    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 }
