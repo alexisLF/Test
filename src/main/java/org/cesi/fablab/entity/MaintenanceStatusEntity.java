@@ -23,7 +23,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "MaintenanceStatus")
 public class MaintenanceStatusEntity {
-// Propriété
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
