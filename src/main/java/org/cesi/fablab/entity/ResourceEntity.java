@@ -56,7 +56,7 @@ public class ResourceEntity {
 	private ResourceStateEntity state;
 	
 	@OneToMany( targetEntity=ConsumableEntity.class, mappedBy="resource" )
-    private List<ConsumableEntity> consumableList = new ArrayList<ConsumableEntity>();
+    private List<ConsumableEntity> consumablesList = new ArrayList<ConsumableEntity>();
 		
 	@ManyToOne
 	@JoinColumn(name="documentationId", nullable = false)
@@ -67,17 +67,17 @@ public class ResourceEntity {
     @JoinTable( name = "documentFiles",
                 joinColumns = @JoinColumn( name = "resourceId" ),
                 inverseJoinColumns = @JoinColumn( name = "securityGearId" ) )
-    private List<ResourceEntity> resource = new ArrayList<ResourceEntity>();
+    private List<SecurityGearEntity> securitysList = new ArrayList<SecurityGearEntity>();
 	
 	@ManyToMany
 	@JoinTable( name= "resourceProject",
 				joinColumns = @JoinColumn(name="resourceId"),
 				inverseJoinColumns = @JoinColumn( name = "projectId"))
-	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+	private List<ProjectEntity> projectList = new ArrayList<ProjectEntity>();
 	
-	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="resourceId" )
-    private List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
+	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="resource" )
+    private List<ReservationEntity> reservationsList = new ArrayList<ReservationEntity>();
 	
-	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="resourceId" )
-    private List<MaintenanceEntity> maintenanceList = new ArrayList<MaintenanceEntity>();
+	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="resource" )
+    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 }

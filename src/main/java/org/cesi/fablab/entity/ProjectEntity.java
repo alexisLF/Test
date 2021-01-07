@@ -52,29 +52,29 @@ public class ProjectEntity {
 	@JoinTable( name= "skillProject",
 				joinColumns = @JoinColumn(name="projetId"),
 				inverseJoinColumns = @JoinColumn( name = "skillId"))
-	private List<SkillEntity> skills = new ArrayList<SkillEntity>();
+	private List<SkillEntity> skillsList = new ArrayList<SkillEntity>();
 	
 	@ManyToMany
 	@JoinTable( name= "tagProjet",
 				joinColumns = @JoinColumn(name="projetId"),
 				inverseJoinColumns = @JoinColumn( name = "tagId"))
-	private List<TagEntity> tags = new ArrayList<TagEntity>();
+	private List<TagEntity> tagsList = new ArrayList<TagEntity>();
 	
 	@ManyToMany
 	@JoinTable( name= "documentProjet",
 				joinColumns = @JoinColumn(name="projetId"),
 				inverseJoinColumns = @JoinColumn( name = "documentId"))
-	private List<DocumentEntity> documents = new ArrayList<DocumentEntity>();
+	private List<DocumentEntity> documentsList = new ArrayList<DocumentEntity>();
 	
 	@ManyToMany
 	@JoinTable( name= "resourceProject",
 				joinColumns = @JoinColumn(name="projectId"),
 				inverseJoinColumns = @JoinColumn( name = "resourceId"))
-	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+	private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 	
 	@ManyToOne
 	@JoinColumn(name="creatorId", nullable = false)
-	private UserEntity creatorId;
+	private UserEntity creator;
 
 	@Column
 	private boolean status;

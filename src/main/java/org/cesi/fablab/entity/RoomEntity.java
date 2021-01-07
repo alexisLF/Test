@@ -40,8 +40,8 @@ public class RoomEntity {
 
 	@ManyToOne
 	@JoinColumn(name="siteId", nullable = false)
-	private SiteEntity siteId;
+	private SiteEntity site;
 	
 	@OneToMany( targetEntity=ResourceEntity.class, mappedBy="room" )
-    private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 }

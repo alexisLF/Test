@@ -33,6 +33,6 @@ public class MaintenanceStatusEntity {
 	@Column
 	private String name;
 	
-	@OneToMany( targetEntity=MaintenanceEntity.class, mappedBy="statusId" )
-    private List<MaintenanceEntity> maintenanceList = new ArrayList<MaintenanceEntity>();
+	@OneToMany( targetEntity=MaintenanceEntity.class, mappedBy="status" )
+    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 }	

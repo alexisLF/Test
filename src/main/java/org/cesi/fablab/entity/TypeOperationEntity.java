@@ -35,6 +35,6 @@ public class TypeOperationEntity {
 	@Column
 	private String description;
 	
-	@OneToMany( targetEntity=MaintenanceEntity.class, mappedBy="typeId" )
-    private List<MaintenanceEntity> maintenanceList = new ArrayList<MaintenanceEntity>();
+	@OneToMany( targetEntity=MaintenanceEntity.class, mappedBy="type" )
+    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 }

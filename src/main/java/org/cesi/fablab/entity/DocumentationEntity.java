@@ -38,12 +38,12 @@ public class DocumentationEntity {
 	private String useCondition;
 	
 	@OneToMany( targetEntity=ResourceEntity.class, mappedBy="documentation" )
-    private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 	
 	@ManyToMany
     @JoinTable( name = "documentFiles",
                 joinColumns = @JoinColumn( name = "documentId" ),
                 inverseJoinColumns = @JoinColumn( name = "fileId" ) )
-    private List<FileEntity> files = new ArrayList<FileEntity>();
+    private List<FileEntity> filesList = new ArrayList<FileEntity>();
 	
 }

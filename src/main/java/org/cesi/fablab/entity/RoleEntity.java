@@ -35,7 +35,7 @@ public class RoleEntity {
 	@Column(name="description", columnDefinition="TEXT")
 	private String description;
 	
-	@OneToMany(targetEntity=UserEntity.class, mappedBy="roleId")
+	@OneToMany(targetEntity=UserEntity.class, mappedBy="role")
 	private List<UserEntity> userList = new ArrayList<UserEntity>();
 	
 	@ManyToMany

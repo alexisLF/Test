@@ -40,11 +40,11 @@ public class MaintenanceEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="resourceId", nullable = false)
-	private ResourceEntity resourceId;
+	private ResourceEntity resource;
 	
 	@ManyToOne
 	@JoinColumn(name="userId", nullable = false)
-	private UserEntity userId;
+	private UserEntity user;
 	
 	@Column
 	private String note;
@@ -54,9 +54,9 @@ public class MaintenanceEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="typeId", nullable = false)
-	private TypeOperationEntity typeId;
+	private TypeOperationEntity type;
 	
 	@ManyToOne
 	@JoinColumn(name="statusId", nullable = false)
-	private MaintenanceStatusEntity statusId;	
+	private MaintenanceStatusEntity status;	
 }

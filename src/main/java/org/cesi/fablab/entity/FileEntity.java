@@ -39,6 +39,6 @@ public class FileEntity {
     @JoinTable( name = "documentFiles",
     		joinColumns = @JoinColumn( name = "fileId" ),
             inverseJoinColumns = @JoinColumn( name = "documentId" ) )
-    private List<DocumentationEntity> users = new ArrayList<DocumentationEntity>();
+    private List<DocumentationEntity> usersList = new ArrayList<DocumentationEntity>();
 	
 }

@@ -44,5 +44,5 @@ public class DocumentEntity {
 	@JoinTable( name= "documentProjet",
 				joinColumns = @JoinColumn(name="documentId"),
 				inverseJoinColumns = @JoinColumn( name = "projetId"))
-	private List<ProjectEntity> projets = new ArrayList<ProjectEntity>();
+	private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
 }

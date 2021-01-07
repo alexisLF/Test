@@ -50,22 +50,22 @@ public class UserEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="group_id", nullable=false)
-	private GroupEntity groupId;
+	private GroupEntity group;
 	
 	@ManyToOne
 	@JoinColumn(name="role_id", nullable=false)
-	private RoleEntity roleId;
+	private RoleEntity role;
 	
-	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="userId" )
-    private List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
+	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="user" )
+    private List<ReservationEntity> reservationsList = new ArrayList<ReservationEntity>();
 	
-	@OneToMany( targetEntity=ProjectEntity.class, mappedBy="creatorId" )
-    private List<ProjectEntity> projectCollaboratorList = new ArrayList<ProjectEntity>();
+	@OneToMany( targetEntity=ProjectEntity.class, mappedBy="creator" )
+    private List<ProjectEntity> projectCollaboratorsList = new ArrayList<ProjectEntity>();
 	
 	@ManyToMany
 	@JoinTable( name= "projectCollaborator",
 				joinColumns = @JoinColumn(name="userId"),
 				inverseJoinColumns = @JoinColumn( name = "projectId"))
-	private List<UserEntity> projectList = new ArrayList<UserEntity>();
+	private List<UserEntity> projectsList = new ArrayList<UserEntity>();
 	
 }

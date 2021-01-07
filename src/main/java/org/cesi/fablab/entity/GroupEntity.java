@@ -32,6 +32,6 @@ public class GroupEntity {
 	@Column
 	private int site;
 	
-	@OneToMany(targetEntity=UserEntity.class, mappedBy="groupId")
-	private List<UserEntity> userList = new ArrayList<UserEntity>();
+	@OneToMany(targetEntity=UserEntity.class, mappedBy="group")
+	private List<UserEntity> usersList = new ArrayList<UserEntity>();
 }

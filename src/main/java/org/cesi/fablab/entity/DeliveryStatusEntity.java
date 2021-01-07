@@ -33,5 +33,5 @@ public class DeliveryStatusEntity {
 	private String name;
 	
 	@OneToMany( targetEntity=PurchaseEntity.class, mappedBy="delivery" )
-    private List<PurchaseEntity> purchaseList = new ArrayList<PurchaseEntity>();
+    private List<PurchaseEntity> purchasesList = new ArrayList<PurchaseEntity>();
 }

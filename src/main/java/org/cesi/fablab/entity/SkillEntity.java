@@ -37,6 +37,6 @@ public class SkillEntity {
 	@ManyToMany
 	@JoinTable( name= "skillProject",
 				joinColumns = @JoinColumn(name="skillId"),
-				inverseJoinColumns = @JoinColumn( name = "projetId"))
-	private List<ProjectEntity> projets = new ArrayList<ProjectEntity>();
+				inverseJoinColumns = @JoinColumn( name = "projectId"))
+	private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
 }

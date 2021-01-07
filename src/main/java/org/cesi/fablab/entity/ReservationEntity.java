@@ -41,7 +41,7 @@ public class ReservationEntity
 	private int priority;
 	@ManyToOne
 	@JoinColumn(name="userId", nullable = false)
-	private UserEntity userId;
+	private UserEntity user;
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private java.util.Calendar dateStart;
@@ -50,5 +50,5 @@ public class ReservationEntity
 	private java.util.Calendar dateEnd;
 	@ManyToOne
 	@JoinColumn(name="resourceId", nullable = false)
-	private ResourceEntity resourceId;
+	private ResourceEntity resource;
 }

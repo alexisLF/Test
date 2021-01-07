@@ -44,7 +44,7 @@ public class HolidayEntity {
 	
 	@ManyToOne
 	@JoinColumn(name="siteId", nullable = false)
-	private SiteEntity siteId;
+	private SiteEntity site;
 	
 	
 }

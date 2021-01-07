@@ -34,17 +34,9 @@ public class SiteEntity {
 	@Column
 	private String description;
 	
-	@OneToMany( targetEntity=HolidayEntity.class, mappedBy="siteId" )
-    private List<HolidayEntity> holidayList = new ArrayList<HolidayEntity>();
+	@OneToMany( targetEntity=HolidayEntity.class, mappedBy="site" )
+    private List<HolidayEntity> holidaysList = new ArrayList<HolidayEntity>();
 	
-	@OneToMany( targetEntity=RoomEntity.class, mappedBy="siteId" )
-    private List<RoomEntity> roomList = new ArrayList<RoomEntity>();
-	
-	public List<HolidayEntity> getHolidayList() {
-		return holidayList;
-	}
-
-	public void setHolidayList(List<HolidayEntity> holidayList) {
-		this.holidayList = holidayList;
-	}
+	@OneToMany( targetEntity=RoomEntity.class, mappedBy="site" )
+    private List<RoomEntity> roomsList = new ArrayList<RoomEntity>();
 }

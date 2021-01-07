@@ -31,5 +31,5 @@ public class TypeResourceEntity {
 	private String name;
 	
 	@OneToMany( targetEntity=ResourceEntity.class, mappedBy="type" )
-    private List<ResourceEntity> roomList = new ArrayList<ResourceEntity>();
+    private List<ResourceEntity> roomsList = new ArrayList<ResourceEntity>();
 }

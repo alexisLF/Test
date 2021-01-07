@@ -38,5 +38,5 @@ public class SecurityGearEntity {
     @JoinTable( name = "documentFiles",
                 joinColumns = @JoinColumn( name = "securityGearId" ),
                 inverseJoinColumns = @JoinColumn( name = "resourceId" ) )
-    private List<ResourceEntity> resource = new ArrayList<ResourceEntity>();
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 }

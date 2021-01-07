@@ -37,7 +37,7 @@ public class CapacitationEntity {
 	@JoinTable(name = "userRoleCapacitation", 
 	joinColumns = @JoinColumn(name = "capacitationId" ), 
 	inverseJoinColumns = @JoinColumn(name = "roleId"))
-	private List<CapacitationEntity> RoleList = new ArrayList<CapacitationEntity>();
+	private List<CapacitationEntity> RolesList = new ArrayList<CapacitationEntity>();
 	
 	
 }
