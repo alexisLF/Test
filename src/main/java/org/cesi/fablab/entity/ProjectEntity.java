@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -61,16 +62,28 @@ public class ProjectEntity {
 				inverseJoinColumns = @JoinColumn( name = "resourceId"))
 	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 	
+	@ManyToOne
+	@JoinColumn(name="creatorId", nullable = false)
+	private UserEntity creatorId;
+
 	@Column
 	private boolean status;
 	
 	@Column
 	private boolean publicAccess;
 	
+	@ManyToMany
+	@JoinTable( name= "projectCollaborator",
+				joinColumns = @JoinColumn(name="projectId"),
+				inverseJoinColumns = @JoinColumn( name = "userId"))
+	private List<UserEntity> collaboratorList = new ArrayList<UserEntity>();
+	
 	//Constructeur
+	
 	public ProjectEntity(int id, String title, String description, Calendar dateStart, Calendar dateEnd,
 			List<SkillEntity> skills, List<TagEntity> tags, List<DocumentEntity> documents,
-			List<ResourceEntity> resourceList, boolean status, boolean publicAccess) {
+			List<ResourceEntity> resourceList, UserEntity creatorId, boolean status, boolean publicAccess,
+			List<UserEntity> collaboratorList) {
 		super();
 		this.id = id;
 		this.title = title;
@@ -81,8 +94,10 @@ public class ProjectEntity {
 		this.tags = tags;
 		this.documents = documents;
 		this.resourceList = resourceList;
+		this.creatorId = creatorId;
 		this.status = status;
 		this.publicAccess = publicAccess;
+		this.collaboratorList = collaboratorList;
 	}
 	
 	//Méthodes
@@ -90,7 +105,7 @@ public class ProjectEntity {
 	public int getId() {
 		return id;
 	}
-
+	
 	public void setId(int id) {
 		this.id = id;
 	}
@@ -174,11 +189,20 @@ public class ProjectEntity {
 	public void setPublicAccess(boolean publicAccess) {
 		this.publicAccess = publicAccess;
 	}
-	
-	
-	
-	
-	
-	
 
+	public UserEntity getCreatorId() {
+		return creatorId;
+	}
+
+	public void setCreatorId(UserEntity creatorId) {
+		this.creatorId = creatorId;
+	}
+
+	public List<UserEntity> getCollaboratorList() {
+		return collaboratorList;
+	}
+
+	public void setCollaboratorList(List<UserEntity> collaboratorList) {
+		this.collaboratorList = collaboratorList;
+	}
 }

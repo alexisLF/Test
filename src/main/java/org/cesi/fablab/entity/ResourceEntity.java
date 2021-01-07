@@ -67,6 +67,8 @@ public class ResourceEntity {
 				inverseJoinColumns = @JoinColumn( name = "projectId"))
 	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 	
+	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="resourceId" )
+    private List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
 	
 	//Constructeur
 	public ResourceEntity(int id, String name, String ref, Date dateInstallation, int stock, Boolean isActive,

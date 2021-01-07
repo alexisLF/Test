@@ -1,6 +1,8 @@
 package org.cesi.fablab.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,7 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -42,8 +47,24 @@ public class UserEntity {
 	@JoinColumn(name="role_id", nullable=false)
 	private RoleEntity roleId;
 	
+	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="userId" )
+    private List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
+	
+	@OneToMany( targetEntity=ProjectEntity.class, mappedBy="creatorId" )
+    private List<ProjectEntity> projectCollaboratorList = new ArrayList<ProjectEntity>();
+	
+	@ManyToMany
+	@JoinTable( name= "projectCollaborator",
+				joinColumns = @JoinColumn(name="userId"),
+				inverseJoinColumns = @JoinColumn( name = "projectId"))
+	private List<UserEntity> projectList = new ArrayList<UserEntity>();
+	
+	
+
 	public UserEntity(int id, String mail, String password, String firstname, String lastname, boolean active,
-			LocalDateTime dateActive, String avatar, int credit, GroupEntity groupId, RoleEntity roleId) {
+			LocalDateTime dateActive, String avatar, int credit, GroupEntity groupId, RoleEntity roleId,
+			List<ReservationEntity> reservationList, List<ProjectEntity> projectCollaboratorList,
+			List<UserEntity> projectList) {
 		super();
 		this.id = id;
 		this.mail = mail;
@@ -56,6 +77,9 @@ public class UserEntity {
 		this.credit = credit;
 		this.groupId = groupId;
 		this.roleId = roleId;
+		this.reservationList = reservationList;
+		this.projectCollaboratorList = projectCollaboratorList;
+		this.projectList = projectList;
 	}
 
 	public int getId() {
@@ -145,4 +169,30 @@ public class UserEntity {
 	public void setRoleId(RoleEntity roleId) {
 		this.roleId = roleId;
 	}
+
+	public List<ReservationEntity> getReservationList() {
+		return reservationList;
+	}
+
+	public void setReservationList(List<ReservationEntity> reservationList) {
+		this.reservationList = reservationList;
+	}
+
+	public List<ProjectEntity> getProjectCollaboratorList() {
+		return projectCollaboratorList;
+	}
+
+	public void setProjectCollaboratorList(List<ProjectEntity> projectCollaboratorList) {
+		this.projectCollaboratorList = projectCollaboratorList;
+	}
+
+	public List<UserEntity> getProjectList() {
+		return projectList;
+	}
+
+	public void setProjectList(List<UserEntity> projectList) {
+		this.projectList = projectList;
+	}
+	
+	
 }
