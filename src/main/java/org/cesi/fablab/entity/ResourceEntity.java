@@ -61,6 +61,12 @@ public class ResourceEntity {
                 inverseJoinColumns = @JoinColumn( name = "securityGearId" ) )
     private List<ResourceEntity> resource = new ArrayList<ResourceEntity>();
 	
+	@ManyToMany
+	@JoinTable( name= "resourceProject",
+				joinColumns = @JoinColumn(name="resourceId"),
+				inverseJoinColumns = @JoinColumn( name = "projectId"))
+	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+	
 	
 	//Constructeur
 	public ResourceEntity(int id, String name, String ref, Date dateInstallation, int stock, Boolean isActive,
