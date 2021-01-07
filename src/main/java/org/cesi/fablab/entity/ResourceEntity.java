@@ -1,7 +1,5 @@
 package org.cesi.fablab.entity;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,4 +77,7 @@ public class ResourceEntity {
 	
 	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="resourceId" )
     private List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
+	
+	@OneToMany( targetEntity=ReservationEntity.class, mappedBy="resourceId" )
+    private List<MaintenanceEntity> maintenanceList = new ArrayList<MaintenanceEntity>();
 }
