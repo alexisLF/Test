@@ -35,7 +35,7 @@ public class UserDTO {
     private List<ProjectEntity> projectCollaboratorsList = new ArrayList<ProjectEntity>();
     private List<UserEntity> projectsList = new ArrayList<UserEntity>();
 
-    public UserDTO(UserEntity userEntity) {
+    public UserDTO(final UserEntity userEntity) {
         super();
         this.id = userEntity.getId();
         this.mail = userEntity.getMail();
