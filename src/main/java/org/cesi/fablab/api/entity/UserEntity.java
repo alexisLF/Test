@@ -1,4 +1,4 @@
-package org.cesi.fablab.entity;
+package org.cesi.fablab.api.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

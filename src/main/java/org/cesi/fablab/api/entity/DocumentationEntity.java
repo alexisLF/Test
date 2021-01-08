@@ -1,4 +1,4 @@
-package org.cesi.fablab.entity;
+package org.cesi.fablab.api.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -23,19 +24,22 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "file")
-public class FileEntity {
-    // Propriété
+@Table(name = "documentation")
+public class DocumentationEntity {
+// Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
-    private String name;
+    private String description;
     @Column
-    private String url;
+    private String useCondition;
+
+    @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "documentation")
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
     @ManyToMany
-    @JoinTable(name = "documentFiles", joinColumns = @JoinColumn(name = "fileId"), inverseJoinColumns = @JoinColumn(name = "documentId"))
-    private List<DocumentationEntity> usersList = new ArrayList<DocumentationEntity>();
+    @JoinTable(name = "documentFiles", joinColumns = @JoinColumn(name = "documentId"), inverseJoinColumns = @JoinColumn(name = "fileId"))
+    private List<FileEntity> filesList = new ArrayList<FileEntity>();
 
 }

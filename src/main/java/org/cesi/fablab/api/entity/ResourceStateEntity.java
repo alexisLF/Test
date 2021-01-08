@@ -1,4 +1,4 @@
-package org.cesi.fablab.entity;
+package org.cesi.fablab.api.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,9 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -23,8 +21,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "securitygear")
-public class SecurityGearEntity {
+@Table(name = "resourceState")
+public class ResourceStateEntity {
     // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -32,7 +30,6 @@ public class SecurityGearEntity {
     @Column
     private String name;
 
-    @ManyToMany
-    @JoinTable(name = "documentFiles", joinColumns = @JoinColumn(name = "securityGearId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
-    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+    @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "state")
+    private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 }

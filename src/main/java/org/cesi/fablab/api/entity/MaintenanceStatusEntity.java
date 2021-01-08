@@ -1,4 +1,4 @@
-package org.cesi.fablab.entity;
+package org.cesi.fablab.api.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +21,13 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "typeResource")
-public class TypeResourceEntity {
-// Propriété
+@Table(name = "MaintenanceStatus")
+public class MaintenanceStatusEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
     private String name;
-
-    @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "type")
-    private List<ResourceEntity> roomsList = new ArrayList<ResourceEntity>();
+    @OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "status")
+    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 }

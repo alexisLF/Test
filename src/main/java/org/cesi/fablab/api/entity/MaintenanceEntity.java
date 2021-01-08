@@ -1,4 +1,4 @@
-package org.cesi.fablab.entity;
+package org.cesi.fablab.api.entity;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

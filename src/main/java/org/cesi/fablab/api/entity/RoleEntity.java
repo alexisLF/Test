@@ -1,4 +1,4 @@
-package org.cesi.fablab.entity;
+package org.cesi.fablab.api.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -23,17 +24,20 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "tag")
-public class TagEntity {
-
+@Table(name = "userRole")
+public class RoleEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
     @Column
     private String name;
+    @Column(name = "description", columnDefinition = "TEXT")
+    private String description;
+
+    @OneToMany(targetEntity = UserEntity.class, mappedBy = "role")
+    private List<UserEntity> userList = new ArrayList<UserEntity>();
 
     @ManyToMany
-    @JoinTable(name = "tagProjet", joinColumns = @JoinColumn(name = "tagId"), inverseJoinColumns = @JoinColumn(name = "projectId"))
-    private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
+    @JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "roleId"), inverseJoinColumns = @JoinColumn(name = "capacitationId"))
+    private List<CapacitationEntity> CapacitationList = new ArrayList<CapacitationEntity>();
 }

@@ -1,4 +1,4 @@
-package org.cesi.fablab.entity;
+package org.cesi.fablab.api.entity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,8 +23,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "document")
-public class DocumentEntity {
+@Table(name = "skill")
+public class SkillEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -33,13 +33,7 @@ public class DocumentEntity {
     @Column
     private String name;
 
-    @Column(columnDefinition = "TEXT")
-    private String description;
-
-    @Column
-    private String path;
-
     @ManyToMany
-    @JoinTable(name = "documentProjet", joinColumns = @JoinColumn(name = "documentId"), inverseJoinColumns = @JoinColumn(name = "projetId"))
+    @JoinTable(name = "skillProject", joinColumns = @JoinColumn(name = "skillId"), inverseJoinColumns = @JoinColumn(name = "projectId"))
     private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
 }

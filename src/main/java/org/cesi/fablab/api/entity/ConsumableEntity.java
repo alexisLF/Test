@@ -1,14 +1,12 @@
-package org.cesi.fablab.entity;
-
-import java.util.ArrayList;
-import java.util.List;
+package org.cesi.fablab.api.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -21,16 +19,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "userGroup")
-public class GroupEntity {
+@Table(name = "consumable")
+public class ConsumableEntity {
+    // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column
     private String name;
+    @ManyToOne
+    @JoinColumn(name = "resourceId", nullable = false)
+    private ResourceEntity resource;
     @Column
-    private int site;
-
-    @OneToMany(targetEntity = UserEntity.class, mappedBy = "group")
-    private List<UserEntity> usersList = new ArrayList<UserEntity>();
+    private float value;
 }
