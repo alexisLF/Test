@@ -24,12 +24,12 @@ import lombok.Setter;
 @Table(name = "typeFile")
 public class TypeFileEntity {
 // Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@Column
-	private String name;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column
+    private String name;
 
-	@OneToMany(targetEntity = FileEntity.class, mappedBy = "type")
-	private List<FileEntity> filesList = new ArrayList<FileEntity>();
+    @OneToMany(targetEntity = FileEntity.class, mappedBy = "type")
+    private List<FileEntity> filesList = new ArrayList<FileEntity>();
 }

@@ -24,20 +24,20 @@ import lombok.Setter;
 @Table(name = "holiday")
 public class HolidayEntity {
 // Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
-	@Basic
-	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Calendar dateStart;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Calendar dateStart;
 
-	@Basic
-	@Temporal(TemporalType.TIMESTAMP)
-	private java.util.Calendar dateEnd;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Calendar dateEnd;
 
-	@ManyToOne
-	@JoinColumn(name = "siteId", nullable = false)
-	private SiteEntity site;
+    @ManyToOne
+    @JoinColumn(name = "siteId", nullable = false)
+    private SiteEntity site;
 
 }
