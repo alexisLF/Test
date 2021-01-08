@@ -64,6 +64,6 @@ public class UserEntity {
 
     @ManyToMany
     @JoinTable(name = "projectCollaborator", joinColumns = @JoinColumn(name = "userId"), inverseJoinColumns = @JoinColumn(name = "projectId"))
-    private List<UserEntity> projectsList = new ArrayList<UserEntity>();
+    private List<ProjectEntity> projectsList = new ArrayList<ProjectEntity>();
 
 }

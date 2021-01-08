@@ -34,5 +34,5 @@ public class CapacitationEntity {
     private String description;
     @ManyToMany
     @JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "capacitationId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
-    private List<CapacitationEntity> RolesList = new ArrayList<CapacitationEntity>();
+    private List<RoleEntity> RolesList = new ArrayList<RoleEntity>();
 }
