@@ -24,7 +24,7 @@ public class SecurityGearDTO {
 		super();
 		this.id = securityGearEntity.getId();
 		this.name = securityGearEntity.getName();
-		// this.resourcesList = securityGearEntity.getResourceEntity();
+		// this.resourcesList = securityGearEntity.getResourcesList();
 	}
 
 }
