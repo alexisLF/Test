@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class FablabApplication {
+public class FablabApplication {
 
-	static final void main(final String[] args) {
-		SpringApplication.run(FablabApplication.class, args);
-	}
+    public static final void main(final String[] args) {
+        SpringApplication.run(FablabApplication.class, args);
+    }
 }
