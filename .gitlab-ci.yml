@@ -6,6 +6,6 @@ stages:
 checkstyle:
     stage: test
     script:
-        - 'mvn checkstyle:check -e -Dcheckstyle.violationSeverity=warning'
+        - 'mvn checkstyle:checkstyle -e -Dcheckstyle.config.location=./cesi_checks.xml -Dcheckstyle.violationSeverity=warning'
     allow_failure: false
 
