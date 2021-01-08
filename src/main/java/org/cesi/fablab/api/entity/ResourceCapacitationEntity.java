@@ -3,7 +3,6 @@ package org.cesi.fablab.api.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +11,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -25,25 +23,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "purchase")
-public class PurchaseEntity {
-	// Propriété
+@Table(name = "resourceCapacitation")
+public class ResourceCapacitationEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@Column
 	private String name;
-	@Basic
-	private java.sql.Date purchaseDate;
-	@ManyToOne
-	@JoinColumn(name = "resourceId", nullable = false)
-	private ResourceEntity ressource;
-
-	@ManyToOne
-	@JoinColumn(name = "deliveryId", nullable = false)
-	private DeliveryStatusEntity delivery;
+	@Column(name = "description", columnDefinition = "TEXT")
+	private String description;
 
 	@ManyToMany
-	@JoinTable(name = "purchaseFiles", joinColumns = @JoinColumn(name = "purchaseId"), inverseJoinColumns = @JoinColumn(name = "fileId"))
-	private List<FileEntity> filesList = new ArrayList<FileEntity>();
+	@JoinTable(name = "machineCapacitation", joinColumns = @JoinColumn(name = "resourceCapacitationId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
+	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+
+	@ManyToMany
+	@JoinTable(name = "userCapacitation", joinColumns = @JoinColumn(name = "resourceCapacitationId"), inverseJoinColumns = @JoinColumn(name = "userId"))
+	private List<UserEntity> userCapacitationList = new ArrayList<UserEntity>();
 }

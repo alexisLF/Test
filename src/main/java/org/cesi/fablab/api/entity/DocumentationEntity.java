@@ -27,19 +27,19 @@ import lombok.Setter;
 @Table(name = "documentation")
 public class DocumentationEntity {
 // Propriété
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    @Column
-    private String description;
-    @Column
-    private String useCondition;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int id;
+	@Column
+	private String description;
+	@Column
+	private String useCondition;
 
-    @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "documentation")
-    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+	@OneToMany(targetEntity = ResourceEntity.class, mappedBy = "documentation")
+	private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
-    @ManyToMany
-    @JoinTable(name = "documentFiles", joinColumns = @JoinColumn(name = "documentId"), inverseJoinColumns = @JoinColumn(name = "fileId"))
-    private List<FileEntity> filesList = new ArrayList<FileEntity>();
+	@ManyToMany
+	@JoinTable(name = "documentationFiles", joinColumns = @JoinColumn(name = "documentationId"), inverseJoinColumns = @JoinColumn(name = "fileId"))
+	private List<FileEntity> filesList = new ArrayList<FileEntity>();
 
 }
