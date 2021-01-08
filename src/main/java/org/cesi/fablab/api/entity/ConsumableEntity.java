@@ -21,13 +21,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "consumable")
 public class ConsumableEntity {
-	// Propriété
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@ManyToOne
-	@JoinColumn(name = "resourceId", nullable = false)
-	private ResourceEntity resource;
-	@Column
-	private float value;
+    // Propriété
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @ManyToOne
+    @JoinColumn(name = "resourceId", nullable = false)
+    private ResourceEntity resource;
+    @Column
+    private float value;
 }
