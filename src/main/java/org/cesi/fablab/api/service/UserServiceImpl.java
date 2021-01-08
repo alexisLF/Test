@@ -11,37 +11,38 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl implements UserService {
-	@Autowired
-	private UserRepository userRepository;
-	@Override
-	public List<UserDTO> getAllUsers() throws Exception {
-		List<UserDTO> lstUsersDTO= new ArrayList<UserDTO>();
-		List<UserEntity> lstUsersEntity=userRepository.findAll();
-		if(lstUsersEntity != null && !lstUsersEntity.isEmpty()) {
-			for(UserEntity currentUserEntity : lstUsersEntity) {
-				UserDTO userDTO=new UserDTO(currentUserEntity);
-				lstUsersDTO.add(userDTO);
-			}
-		}
-		return lstUsersDTO;
-	}
+    @Autowired
+    private UserRepository userRepository;
 
-	@Override
-	public void addUser(UserDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public List<UserDTO> getAllUsers() throws Exception {
+        List<UserDTO> lstUsersDTO = new ArrayList<UserDTO>();
+        List<UserEntity> lstUsersEntity = userRepository.findAll();
+        if (lstUsersEntity != null && !lstUsersEntity.isEmpty()) {
+            for (UserEntity currentUserEntity : lstUsersEntity) {
+                UserDTO userDTO = new UserDTO(currentUserEntity);
+                lstUsersDTO.add(userDTO);
+            }
+        }
+        return lstUsersDTO;
+    }
 
-	@Override
-	public void removeUser(UserDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    public void addUser(UserDTO dto) throws Exception {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void updateUser(UserDTO dto) throws Exception {
-		// TODO Auto-generated method stub
-		
-	}
+    }
+
+    @Override
+    public void removeUser(UserDTO dto) throws Exception {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void updateUser(UserDTO dto) throws Exception {
+        // TODO Auto-generated method stub
+
+    }
 
 }
