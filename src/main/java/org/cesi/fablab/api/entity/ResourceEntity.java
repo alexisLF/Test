@@ -55,9 +55,6 @@ public class ResourceEntity {
     @JoinColumn(name = "stateId", nullable = false)
     private ResourceStateEntity state;
 
-    @OneToMany(targetEntity = ConsumableEntity.class, mappedBy = "resource")
-    private List<ConsumableEntity> consumablesList = new ArrayList<ConsumableEntity>();
-
     @ManyToOne
     @JoinColumn(name = "documentationId", nullable = false)
     private DocumentationEntity documentation;
@@ -73,7 +70,7 @@ public class ResourceEntity {
     @OneToMany(targetEntity = ReservationEntity.class, mappedBy = "resource")
     private List<ReservationEntity> reservationsList = new ArrayList<ReservationEntity>();
 
-    @OneToMany(targetEntity = ReservationEntity.class, mappedBy = "resource")
+    @OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "resource")
     private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 
     @ManyToMany
