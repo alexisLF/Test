@@ -19,21 +19,21 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchaseDTO {
-	private int id;
-	private String name;
-	private Date purchaseDate;
-	private ResourceEntity ressource;
-	private DeliveryStatusEntity delivery;
-	private List<FileEntity> filesList = new ArrayList<FileEntity>();
+    private int id;
+    private String name;
+    private Date purchaseDate;
+    private ResourceEntity ressource;
+    private DeliveryStatusEntity delivery;
+    private List<FileEntity> filesList = new ArrayList<FileEntity>();
 
-	public PurchaseDTO(final PurchaseEntity purchaseEntity) {
-		super();
-		this.id = purchaseEntity.getId();
-		this.name = purchaseEntity.getName();
-		this.purchaseDate = purchaseEntity.getPurchaseDate();
-		// this.ressource = userEntity.getRessource();
-		// this.delivery = userEntity.getDelivery();
-		// this.filesList = userEntity.getFilesList();
-	}
+    public PurchaseDTO(final PurchaseEntity purchaseEntity) {
+        super();
+        this.id = purchaseEntity.getId();
+        this.name = purchaseEntity.getName();
+        this.purchaseDate = purchaseEntity.getPurchaseDate();
+        // this.ressource = userEntity.getRessource();
+        // this.delivery = userEntity.getDelivery();
+        // this.filesList = userEntity.getFilesList();
+    }
 
 }

@@ -16,15 +16,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeliveryStatusDTO {
-	private int id;
-	private String name;
-	private List<PurchaseEntity> purchasesList = new ArrayList<PurchaseEntity>();
+    private int id;
+    private String name;
+    private List<PurchaseEntity> purchasesList = new ArrayList<PurchaseEntity>();
 
-	public DeliveryStatusDTO(final DeliveryStatusEntity deliveryStatusEntity) {
-		super();
-		this.id = deliveryStatusEntity.getId();
-		this.name = deliveryStatusEntity.getName();
-		// this.purchasesList = deliveryStatusEntity.getPurchasesList();
-	}
+    public DeliveryStatusDTO(final DeliveryStatusEntity deliveryStatusEntity) {
+        super();
+        this.id = deliveryStatusEntity.getId();
+        this.name = deliveryStatusEntity.getName();
+        // this.purchasesList = deliveryStatusEntity.getPurchasesList();
+    }
 
 }

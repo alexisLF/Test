@@ -16,15 +16,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResourceStateDTO {
-	private int id;
-	private String name;
-	private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+    private int id;
+    private String name;
+    private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 
-	public ResourceStateDTO(final ResourceStateEntity resourceStateEntity) {
-		super();
-		this.id = resourceStateEntity.getId();
-		this.name = resourceStateEntity.getName();
-		// this.resourceList = resourceStateEntity.getResourceList();
-	}
+    public ResourceStateDTO(final ResourceStateEntity resourceStateEntity) {
+        super();
+        this.id = resourceStateEntity.getId();
+        this.name = resourceStateEntity.getName();
+        // this.resourceList = resourceStateEntity.getResourceList();
+    }
 
 }
