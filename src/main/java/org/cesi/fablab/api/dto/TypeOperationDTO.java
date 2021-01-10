@@ -16,17 +16,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TypeOperationDTO {
-	private int id;
-	private String name;
-	private String description;
-	private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
+    private int id;
+    private String name;
+    private String description;
+    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 
-	public TypeOperationDTO(final TypeOperationEntity typeOperationEntity) {
-		super();
-		this.id = typeOperationEntity.getId();
-		this.name = typeOperationEntity.getName();
-		this.description = typeOperationEntity.getDescription();
-		// this.maintenancesList = typeOperationEntity.getMaintenancesList();
-	}
+    public TypeOperationDTO(final TypeOperationEntity typeOperationEntity) {
+        super();
+        this.id = typeOperationEntity.getId();
+        this.name = typeOperationEntity.getName();
+        this.description = typeOperationEntity.getDescription();
+        // this.maintenancesList = typeOperationEntity.getMaintenancesList();
+    }
 
 }

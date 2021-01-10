@@ -16,15 +16,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MaintenanceStatusDTO {
-	private int id;
-	private String name;
-	private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
+    private int id;
+    private String name;
+    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 
-	public MaintenanceStatusDTO(final MaintenanceStatusEntity maintenanceStatusEntity) {
-		super();
-		this.id = maintenanceStatusEntity.getId();
-		this.name = maintenanceStatusEntity.getName();
-		// this.maintenancesList = maintenanceStatusEntity.getMaintenancesList();
-	}
+    public MaintenanceStatusDTO(final MaintenanceStatusEntity maintenanceStatusEntity) {
+        super();
+        this.id = maintenanceStatusEntity.getId();
+        this.name = maintenanceStatusEntity.getName();
+        // this.maintenancesList = maintenanceStatusEntity.getMaintenancesList();
+    }
 
 }
