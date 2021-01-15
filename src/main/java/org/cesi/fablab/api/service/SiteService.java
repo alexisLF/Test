@@ -3,14 +3,17 @@ package org.cesi.fablab.api.service;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.SiteDTO;
+import org.cesi.fablab.api.entity.SiteEntity;
 
 public interface SiteService {
-	public List<SiteDTO> getAllSites() throws Exception;
+    List<SiteDTO> getAllSites() throws Exception;
 
-	public void addSite(SiteDTO dto) throws Exception;
+    SiteDTO addSite(SiteDTO dto) throws Exception;
 
-	public void removeSite(SiteDTO dto) throws Exception;
+    boolean removeSite(SiteDTO dto) throws Exception;
 
-	public void updateSite(SiteDTO dto) throws Exception;
+    SiteEntity updateSite(SiteDTO dto) throws Exception;
+
+    SiteEntity getSiteById(long id) throws Exception;
 
 }

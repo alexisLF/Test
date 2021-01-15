@@ -23,7 +23,7 @@ public class SiteDTO {
     private List<HolidayEntity> holidaysList = new ArrayList<HolidayEntity>();
     private List<RoomEntity> roomsList = new ArrayList<RoomEntity>();
 
-    public SiteDTO(SiteEntity siteEntity) {
+    public SiteDTO(final SiteEntity siteEntity) {
         super();
         this.id = siteEntity.getId();
         this.name = siteEntity.getName();

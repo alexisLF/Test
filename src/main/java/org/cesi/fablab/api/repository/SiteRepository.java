@@ -6,5 +6,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(transactionManager = "transactionManager")
 public interface SiteRepository extends JpaRepository<SiteEntity, Long> {
-
+    SiteEntity findById(long id);
 }
