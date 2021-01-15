@@ -26,7 +26,7 @@ public class DeliveryStatusEntity {
     // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @Column
     private String name;
     @OneToMany(targetEntity = PurchaseEntity.class, mappedBy = "delivery")

@@ -24,7 +24,7 @@ public class ConsumableEntity {
     // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @ManyToOne
     @JoinColumn(name = "resourceId", nullable = false)
     private ResourceEntity resource;
