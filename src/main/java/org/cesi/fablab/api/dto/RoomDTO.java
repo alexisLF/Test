@@ -17,19 +17,19 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RoomDTO {
-	private int id;
-	private String name;
-	private String floor;
-	private SiteEntity site;
-	private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+    private long id;
+    private String name;
+    private String floor;
+    private SiteEntity site;
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
-	public RoomDTO(RoomEntity roomEntity) {
-		super();
-		this.id = roomEntity.getId();
-		this.name = roomEntity.getName();
-		this.floor = roomEntity.getFloor();
-		// this.site = userEntity.getSite();
-		// this.resourcesList = userEntity.getResourcesList();
-	}
+    public RoomDTO(RoomEntity roomEntity) {
+        super();
+        this.id = roomEntity.getId();
+        this.name = roomEntity.getName();
+        this.floor = roomEntity.getFloor();
+        // this.site = userEntity.getSite();
+        // this.resourcesList = userEntity.getResourcesList();
+    }
 
 }

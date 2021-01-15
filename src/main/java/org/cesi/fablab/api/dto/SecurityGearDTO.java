@@ -16,15 +16,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SecurityGearDTO {
-	private int id;
-	private String name;
-	private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+    private long id;
+    private String name;
+    private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
-	public SecurityGearDTO(SecurityGearEntity securityGearEntity) {
-		super();
-		this.id = securityGearEntity.getId();
-		this.name = securityGearEntity.getName();
-		// this.resourcesList = securityGearEntity.getResourcesList();
-	}
+    public SecurityGearDTO(SecurityGearEntity securityGearEntity) {
+        super();
+        this.id = securityGearEntity.getId();
+        this.name = securityGearEntity.getName();
+        // this.resourcesList = securityGearEntity.getResourcesList();
+    }
 
 }
