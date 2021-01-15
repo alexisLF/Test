@@ -23,7 +23,7 @@ public class RoomDTO {
     private SiteEntity site;
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
-    public RoomDTO(RoomEntity roomEntity) {
+    public RoomDTO(final RoomEntity roomEntity) {
         super();
         this.id = roomEntity.getId();
         this.name = roomEntity.getName();

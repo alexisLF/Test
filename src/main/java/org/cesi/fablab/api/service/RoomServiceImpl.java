@@ -12,38 +12,73 @@ import org.springframework.stereotype.Service;
 @Service
 public class RoomServiceImpl implements RoomService {
 
-	@Autowired
-	private RoomRepository roomRepository;
+    @Autowired
+    private RoomRepository roomRepository;
 
-	@Override
-	public List<RoomDTO> getAllRooms() throws Exception {
-		List<RoomDTO> lstRoomsDTO = new ArrayList<RoomDTO>();
-		List<RoomEntity> lstRoomsEntity = roomRepository.findAll();
-		if (lstRoomsEntity != null && !lstRoomsEntity.isEmpty()) {
-			for (RoomEntity currentRoomEntity : lstRoomsEntity) {
-				RoomDTO roomDTO = new RoomDTO(currentRoomEntity);
-				lstRoomsDTO.add(roomDTO);
-			}
-		}
-		return lstRoomsDTO;
-	}
+    @Override
+    public List<RoomDTO> getAllRooms() throws Exception {
+        List<RoomDTO> lstRoomsDTO = new ArrayList<RoomDTO>();
+        List<RoomEntity> lstRoomsEntity = roomRepository.findAll();
+        if (lstRoomsEntity != null && !lstRoomsEntity.isEmpty()) {
+            for (RoomEntity currentRoomEntity : lstRoomsEntity) {
+                RoomDTO roomDTO = new RoomDTO(currentRoomEntity);
+                lstRoomsDTO.add(roomDTO);
+            }
+        }
+        return lstRoomsDTO;
+    }
 
-	@Override
-	public void addRoom(RoomDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    public final RoomDTO addRoom(final RoomDTO dto) throws Exception {
+        // TODO Auto-generated method stub
+        RoomEntity entity = new RoomEntity();
+        entity.setFloor(dto.getFloor());
+        entity.setName(dto.getName());
+        roomRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
+    }
 
-	}
+    @Override
+    public final boolean removeRoom(final RoomDTO dto) throws Exception {
+        // TODO Auto-generated method stub
 
-	@Override
-	public void removeRoom(RoomDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+        RoomEntity entity = roomRepository.findById(dto.getId());
+        if (entity != null) {
+            roomRepository.delete(entity);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
-	}
+    @Override
+    public final RoomEntity updateRoom(final RoomDTO dto) throws Exception {
+        // TODO Auto-generated method stub
+        RoomEntity entity = this.getRoomById(dto.getId());
+        entity.setFloor(dto.getFloor());
+        entity.setName(dto.getName());
+        return roomRepository.save(entity);
+    }
 
-	@Override
-	public void updateRoom(RoomDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    public final RoomEntity getRoomById(final long id) throws Exception {
+        // TODO Auto-generated method stub
+        return roomRepository.getOne(id);
+    }
 
-	}
+    @Override
+    public final List<RoomDTO> getRoomsBySite(final long idSite) throws Exception {
+        // TODO Auto-generated method stub
+        List<RoomDTO> lstRoomsDTO = new ArrayList<RoomDTO>();
+        List<RoomEntity> lstRoomsEntity = roomRepository.findBySite(idSite);
+        if (lstRoomsEntity != null && !lstRoomsEntity.isEmpty()) {
+            for (RoomEntity currentRoomEntity : lstRoomsEntity) {
+                RoomDTO roomDTO = new RoomDTO(currentRoomEntity);
+                lstRoomsDTO.add(roomDTO);
+            }
+        }
+        return lstRoomsDTO;
+    }
 
 }
