@@ -28,21 +28,56 @@ public class TypeOperationServiceImpl implements TypeOperationService {
     }
 
     @Override
-    public final void addTypeOperation(final TypeOperationDTO dto) throws Exception {
+    public final TypeOperationDTO addTypeOperation(final TypeOperationDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
+        TypeOperationEntity entity = new TypeOperationEntity();
+        entity.setDescription(dto.getDescription());
+        entity.setName(dto.getName());
+        typeOperationRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
     }
 
     @Override
-    public final void removeTypeOperation(final TypeOperationDTO dto) throws Exception {
+    public final boolean removeTypeOperation(final TypeOperationDTO dto) throws Exception {
         // TODO Auto-generated method stub
 
+        TypeOperationEntity entity = typeOperationRepository.findById(dto.getId());
+        if (entity != null) {
+            typeOperationRepository.delete(entity);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public final void updateTypeOperation(final TypeOperationDTO dto) throws Exception {
+    public final TypeOperationEntity updateTypeOperation(final TypeOperationDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
+        TypeOperationEntity entity = new TypeOperationEntity();
+        entity.setId(dto.getId());
+        entity.setDescription(dto.getDescription());
+        entity.setName(dto.getName());
+        return typeOperationRepository.save(entity);
     }
 
+    @Override
+    public final TypeOperationEntity getTypeOperationById(final int id) throws Exception {
+        // TODO Auto-generated method stub
+        return typeOperationRepository.getOne(id);
+    }
+
+    @Override
+    public final List<TypeOperationDTO> getTypeOperationByName(final String name) throws Exception {
+        // TODO Auto-generated method stub
+        List<TypeOperationDTO> lstTypesOperationDTO = new ArrayList<TypeOperationDTO>();
+        List<TypeOperationEntity> lstTypesOperationEntity = typeOperationRepository.findByName(name);
+        if (lstTypesOperationEntity != null && !lstTypesOperationEntity.isEmpty()) {
+            for (TypeOperationEntity currentTypeOperationEntity : lstTypesOperationEntity) {
+                TypeOperationDTO typeOperationDTO = new TypeOperationDTO(currentTypeOperationEntity);
+                lstTypesOperationDTO.add(typeOperationDTO);
+            }
+        }
+        return lstTypesOperationDTO;
+    }
 }

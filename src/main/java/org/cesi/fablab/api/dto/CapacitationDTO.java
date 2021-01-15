@@ -16,17 +16,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CapacitationDTO {
-	private int id;
-	private String name;
-	private String description;
-	private List<RoleEntity> rolesList = new ArrayList<RoleEntity>();
+    private int id;
+    private String name;
+    private String description;
+    private List<RoleEntity> rolesList = new ArrayList<RoleEntity>();
 
-	public CapacitationDTO(final CapacitationEntity capacitationEntity) {
-		super();
-		this.id = capacitationEntity.getId();
-		this.name = capacitationEntity.getName();
-		this.description = capacitationEntity.getDescription();
-		// this.rolesList = capacitationEntity.getRolesList();
-	}
+    public CapacitationDTO(final CapacitationEntity capacitationEntity) {
+        super();
+        this.id = capacitationEntity.getId();
+        this.name = capacitationEntity.getName();
+        this.description = capacitationEntity.getDescription();
+        // this.rolesList = capacitationEntity.getRolesList();
+    }
 
 }
