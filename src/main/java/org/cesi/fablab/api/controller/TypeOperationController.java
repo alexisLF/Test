@@ -29,7 +29,7 @@ public class TypeOperationController {
     @Autowired(required = true)
     private TypeOperationService typeOperationService;
 
-    @GetMapping("/operation/all")
+    @GetMapping("/typeoperation/all")
     ResponseEntity<Map<String, Object>> all() throws Exception {
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
@@ -39,7 +39,7 @@ public class TypeOperationController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(value = "/operation")
+    @PostMapping(value = "/typeoperation")
     public ResponseEntity<Object> addTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperationModel)
             throws Exception {
 
@@ -54,7 +54,7 @@ public class TypeOperationController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping(value = "/operation")
+    @PutMapping(value = "/typeoperation")
     public ResponseEntity<Object> updateTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperationModel)
             throws Exception {
 
@@ -73,7 +73,7 @@ public class TypeOperationController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/operation/allByName")
+    @GetMapping("/typeoperation/allByName")
     ResponseEntity<Map<String, Object>> getAllByName(@RequestParam(name = "name", defaultValue = "") final String name)
             throws Exception {
         List<TypeOperationDTO> entityList = typeOperationService.getTypeOperationByName(name);
@@ -90,7 +90,7 @@ public class TypeOperationController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/operation/oneById")
+    @GetMapping("/typeoperation/oneById")
     ResponseEntity<Map<String, Object>> getById(@RequestParam(name = "id", defaultValue = "0") final int id)
             throws Exception {
         Map<String, Object> response = new HashMap<>();
@@ -109,7 +109,7 @@ public class TypeOperationController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(value = "/operation")
+    @DeleteMapping(value = "/typeoperation")
     public ResponseEntity<Object> deleteTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperationModel)
             throws Exception {
 
