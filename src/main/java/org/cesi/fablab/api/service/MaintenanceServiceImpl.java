@@ -11,38 +11,38 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class MaintenanceServiceImpl implements MaintenanceService {
-	@Autowired
-	private MaintenanceRepository maintenanceRepository;
+    @Autowired
+    private MaintenanceRepository maintenanceRepository;
 
-	@Override
-	public List<MaintenanceDTO> getAllMaintenances() throws Exception {
-		List<MaintenanceDTO> lstMaintenancesDTO = new ArrayList<MaintenanceDTO>();
-		List<MaintenanceEntity> lstMaintenancesEntity = maintenanceRepository.findAll();
-		if (lstMaintenancesEntity != null && !lstMaintenancesEntity.isEmpty()) {
-			for (MaintenanceEntity currentMaintenanceEntity : lstMaintenancesEntity) {
-				MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity);
-				lstMaintenancesDTO.add(maintenanceDTO);
-			}
-		}
-		return lstMaintenancesDTO;
-	}
+    @Override
+    public List<MaintenanceDTO> getAllMaintenances() throws Exception {
+        List<MaintenanceDTO> lstMaintenancesDTO = new ArrayList<MaintenanceDTO>();
+        List<MaintenanceEntity> lstMaintenancesEntity = maintenanceRepository.findAll();
+        if (lstMaintenancesEntity != null && !lstMaintenancesEntity.isEmpty()) {
+            for (MaintenanceEntity currentMaintenanceEntity : lstMaintenancesEntity) {
+                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity);
+                lstMaintenancesDTO.add(maintenanceDTO);
+            }
+        }
+        return lstMaintenancesDTO;
+    }
 
-	@Override
-	public final void addMaintenance(final MaintenanceDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    public final void addMaintenance(final MaintenanceDTO dto) throws Exception {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public final void removeMaintenance(final MaintenanceDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    public final void removeMaintenance(final MaintenanceDTO dto) throws Exception {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
-	@Override
-	public final void updateMaintenance(final MaintenanceDTO dto) throws Exception {
-		// TODO Auto-generated method stub
+    @Override
+    public final void updateMaintenance(final MaintenanceDTO dto) throws Exception {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

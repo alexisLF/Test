@@ -16,15 +16,15 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TypeFileDTO {
-	private int id;
-	private String name;
-	private List<FileEntity> filesList = new ArrayList<FileEntity>();
+    private int id;
+    private String name;
+    private List<FileEntity> filesList = new ArrayList<FileEntity>();
 
-	public TypeFileDTO(final TypeFileEntity typeFileEntity) {
-		super();
-		this.id = typeFileEntity.getId();
-		this.name = typeFileEntity.getName();
-		// this.filesList = typeFileEntity.getFilesList();
-	}
+    public TypeFileDTO(final TypeFileEntity typeFileEntity) {
+        super();
+        this.id = typeFileEntity.getId();
+        this.name = typeFileEntity.getName();
+        // this.filesList = typeFileEntity.getFilesList();
+    }
 
 }

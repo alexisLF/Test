@@ -19,23 +19,23 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileDTO {
-	private int id;
-	private String name;
-	private String url;
-	private Calendar dateUpload;
-	private TypeFileEntity type;
-	private List<DocumentationEntity> usersList = new ArrayList<DocumentationEntity>();
-	private List<PurchaseEntity> purchaseFilesList = new ArrayList<PurchaseEntity>();
+    private int id;
+    private String name;
+    private String url;
+    private Calendar dateUpload;
+    private TypeFileEntity type;
+    private List<DocumentationEntity> usersList = new ArrayList<DocumentationEntity>();
+    private List<PurchaseEntity> purchaseFilesList = new ArrayList<PurchaseEntity>();
 
-	public FileDTO(final FileEntity fileEntity) {
-		super();
-		this.id = fileEntity.getId();
-		this.name = fileEntity.getName();
-		this.url = fileEntity.getUrl();
-		this.dateUpload = fileEntity.getDateUpload();
-		// this.type = fileEntity.getType();
-		// this.usersList = fileEntity.getUsersList();
-		// this.purchaseFilesList = fileEntity.getPurchaseFilesList();
-	}
+    public FileDTO(final FileEntity fileEntity) {
+        super();
+        this.id = fileEntity.getId();
+        this.name = fileEntity.getName();
+        this.url = fileEntity.getUrl();
+        this.dateUpload = fileEntity.getDateUpload();
+        // this.type = fileEntity.getType();
+        // this.usersList = fileEntity.getUsersList();
+        // this.purchaseFilesList = fileEntity.getPurchaseFilesList();
+    }
 
 }
