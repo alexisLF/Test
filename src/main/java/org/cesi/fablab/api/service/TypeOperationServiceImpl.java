@@ -54,8 +54,7 @@ public class TypeOperationServiceImpl implements TypeOperationService {
     @Override
     public final TypeOperationEntity updateTypeOperation(final TypeOperationDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        TypeOperationEntity entity = new TypeOperationEntity();
-        entity.setId(dto.getId());
+        TypeOperationEntity entity = this.getTypeOperationById(dto.getId());
         entity.setDescription(dto.getDescription());
         entity.setName(dto.getName());
         return typeOperationRepository.save(entity);

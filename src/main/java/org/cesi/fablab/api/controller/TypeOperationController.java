@@ -58,18 +58,18 @@ public class TypeOperationController {
     public ResponseEntity<Object> updateTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperationModel)
             throws Exception {
 
-        TypeOperationEntity entity = typeOperationService.getTypeOperationById(typeOperationModel.getId());
-
         Map<String, Object> response = new HashMap<>();
-        if (entity != null) {
+        try {
             typeOperationService.updateTypeOperation(typeOperationModel);
             response.put("ERROR", false);
             response.put("DATA", typeOperationModel);
-        } else {
+        } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
             response.put("MESSAGE", "Entity not found");
+        } finally {
+            response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
-        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+
         return ResponseEntity.ok(response);
     }
 
