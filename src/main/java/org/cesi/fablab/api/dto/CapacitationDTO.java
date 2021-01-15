@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CapacitationDTO {
-    private int id;
+    private long id;
     private String name;
     private String description;
     private List<RoleEntity> rolesList = new ArrayList<RoleEntity>();

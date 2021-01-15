@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TypeOperationDTO {
-    private int id;
+    private long id;
     private String name;
     private String description;
     private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();

@@ -25,7 +25,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ResourceDTO {
-    private int id;
+    private long id;
     private String name;
     private String ref;
     private Date dateInstallation;

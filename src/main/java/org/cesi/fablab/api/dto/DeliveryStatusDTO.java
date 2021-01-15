@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DeliveryStatusDTO {
-    private int id;
+    private long id;
     private String name;
     private List<PurchaseEntity> purchasesList = new ArrayList<PurchaseEntity>();
 

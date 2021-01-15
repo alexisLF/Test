@@ -19,7 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class FileDTO {
-    private int id;
+    private long id;
     private String name;
     private String url;
     private Calendar dateUpload;

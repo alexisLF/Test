@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResourceCapacitationDTO {
 
-    private int id;
+    private long id;
     private String name;
     private String description;
     // private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();

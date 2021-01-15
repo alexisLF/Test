@@ -61,7 +61,7 @@ public class TypeOperationServiceImpl implements TypeOperationService {
     }
 
     @Override
-    public final TypeOperationEntity getTypeOperationById(final int id) throws Exception {
+    public final TypeOperationEntity getTypeOperationById(final long id) throws Exception {
         // TODO Auto-generated method stub
         return typeOperationRepository.getOne(id);
     }

@@ -12,7 +12,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DocumentationDTO {
-    private int id;
+    private long id;
     private String description;
     private String useCondition;
     // private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();

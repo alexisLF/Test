@@ -18,7 +18,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MaintenanceDTO {
-    private int id;
+    private long id;
     private Calendar dateStart;
     private Calendar dateEnd;
     private ResourceEntity ressource;

@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TypeFileDTO {
-    private int id;
+    private long id;
     private String name;
     private List<FileEntity> filesList = new ArrayList<FileEntity>();
 

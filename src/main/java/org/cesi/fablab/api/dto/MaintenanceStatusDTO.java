@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MaintenanceStatusDTO {
-    private int id;
+    private long id;
     private String name;
     private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 

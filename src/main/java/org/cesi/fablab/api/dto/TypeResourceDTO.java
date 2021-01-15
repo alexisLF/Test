@@ -16,7 +16,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class TypeResourceDTO {
-    private int id;
+    private long id;
     private String name;
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 

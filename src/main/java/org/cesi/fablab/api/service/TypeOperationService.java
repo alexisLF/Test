@@ -14,7 +14,7 @@ public interface TypeOperationService {
 
     TypeOperationEntity updateTypeOperation(TypeOperationDTO dto) throws Exception;
 
-    TypeOperationEntity getTypeOperationById(int id) throws Exception;
+    TypeOperationEntity getTypeOperationById(long id) throws Exception;
 
     List<TypeOperationDTO> getTypeOperationByName(String name) throws Exception;
 }

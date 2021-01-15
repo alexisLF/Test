@@ -19,7 +19,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PurchaseDTO {
-    private int id;
+    private long id;
     private String name;
     private Date purchaseDate;
     private ResourceEntity ressource;
