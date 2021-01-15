@@ -15,17 +15,17 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(path = { "/core/api/v1" })
 public class SiteController {
 
-	@Autowired(required = true)
-	private SiteService siteService;
+    @Autowired(required = true)
+    private SiteService siteService;
 
-	@GetMapping("/all")
-	ResponseEntity<Map<String, Object>> all() throws Exception {
-		Map<String, Object> response = new HashMap<>();
-		response.put("ERROR", false);
-		response.put("DATA", siteService.getAllSites());
-		response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-		response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
-		return ResponseEntity.ok(response);
-	}
+    @GetMapping("/site/all")
+    ResponseEntity<Map<String, Object>> all() throws Exception {
+        Map<String, Object> response = new HashMap<>();
+        response.put("ERROR", false);
+        response.put("DATA", siteService.getAllSites());
+        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
+        return ResponseEntity.ok(response);
+    }
 
 }

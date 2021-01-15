@@ -14,11 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(path = { "/core/api/v1" })
 public class SecurityGearController {
-	
-	@Autowired(required = true)
+
+    @Autowired(required = true)
     private SecurityGearService securityGearService;
 
-    @GetMapping("/all")
+    @GetMapping("/securitygear/all")
     ResponseEntity<Map<String, Object>> all() throws Exception {
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
