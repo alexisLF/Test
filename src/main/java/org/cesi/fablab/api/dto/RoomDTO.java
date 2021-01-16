@@ -28,7 +28,7 @@ public class RoomDTO {
         this.id = roomEntity.getId();
         this.name = roomEntity.getName();
         this.floor = roomEntity.getFloor();
-        // this.site = userEntity.getSite();
+        this.site = roomEntity.getSite();
         // this.resourcesList = userEntity.getResourcesList();
     }
 

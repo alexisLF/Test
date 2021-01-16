@@ -11,5 +11,5 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
 
     RoomEntity findById(long id);
 
-    List<RoomEntity> findBySite(long idSite);
+    List<RoomEntity> findBySiteId(long idSite);
 }

@@ -12,6 +12,7 @@ import org.cesi.fablab.api.dto.RoomDTO;
 import org.cesi.fablab.api.entity.RoomEntity;
 import org.cesi.fablab.api.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,15 +42,24 @@ public class RoomController {
     @PostMapping(value = "/room")
     public ResponseEntity<Object> addRoom(@Valid @RequestBody final RoomDTO roomModel) throws Exception {
 
-        RoomDTO dto = roomService.addRoom(roomModel);
-        roomModel.setId(dto.getId());
-
         Map<String, Object> response = new HashMap<>();
-        response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", roomModel);
-        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        try {
+            RoomDTO dto = roomService.addRoom(roomModel);
+            roomModel.setId(dto.getId());
+            response.put("ERROR", false);
+            response.put("DATA", dto);
+            response.put("DATA", roomModel);
+        } catch (EntityNotFoundException e) {
+            response.put("ERROR", true);
+            response.put("MESSAGE", "Entity not found");
+        } catch (DataIntegrityViolationException e) {
+            response.put("ERROR", true);
+            response.put("MESSAGE", "Data integrity violation");
+        } finally {
+            response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        }
         return ResponseEntity.ok(response);
+
     }
 
     @PutMapping(value = "/room")
@@ -63,6 +73,9 @@ public class RoomController {
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
             response.put("MESSAGE", "Entity not found");
+        } catch (DataIntegrityViolationException e) {
+            response.put("ERROR", true);
+            response.put("MESSAGE", "Data integrity violation");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -70,9 +83,9 @@ public class RoomController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/room/allByName")
-    ResponseEntity<Map<String, Object>> getAllBySite(@RequestParam(name = "name", defaultValue = "") final long idSite)
-            throws Exception {
+    @GetMapping("/room/allBySite")
+    ResponseEntity<Map<String, Object>> getAllBySite(
+            @RequestParam(name = "idSite", defaultValue = "") final long idSite) throws Exception {
         List<RoomDTO> entityList = roomService.getRoomsBySite(idSite);
 
         Map<String, Object> response = new HashMap<>();
