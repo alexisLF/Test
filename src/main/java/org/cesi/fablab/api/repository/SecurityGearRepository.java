@@ -6,5 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(transactionManager = "transactionManager")
 public interface SecurityGearRepository extends JpaRepository<SecurityGearEntity, Long> {
+    SecurityGearEntity findById(long id);
 
 }

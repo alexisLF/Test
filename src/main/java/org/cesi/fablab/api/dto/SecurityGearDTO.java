@@ -20,7 +20,7 @@ public class SecurityGearDTO {
     private String name;
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
-    public SecurityGearDTO(SecurityGearEntity securityGearEntity) {
+    public SecurityGearDTO(final SecurityGearEntity securityGearEntity) {
         super();
         this.id = securityGearEntity.getId();
         this.name = securityGearEntity.getName();
