@@ -27,7 +27,7 @@ import lombok.Setter;
 public class ResourceCapacitationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
     @Column
     private String name;
     @Column(name = "description", columnDefinition = "TEXT")

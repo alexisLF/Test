@@ -27,7 +27,7 @@ public class MaintenanceEntity {
     // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)

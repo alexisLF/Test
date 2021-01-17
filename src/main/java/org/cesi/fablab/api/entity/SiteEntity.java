@@ -26,7 +26,8 @@ public class SiteEntity {
     // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
+
     @Column
     private String name;
 
