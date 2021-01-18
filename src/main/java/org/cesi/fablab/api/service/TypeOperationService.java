@@ -10,7 +10,7 @@ public interface TypeOperationService {
 
     TypeOperationDTO addTypeOperation(TypeOperationDTO dto) throws Exception;
 
-    boolean removeTypeOperation(TypeOperationDTO dto) throws Exception;
+    boolean removeTypeOperation(long id) throws Exception;
 
     TypeOperationEntity updateTypeOperation(TypeOperationDTO dto) throws Exception;
 

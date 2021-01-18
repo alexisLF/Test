@@ -91,7 +91,7 @@ public class TypeOperationController {
     }
 
     @GetMapping("/typeoperation/oneById")
-    ResponseEntity<Map<String, Object>> getById(@RequestParam(name = "id", defaultValue = "0") final int id)
+    ResponseEntity<Map<String, Object>> getById(@RequestParam(name = "id", defaultValue = "0") final long id)
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
@@ -110,16 +110,16 @@ public class TypeOperationController {
     }
 
     @DeleteMapping(value = "/typeoperation")
-    public ResponseEntity<Object> deleteTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperationModel)
+    public ResponseEntity<Object> deleteTypeOperation(@RequestParam(name = "id", defaultValue = "0") final long id)
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!typeOperationService.removeTypeOperation(typeOperationModel)) {
+        if (!typeOperationService.removeTypeOperation(id)) {
             response.put("ERROR", true);
             response.put("MESSAGE", "Delete failed");
         } else {
             response.put("ERROR", false);
-            response.put("DATA", typeOperationModel);
+            response.put("DATA", id);
         }
 
         return ResponseEntity.ok(response);

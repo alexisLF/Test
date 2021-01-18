@@ -39,10 +39,10 @@ public class TypeOperationServiceImpl implements TypeOperationService {
     }
 
     @Override
-    public final boolean removeTypeOperation(final TypeOperationDTO dto) throws Exception {
+    public final boolean removeTypeOperation(final long id) throws Exception {
         // TODO Auto-generated method stub
 
-        TypeOperationEntity entity = typeOperationRepository.findById(dto.getId());
+        TypeOperationEntity entity = typeOperationRepository.findById(id);
         if (entity != null) {
             typeOperationRepository.delete(entity);
             return true;
