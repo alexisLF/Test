@@ -15,35 +15,57 @@ public class ResourceCapacitationServiceImpl implements ResourceCapacitationServ
     private ResourceCapacitationRepository resourceCapacitationRepository;
 
     @Override
-    public List<ResourceCapacitationDTO> getAllResourceCapacitations() throws Exception {
-        List<ResourceCapacitationDTO> lstResourceCapacitationsDTO = new ArrayList<ResourceCapacitationDTO>();
-        List<ResourceCapacitationEntity> lstResourceCapacitationsEntity = resourceCapacitationRepository.findAll();
-        if (lstResourceCapacitationsEntity != null && !lstResourceCapacitationsEntity.isEmpty()) {
-            for (ResourceCapacitationEntity currentResourceCapacitationEntity : lstResourceCapacitationsEntity) {
+    public List<ResourceCapacitationDTO> getAllResourceCapacitation() throws Exception {
+        List<ResourceCapacitationDTO> lstResourceCapacitationDTO = new ArrayList<ResourceCapacitationDTO>();
+        List<ResourceCapacitationEntity> lstResourceCapacitationEntity = resourceCapacitationRepository.findAll();
+        if (lstResourceCapacitationEntity != null && !lstResourceCapacitationEntity.isEmpty()) {
+            for (ResourceCapacitationEntity currentResourceCapacitationEntity : lstResourceCapacitationEntity) {
                 ResourceCapacitationDTO resourceCapacitationDTO = new ResourceCapacitationDTO(
                         currentResourceCapacitationEntity);
-                lstResourceCapacitationsDTO.add(resourceCapacitationDTO);
+                lstResourceCapacitationDTO.add(resourceCapacitationDTO);
             }
         }
-        return lstResourceCapacitationsDTO;
+        return lstResourceCapacitationDTO;
     }
 
     @Override
-    public final void addResourceCapacitation(final ResourceCapacitationDTO dto) throws Exception {
+    public final ResourceCapacitationDTO addResourceCapacitation(final ResourceCapacitationDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
+        ResourceCapacitationEntity entity = new ResourceCapacitationEntity();
+        entity.setDescription(dto.getDescription());
+        entity.setName(dto.getName());
+        resourceCapacitationRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
     }
 
     @Override
-    public final void removeResourceCapacitation(final ResourceCapacitationDTO dto) throws Exception {
+    public final boolean removeResourceCapacitation(final long id) throws Exception {
         // TODO Auto-generated method stub
 
+        ResourceCapacitationEntity entity = resourceCapacitationRepository.findById(id);
+        if (entity != null) {
+            resourceCapacitationRepository.delete(entity);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public final void updateResourceCapacitation(final ResourceCapacitationDTO dto) throws Exception {
+    public final ResourceCapacitationEntity updateResourceCapacitation(final ResourceCapacitationDTO dto)
+            throws Exception {
         // TODO Auto-generated method stub
+        ResourceCapacitationEntity entity = this.getResourceCapacitationById(dto.getId());
+        entity.setDescription(dto.getDescription());
+        entity.setName(dto.getName());
+        return resourceCapacitationRepository.save(entity);
+    }
 
+    @Override
+    public final ResourceCapacitationEntity getResourceCapacitationById(final long id) throws Exception {
+        // TODO Auto-generated method stub
+        return resourceCapacitationRepository.getOne(id);
     }
 
 }
