@@ -7,4 +7,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(transactionManager = "transactionManager")
 public interface TypeFileRepository extends JpaRepository<TypeFileEntity, Long> {
 
+    TypeFileEntity findById(long id);
 }

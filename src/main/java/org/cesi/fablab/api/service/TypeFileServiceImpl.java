@@ -15,34 +15,53 @@ public class TypeFileServiceImpl implements TypeFileService {
     private TypeFileRepository typeFileRepository;
 
     @Override
-    public List<TypeFileDTO> getAllTypesFile() throws Exception {
-        List<TypeFileDTO> lstTypesFileDTO = new ArrayList<TypeFileDTO>();
-        List<TypeFileEntity> lstTypesFileEntity = typeFileRepository.findAll();
-        if (lstTypesFileEntity != null && !lstTypesFileEntity.isEmpty()) {
-            for (TypeFileEntity currentTypeFileEntity : lstTypesFileEntity) {
+    public List<TypeFileDTO> getAllTypeFile() throws Exception {
+        List<TypeFileDTO> lstTypeFileDTO = new ArrayList<TypeFileDTO>();
+        List<TypeFileEntity> lstTypeFileEntity = typeFileRepository.findAll();
+        if (lstTypeFileEntity != null && !lstTypeFileEntity.isEmpty()) {
+            for (TypeFileEntity currentTypeFileEntity : lstTypeFileEntity) {
                 TypeFileDTO typeFileDTO = new TypeFileDTO(currentTypeFileEntity);
-                lstTypesFileDTO.add(typeFileDTO);
+                lstTypeFileDTO.add(typeFileDTO);
             }
         }
-        return lstTypesFileDTO;
+        return lstTypeFileDTO;
     }
 
     @Override
-    public final void addTypeFile(final TypeFileDTO dto) throws Exception {
+    public final TypeFileDTO addTypeFile(final TypeFileDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
+        TypeFileEntity entity = new TypeFileEntity();
+        entity.setName(dto.getName());
+        typeFileRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
     }
 
     @Override
-    public final void removeTypeFile(final TypeFileDTO dto) throws Exception {
+    public final boolean removeTypeFile(final long id) throws Exception {
         // TODO Auto-generated method stub
 
+        TypeFileEntity entity = typeFileRepository.findById(id);
+        if (entity != null) {
+            typeFileRepository.delete(entity);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public final void updateTypeFile(final TypeFileDTO dto) throws Exception {
+    public final TypeFileEntity updateTypeFile(final TypeFileDTO dto) throws Exception {
         // TODO Auto-generated method stub
+        TypeFileEntity entity = this.getTypeFileById(dto.getId());
+        entity.setName(dto.getName());
+        return typeFileRepository.save(entity);
+    }
 
+    @Override
+    public final TypeFileEntity getTypeFileById(final long id) throws Exception {
+        // TODO Auto-generated method stub
+        return typeFileRepository.getOne(id);
     }
 
 }
