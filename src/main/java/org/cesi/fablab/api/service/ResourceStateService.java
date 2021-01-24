@@ -3,14 +3,16 @@ package org.cesi.fablab.api.service;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.ResourceStateDTO;
+import org.cesi.fablab.api.entity.ResourceStateEntity;
 
 public interface ResourceStateService {
-    List<ResourceStateDTO> getAllResourceStates() throws Exception;
+    List<ResourceStateDTO> getAllResourceState() throws Exception;
 
-    void addResourceState(ResourceStateDTO dto) throws Exception;
+    ResourceStateDTO addResourceState(ResourceStateDTO dto) throws Exception;
 
-    void removeResourceState(ResourceStateDTO dto) throws Exception;
+    boolean removeResourceState(long id) throws Exception;
 
-    void updateResourceState(ResourceStateDTO dto) throws Exception;
+    ResourceStateEntity updateResourceState(ResourceStateDTO dto) throws Exception;
 
+    ResourceStateEntity getResourceStateById(long id) throws Exception;
 }

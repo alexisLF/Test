@@ -15,34 +15,53 @@ public class ResourceStateServiceImpl implements ResourceStateService {
     private ResourceStateRepository resourceStateRepository;
 
     @Override
-    public List<ResourceStateDTO> getAllResourceStates() throws Exception {
-        List<ResourceStateDTO> lstResourceStatesDTO = new ArrayList<ResourceStateDTO>();
-        List<ResourceStateEntity> lstResourceStatesEntity = resourceStateRepository.findAll();
-        if (lstResourceStatesEntity != null && !lstResourceStatesEntity.isEmpty()) {
-            for (ResourceStateEntity currentResourceStateEntity : lstResourceStatesEntity) {
+    public List<ResourceStateDTO> getAllResourceState() throws Exception {
+        List<ResourceStateDTO> lstResourceStateDTO = new ArrayList<ResourceStateDTO>();
+        List<ResourceStateEntity> lstResourceStateEntity = resourceStateRepository.findAll();
+        if (lstResourceStateEntity != null && !lstResourceStateEntity.isEmpty()) {
+            for (ResourceStateEntity currentResourceStateEntity : lstResourceStateEntity) {
                 ResourceStateDTO resourceStateDTO = new ResourceStateDTO(currentResourceStateEntity);
-                lstResourceStatesDTO.add(resourceStateDTO);
+                lstResourceStateDTO.add(resourceStateDTO);
             }
         }
-        return lstResourceStatesDTO;
+        return lstResourceStateDTO;
     }
 
     @Override
-    public final void addResourceState(final ResourceStateDTO dto) throws Exception {
+    public final ResourceStateDTO addResourceState(final ResourceStateDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
+        ResourceStateEntity entity = new ResourceStateEntity();
+        entity.setName(dto.getName());
+        resourceStateRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
     }
 
     @Override
-    public final void removeResourceState(final ResourceStateDTO dto) throws Exception {
+    public final boolean removeResourceState(final long id) throws Exception {
         // TODO Auto-generated method stub
 
+        ResourceStateEntity entity = resourceStateRepository.findById(id);
+        if (entity != null) {
+            resourceStateRepository.delete(entity);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public final void updateResourceState(final ResourceStateDTO dto) throws Exception {
+    public final ResourceStateEntity updateResourceState(final ResourceStateDTO dto) throws Exception {
         // TODO Auto-generated method stub
+        ResourceStateEntity entity = this.getResourceStateById(dto.getId());
+        entity.setName(dto.getName());
+        return resourceStateRepository.save(entity);
+    }
 
+    @Override
+    public final ResourceStateEntity getResourceStateById(final long id) throws Exception {
+        // TODO Auto-generated method stub
+        return resourceStateRepository.getOne(id);
     }
 
 }
