@@ -1,0 +1,110 @@
+package org.cesi.fablab.api.controller;
+
+import java.time.ZonedDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
+
+import org.cesi.fablab.api.dto.CapacitationDTO;
+import org.cesi.fablab.api.entity.CapacitationEntity;
+import org.cesi.fablab.api.service.CapacitationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(path = { "/core/api/v1" })
+public class CapacitationController {
+
+    @Autowired(required = true)
+    private CapacitationService capacitationService;
+
+    @GetMapping("/capacitation/all")
+    ResponseEntity<Map<String, Object>> all() throws Exception {
+        Map<String, Object> response = new HashMap<>();
+        response.put("ERROR", false);
+        response.put("DATA", capacitationService.getAllCapacitation());
+        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping(value = "/capacitation")
+    public ResponseEntity<Object> addCapacitation(@Valid @RequestBody final CapacitationDTO capacitationModel)
+            throws Exception {
+
+        CapacitationDTO dto = capacitationService.addCapacitation(capacitationModel);
+        capacitationModel.setId(dto.getId());
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("ERROR", false);
+        response.put("DATA", dto);
+        response.put("DATA", capacitationModel);
+        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        return ResponseEntity.ok(response);
+    }
+
+    @PutMapping(value = "/capacitation")
+    public ResponseEntity<Object> updateCapacitation(@Valid @RequestBody final CapacitationDTO capacitationModel)
+            throws Exception {
+
+        Map<String, Object> response = new HashMap<>();
+        try {
+            capacitationService.updateCapacitation(capacitationModel);
+            response.put("ERROR", false);
+            response.put("DATA", capacitationModel);
+        } catch (EntityNotFoundException e) {
+            response.put("ERROR", true);
+            response.put("MESSAGE", "Entity not found");
+        } finally {
+            response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/capacitation/oneById")
+    ResponseEntity<Map<String, Object>> getById(@RequestParam(name = "id", defaultValue = "0") final long id)
+            throws Exception {
+        Map<String, Object> response = new HashMap<>();
+        try {
+            CapacitationEntity entity = capacitationService.getCapacitationById(id);
+            CapacitationDTO dto = new CapacitationDTO(entity);
+            response.put("ERROR", false);
+            response.put("DATA", dto);
+        } catch (EntityNotFoundException e) {
+            response.put("ERROR", true);
+            response.put("MESSAGE", "Entity not found");
+        } finally {
+            response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping(value = "/capacitation")
+    public ResponseEntity<Object> deleteCapacitation(@RequestParam(name = "id", defaultValue = "0") final long id)
+            throws Exception {
+
+        Map<String, Object> response = new HashMap<>();
+        if (!capacitationService.removeCapacitation(id)) {
+            response.put("ERROR", true);
+            response.put("MESSAGE", "Delete failed");
+        } else {
+            response.put("ERROR", false);
+            response.put("DATA", id);
+        }
+
+        return ResponseEntity.ok(response);
+    }
+
+}

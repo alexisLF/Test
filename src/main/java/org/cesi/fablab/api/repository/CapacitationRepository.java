@@ -6,5 +6,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(transactionManager = "transactionManager")
 public interface CapacitationRepository extends JpaRepository<CapacitationEntity, Long> {
-
+    CapacitationEntity findById(long id);
 }
