@@ -28,21 +28,54 @@ public class MaintenanceStatusServiceImpl implements MaintenanceStatusService {
     }
 
     @Override
-    public final void addMaintenanceStatus(final MaintenanceStatusDTO dto) throws Exception {
+    public final MaintenanceStatusDTO addMaintenanceStatus(final MaintenanceStatusDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
+        MaintenanceStatusEntity entity = new MaintenanceStatusEntity();
+        entity.setName(dto.getName());
+        maintenanceStatusRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
     }
 
     @Override
-    public final void removeMaintenanceStatus(final MaintenanceStatusDTO dto) throws Exception {
+    public final boolean removeMaintenanceStatus(final long id) throws Exception {
         // TODO Auto-generated method stub
 
+        MaintenanceStatusEntity entity = maintenanceStatusRepository.findById(id);
+        if (entity != null) {
+            maintenanceStatusRepository.delete(entity);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public final void updateMaintenanceStatus(final MaintenanceStatusDTO dto) throws Exception {
+    public final MaintenanceStatusEntity updateMaintenanceStatus(final MaintenanceStatusDTO dto) throws Exception {
         // TODO Auto-generated method stub
+        MaintenanceStatusEntity entity = this.getMaintenanceStatusById(dto.getId());
+        entity.setName(dto.getName());
+        return maintenanceStatusRepository.save(entity);
+    }
 
+    @Override
+    public final MaintenanceStatusEntity getMaintenanceStatusById(final long id) throws Exception {
+        // TODO Auto-generated method stub
+        return maintenanceStatusRepository.getOne(id);
+    }
+
+    @Override
+    public final List<MaintenanceStatusDTO> getMaintenanceStatusByName(final String name) throws Exception {
+        // TODO Auto-generated method stub
+        List<MaintenanceStatusDTO> lstMaintenanceStatusDTO = new ArrayList<MaintenanceStatusDTO>();
+        List<MaintenanceStatusEntity> lstMaintenanceStatusEntity = maintenanceStatusRepository.findByName(name);
+        if (lstMaintenanceStatusEntity != null && !lstMaintenanceStatusEntity.isEmpty()) {
+            for (MaintenanceStatusEntity currentMaintenanceStatusEntity : lstMaintenanceStatusEntity) {
+                MaintenanceStatusDTO maintenanceStatusDTO = new MaintenanceStatusDTO(currentMaintenanceStatusEntity);
+                lstMaintenanceStatusDTO.add(maintenanceStatusDTO);
+            }
+        }
+        return lstMaintenanceStatusDTO;
     }
 
 }
