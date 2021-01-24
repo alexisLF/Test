@@ -29,7 +29,7 @@ public class TypeResourceController {
     @Autowired(required = true)
     private TypeResourceService typeResourceService;
 
-    @GetMapping("/typeResource/all")
+    @GetMapping("/typeresource/all")
     ResponseEntity<Map<String, Object>> all() throws Exception {
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
@@ -39,7 +39,7 @@ public class TypeResourceController {
         return ResponseEntity.ok(response);
     }
 
-    @PostMapping(value = "/typeResource")
+    @PostMapping(value = "/typeresource")
     public ResponseEntity<Object> addTypeResource(@Valid @RequestBody final TypeResourceDTO typeResourceModel)
             throws Exception {
 
@@ -54,7 +54,7 @@ public class TypeResourceController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping(value = "/typeResource")
+    @PutMapping(value = "/typeresource")
     public ResponseEntity<Object> updateTypeResource(@Valid @RequestBody final TypeResourceDTO typeResourceModel)
             throws Exception {
 
@@ -73,7 +73,7 @@ public class TypeResourceController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/typeResource/allByName")
+    @GetMapping("/typeresource/allByName")
     ResponseEntity<Map<String, Object>> getAllByName(@RequestParam(name = "name", defaultValue = "") final String name)
             throws Exception {
         List<TypeResourceDTO> entityList = typeResourceService.getTypeResourceByName(name);
@@ -90,7 +90,7 @@ public class TypeResourceController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/typeResource/oneById")
+    @GetMapping("/typeresource/oneById")
     ResponseEntity<Map<String, Object>> getById(@RequestParam(name = "id", defaultValue = "0") final long id)
             throws Exception {
         Map<String, Object> response = new HashMap<>();
@@ -109,7 +109,7 @@ public class TypeResourceController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping(value = "/typeResource")
+    @DeleteMapping(value = "/typeresource")
     public ResponseEntity<Object> deleteTypeResource(@RequestParam(name = "id", defaultValue = "0") final long id)
             throws Exception {
 
