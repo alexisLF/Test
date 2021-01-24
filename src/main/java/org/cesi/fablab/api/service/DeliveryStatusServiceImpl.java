@@ -28,21 +28,54 @@ public class DeliveryStatusServiceImpl implements DeliveryStatusService {
     }
 
     @Override
-    public final void addDeliveryStatus(final DeliveryStatusDTO dto) throws Exception {
+    public final DeliveryStatusDTO addDeliveryStatus(final DeliveryStatusDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
+        DeliveryStatusEntity entity = new DeliveryStatusEntity();
+        entity.setName(dto.getName());
+        deliveryStatusRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
     }
 
     @Override
-    public final void removeDeliveryStatus(final DeliveryStatusDTO dto) throws Exception {
+    public final boolean removeDeliveryStatus(final long id) throws Exception {
         // TODO Auto-generated method stub
 
+        DeliveryStatusEntity entity = deliveryStatusRepository.findById(id);
+        if (entity != null) {
+            deliveryStatusRepository.delete(entity);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public final void updateDeliveryStatus(final DeliveryStatusDTO dto) throws Exception {
+    public final DeliveryStatusEntity updateDeliveryStatus(final DeliveryStatusDTO dto) throws Exception {
         // TODO Auto-generated method stub
+        DeliveryStatusEntity entity = this.getDeliveryStatusById(dto.getId());
+        entity.setName(dto.getName());
+        return deliveryStatusRepository.save(entity);
+    }
 
+    @Override
+    public final DeliveryStatusEntity getDeliveryStatusById(final long id) throws Exception {
+        // TODO Auto-generated method stub
+        return deliveryStatusRepository.getOne(id);
+    }
+
+    @Override
+    public final List<DeliveryStatusDTO> getDeliveryStatusByName(final String name) throws Exception {
+        // TODO Auto-generated method stub
+        List<DeliveryStatusDTO> lstDeliveryStatusDTO = new ArrayList<DeliveryStatusDTO>();
+        List<DeliveryStatusEntity> lstDeliveryStatusEntity = deliveryStatusRepository.findByName(name);
+        if (lstDeliveryStatusEntity != null && !lstDeliveryStatusEntity.isEmpty()) {
+            for (DeliveryStatusEntity currentDeliveryStatusEntity : lstDeliveryStatusEntity) {
+                DeliveryStatusDTO deliveryStatusDTO = new DeliveryStatusDTO(currentDeliveryStatusEntity);
+                lstDeliveryStatusDTO.add(deliveryStatusDTO);
+            }
+        }
+        return lstDeliveryStatusDTO;
     }
 
 }
