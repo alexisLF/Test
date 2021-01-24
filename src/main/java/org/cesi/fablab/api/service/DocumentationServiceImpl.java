@@ -15,34 +15,55 @@ public class DocumentationServiceImpl implements DocumentationService {
     private DocumentationRepository documentationRepository;
 
     @Override
-    public List<DocumentationDTO> getAllDocumentations() throws Exception {
-        List<DocumentationDTO> lstDocumentationsDTO = new ArrayList<DocumentationDTO>();
-        List<DocumentationEntity> lstDocumentationsEntity = documentationRepository.findAll();
-        if (lstDocumentationsEntity != null && !lstDocumentationsEntity.isEmpty()) {
-            for (DocumentationEntity currentDocumentationEntity : lstDocumentationsEntity) {
+    public List<DocumentationDTO> getAllDocumentation() throws Exception {
+        List<DocumentationDTO> lstDocumentationDTO = new ArrayList<DocumentationDTO>();
+        List<DocumentationEntity> lstDocumentationEntity = documentationRepository.findAll();
+        if (lstDocumentationEntity != null && !lstDocumentationEntity.isEmpty()) {
+            for (DocumentationEntity currentDocumentationEntity : lstDocumentationEntity) {
                 DocumentationDTO documentationDTO = new DocumentationDTO(currentDocumentationEntity);
-                lstDocumentationsDTO.add(documentationDTO);
+                lstDocumentationDTO.add(documentationDTO);
             }
         }
-        return lstDocumentationsDTO;
+        return lstDocumentationDTO;
     }
 
     @Override
-    public final void addDocumentation(final DocumentationDTO dto) throws Exception {
+    public final DocumentationDTO addDocumentation(final DocumentationDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
+        DocumentationEntity entity = new DocumentationEntity();
+        entity.setDescription(dto.getDescription());
+        entity.setUseCondition(dto.getUseCondition());
+        documentationRepository.save(entity);
+        dto.setId(entity.getId());
+        return dto;
     }
 
     @Override
-    public final void removeDocumentation(final DocumentationDTO dto) throws Exception {
+    public final boolean removeDocumentation(final long id) throws Exception {
         // TODO Auto-generated method stub
 
+        DocumentationEntity entity = documentationRepository.findById(id);
+        if (entity != null) {
+            documentationRepository.delete(entity);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @Override
-    public final void updateDocumentation(final DocumentationDTO dto) throws Exception {
+    public final DocumentationEntity updateDocumentation(final DocumentationDTO dto) throws Exception {
         // TODO Auto-generated method stub
+        DocumentationEntity entity = this.getDocumentationById(dto.getId());
+        entity.setDescription(dto.getDescription());
+        entity.setUseCondition(dto.getUseCondition());
+        return documentationRepository.save(entity);
+    }
 
+    @Override
+    public final DocumentationEntity getDocumentationById(final long id) throws Exception {
+        // TODO Auto-generated method stub
+        return documentationRepository.getOne(id);
     }
 
 }

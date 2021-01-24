@@ -6,5 +6,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(transactionManager = "transactionManager")
 public interface DocumentationRepository extends JpaRepository<DocumentationEntity, Long> {
-
+    DocumentationEntity findById(long id);
 }
