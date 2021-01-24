@@ -47,7 +47,7 @@ public class FileEntity {
 
     @ManyToMany
     @JoinTable(name = "documentationFiles", joinColumns = @JoinColumn(name = "fileId"), inverseJoinColumns = @JoinColumn(name = "documentationId"))
-    private List<DocumentationEntity> usersList = new ArrayList<DocumentationEntity>();
+    private List<DocumentationEntity> documentationsList = new ArrayList<DocumentationEntity>();
 
     @ManyToMany
     @JoinTable(name = "purchaseFiles", joinColumns = @JoinColumn(name = "fileId"), inverseJoinColumns = @JoinColumn(name = "purchaseId"))

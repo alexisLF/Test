@@ -24,7 +24,7 @@ public class FileDTO {
     private String url;
     private Calendar dateUpload;
     private TypeFileEntity type;
-    private List<DocumentationEntity> usersList = new ArrayList<DocumentationEntity>();
+    private List<DocumentationEntity> documentationsList = new ArrayList<DocumentationEntity>();
     private List<PurchaseEntity> purchaseFilesList = new ArrayList<PurchaseEntity>();
 
     public FileDTO(final FileEntity fileEntity) {
@@ -33,8 +33,8 @@ public class FileDTO {
         this.name = fileEntity.getName();
         this.url = fileEntity.getUrl();
         this.dateUpload = fileEntity.getDateUpload();
-        // this.type = fileEntity.getType();
-        // this.usersList = fileEntity.getUsersList();
+        this.type = fileEntity.getType();
+        // this.documentationsList = fileEntity.getDocumentationsList();
         // this.purchaseFilesList = fileEntity.getPurchaseFilesList();
     }
 
