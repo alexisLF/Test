@@ -37,7 +37,7 @@ public class PurchaseEntity {
     private java.sql.Date purchaseDate;
     @ManyToOne
     @JoinColumn(name = "resourceId", nullable = false)
-    private ResourceEntity ressource;
+    private ResourceEntity resource;
 
     @ManyToOne
     @JoinColumn(name = "deliveryId", nullable = false)

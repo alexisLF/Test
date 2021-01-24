@@ -22,7 +22,7 @@ public class PurchaseDTO {
     private long id;
     private String name;
     private Date purchaseDate;
-    private ResourceEntity ressource;
+    private ResourceEntity resource;
     private DeliveryStatusEntity delivery;
     private List<FileEntity> filesList = new ArrayList<FileEntity>();
 
@@ -31,8 +31,8 @@ public class PurchaseDTO {
         this.id = purchaseEntity.getId();
         this.name = purchaseEntity.getName();
         this.purchaseDate = purchaseEntity.getPurchaseDate();
-        // this.ressource = userEntity.getRessource();
-        // this.delivery = userEntity.getDelivery();
+        this.resource = purchaseEntity.getResource();
+        this.delivery = purchaseEntity.getDelivery();
         // this.filesList = userEntity.getFilesList();
     }
 

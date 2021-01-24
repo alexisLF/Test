@@ -6,5 +6,5 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Transactional(transactionManager = "transactionManager")
 public interface PurchaseRepository extends JpaRepository<PurchaseEntity, Long> {
-
+    PurchaseEntity findById(long id);
 }
