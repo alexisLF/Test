@@ -51,17 +51,17 @@ public class ResourceDTO {
         this.dateInstallation = resourceEntity.getDateInstallation();
         this.stock = resourceEntity.getStock();
         this.isActive = resourceEntity.getIsActive();
-        // this.type = resourceEntity.getType();
-        // this.room = resourceEntity.getRoom();
-        // this.state = resourceEntity.getState();
-        // this.documentation = resourceEntity.getDocumentation();
-        // this.securitysList = resourceEntity.getSecuritysList();
+        this.type = resourceEntity.getType();
+        this.room = resourceEntity.getRoom();
+        this.state = resourceEntity.getState();
+        this.documentation = resourceEntity.getDocumentation();
+        this.securitysList = resourceEntity.getSecuritysList();
         // this.projectList = resourceEntity.getProjectList();
-        // this.reservationsList = resourceEntity.getReservationsList();
-        // this.maintenancesList = resourceEntity.getMaintenancesList();
+        this.reservationsList = resourceEntity.getReservationsList();
+        this.maintenancesList = resourceEntity.getMaintenancesList();
         // this.parentResources = resourceEntity.getParentResources();
-        // this.consumableResources = resourceEntity.getConsumableResources();
-        // this.resourceCapacitationList = resourceEntity.getResourceCapacitationList();
+        this.consumableResources = resourceEntity.getConsumableResources();
+        this.resourceCapacitationList = resourceEntity.getResourceCapacitationList();
     }
 
 }
