@@ -120,15 +120,16 @@ public class RoomController {
     }
 
     @DeleteMapping(value = "/room")
-    public ResponseEntity<Object> deleteRoom(@Valid @RequestBody final RoomDTO roomModel) throws Exception {
+    public ResponseEntity<Object> deleteRoom(@RequestParam(name = "id", defaultValue = "0") final int id)
+            throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!roomService.removeRoom(roomModel)) {
+        if (!roomService.removeRoom(id)) {
             response.put("ERROR", true);
             response.put("MESSAGE", "Delete failed");
         } else {
             response.put("ERROR", false);
-            response.put("DATA", roomModel);
+            response.put("DATA", id);
         }
 
         return ResponseEntity.ok(response);

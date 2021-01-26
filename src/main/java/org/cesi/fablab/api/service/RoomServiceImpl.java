@@ -47,10 +47,10 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public final boolean removeRoom(final RoomDTO dto) throws Exception {
+    public final boolean removeRoom(final long id) throws Exception {
         // TODO Auto-generated method stub
 
-        RoomEntity entity = roomRepository.findById(dto.getId());
+        RoomEntity entity = roomRepository.findById(id);
         if (entity != null) {
             roomRepository.delete(entity);
             return true;

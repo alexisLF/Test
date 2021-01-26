@@ -10,7 +10,7 @@ public interface RoomService {
 
     RoomDTO addRoom(RoomDTO dto) throws Exception;
 
-    boolean removeRoom(RoomDTO dto) throws Exception;
+    boolean removeRoom(long id) throws Exception;
 
     RoomEntity updateRoom(RoomDTO dto) throws Exception;
 
