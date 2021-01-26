@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.ResourceStateDTO;
+import org.cesi.fablab.api.entity.ResourceEntity;
 import org.cesi.fablab.api.entity.ResourceStateEntity;
+import org.cesi.fablab.api.repository.ResourceRepository;
 import org.cesi.fablab.api.repository.ResourceStateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Service;
 public class ResourceStateServiceImpl implements ResourceStateService {
     @Autowired
     private ResourceStateRepository resourceStateRepository;
+    @Autowired
+    private ResourceRepository resourceRepository;
 
     @Override
     public List<ResourceStateDTO> getAllResourceState() throws Exception {
@@ -43,8 +47,13 @@ public class ResourceStateServiceImpl implements ResourceStateService {
 
         ResourceStateEntity entity = resourceStateRepository.findById(id);
         if (entity != null) {
-            resourceStateRepository.delete(entity);
-            return true;
+            List<ResourceEntity> resourceList = resourceRepository.findByStateId(entity.getId());
+            if (resourceList.isEmpty()) {
+                resourceStateRepository.delete(entity);
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }

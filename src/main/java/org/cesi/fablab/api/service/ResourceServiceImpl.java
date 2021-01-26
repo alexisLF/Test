@@ -155,4 +155,17 @@ public class ResourceServiceImpl implements ResourceService {
         return entity;
     }
 
+    @Override
+    public List<ResourceDTO> getResourcesByStateId(long idState) throws Exception {
+        List<ResourceDTO> lstResourceDTO = new ArrayList<ResourceDTO>();
+        List<ResourceEntity> lstResourceEntity = resourceRepository.findByStateId(idState);
+        if (lstResourceEntity != null && !lstResourceEntity.isEmpty()) {
+            for (ResourceEntity currentResourceEntity : lstResourceEntity) {
+                ResourceDTO resourceDTO = new ResourceDTO(currentResourceEntity);
+                lstResourceDTO.add(resourceDTO);
+            }
+        }
+        return lstResourceDTO;
+    }
+
 }
