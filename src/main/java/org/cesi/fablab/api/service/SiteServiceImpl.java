@@ -39,10 +39,10 @@ public class SiteServiceImpl implements SiteService {
     }
 
     @Override
-    public final boolean removeSite(final SiteDTO dto) throws Exception {
+    public final boolean removeSite(final long id) throws Exception {
         // TODO Auto-generated method stub
 
-        SiteEntity entity = siteRepository.findById(dto.getId());
+        SiteEntity entity = siteRepository.findById(id);
         if (entity != null) {
             siteRepository.delete(entity);
             return true;

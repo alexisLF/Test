@@ -90,15 +90,16 @@ public class SiteController {
     }
 
     @DeleteMapping(value = "/site")
-    public ResponseEntity<Object> deleteSite(@Valid @RequestBody final SiteDTO siteModel) throws Exception {
+    public ResponseEntity<Object> deleteSite(@RequestParam(name = "id", defaultValue = "0") final long id)
+            throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!siteService.removeSite(siteModel)) {
+        if (!siteService.removeSite(id)) {
             response.put("ERROR", true);
             response.put("MESSAGE", "Delete failed");
         } else {
             response.put("ERROR", false);
-            response.put("DATA", siteModel);
+            response.put("DATA", id);
         }
 
         return ResponseEntity.ok(response);

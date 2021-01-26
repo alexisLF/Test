@@ -10,7 +10,7 @@ public interface SiteService {
 
     SiteDTO addSite(SiteDTO dto) throws Exception;
 
-    boolean removeSite(SiteDTO dto) throws Exception;
+    boolean removeSite(long id) throws Exception;
 
     SiteEntity updateSite(SiteDTO dto) throws Exception;
 

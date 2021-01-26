@@ -3,7 +3,6 @@ package org.cesi.fablab.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cesi.fablab.api.entity.HolidayEntity;
 import org.cesi.fablab.api.entity.RoomEntity;
 import org.cesi.fablab.api.entity.SiteEntity;
 
@@ -20,16 +19,22 @@ public class SiteDTO {
     private long id;
     private String name;
     private String description;
-    private List<HolidayEntity> holidaysList = new ArrayList<HolidayEntity>();
-    private List<RoomEntity> roomsList = new ArrayList<RoomEntity>();
+    // private List<HolidayDTO> holidaysList = new ArrayList<HolidayDTO>();
+    private List<RoomDTO> roomsList = new ArrayList<RoomDTO>();
 
     public SiteDTO(final SiteEntity siteEntity) {
         super();
         this.id = siteEntity.getId();
         this.name = siteEntity.getName();
         this.description = siteEntity.getDescription();
+        this.setRoomsList(siteEntity.getRoomsList());
         // this.holidaysList = siteEntity.getHolidaysList();
-        // this.roomsList = siteEntity.getRoomsList();
+    }
+
+    private void setRoomsList(final List<RoomEntity> rooms) {
+        for (RoomEntity room : rooms) {
+            this.roomsList.add(new RoomDTO(room, false));
+        }
     }
 
 }

@@ -23,6 +23,14 @@ public class RoomDTO {
     private SiteEntity site;
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
+    public RoomDTO(final RoomEntity roomEntity, final boolean needSite) {
+        super();
+        this.id = roomEntity.getId();
+        this.name = roomEntity.getName();
+        this.floor = roomEntity.getFloor();
+        // this.resourcesList = userEntity.getResourcesList();
+    }
+
     public RoomDTO(final RoomEntity roomEntity) {
         super();
         this.id = roomEntity.getId();
