@@ -10,7 +10,7 @@ public interface MaintenanceService {
 
     MaintenanceDTO addMaintenance(MaintenanceDTO dto) throws Exception;
 
-    boolean removeMaintenance(MaintenanceDTO dto) throws Exception;
+    boolean removeMaintenance(long id) throws Exception;
 
     MaintenanceEntity updateMaintenance(MaintenanceDTO dto) throws Exception;
 

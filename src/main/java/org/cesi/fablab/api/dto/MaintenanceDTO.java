@@ -3,10 +3,6 @@ package org.cesi.fablab.api.dto;
 import java.util.Calendar;
 
 import org.cesi.fablab.api.entity.MaintenanceEntity;
-import org.cesi.fablab.api.entity.MaintenanceStatusEntity;
-import org.cesi.fablab.api.entity.ResourceEntity;
-import org.cesi.fablab.api.entity.TypeOperationEntity;
-import org.cesi.fablab.api.entity.UserEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,24 +17,39 @@ public class MaintenanceDTO {
     private long id;
     private Calendar dateStart;
     private Calendar dateEnd;
-    private ResourceEntity resource;
-    private UserEntity user;
+    private ResourceDTO resource;
+    private UserDTO user;
     private String note;
     private boolean success;
-    private TypeOperationEntity type;
-    private MaintenanceStatusEntity status;
+    private TypeOperationDTO type;
+    private MaintenanceStatusDTO status;
 
     public MaintenanceDTO(final MaintenanceEntity maintenanceEntity) {
         super();
         this.id = maintenanceEntity.getId();
         this.dateStart = maintenanceEntity.getDateStart();
         this.dateEnd = maintenanceEntity.getDateEnd();
-        this.resource = maintenanceEntity.getResource();
-        this.user = maintenanceEntity.getUser();
+        this.resource = new ResourceDTO(maintenanceEntity.getResource());
+        this.user = new UserDTO(maintenanceEntity.getUser());
         this.note = maintenanceEntity.getNote();
         this.success = maintenanceEntity.isSuccess();
-        this.type = maintenanceEntity.getType();
-        this.status = maintenanceEntity.getStatus();
+        this.type = new TypeOperationDTO(maintenanceEntity.getType());
+        this.status = new MaintenanceStatusDTO(maintenanceEntity.getStatus());
+    }
+
+    public MaintenanceDTO(final MaintenanceEntity maintenanceEntity, boolean needType) {
+        super();
+        this.id = maintenanceEntity.getId();
+        this.dateStart = maintenanceEntity.getDateStart();
+        this.dateEnd = maintenanceEntity.getDateEnd();
+        if (needType) {
+            this.resource = new ResourceDTO(maintenanceEntity.getResource());
+        }
+        this.user = new UserDTO(maintenanceEntity.getUser());
+        this.note = maintenanceEntity.getNote();
+        this.success = maintenanceEntity.isSuccess();
+        this.type = new TypeOperationDTO(maintenanceEntity.getType());
+        this.status = new MaintenanceStatusDTO(maintenanceEntity.getStatus(), needType);
     }
 
 }

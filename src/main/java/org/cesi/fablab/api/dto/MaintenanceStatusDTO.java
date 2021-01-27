@@ -18,13 +18,30 @@ import lombok.Setter;
 public class MaintenanceStatusDTO {
     private long id;
     private String name;
-    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
+    private List<MaintenanceDTO> maintenancesList = new ArrayList<MaintenanceDTO>();
 
     public MaintenanceStatusDTO(final MaintenanceStatusEntity maintenanceStatusEntity) {
         super();
         this.id = maintenanceStatusEntity.getId();
         this.name = maintenanceStatusEntity.getName();
-        // this.maintenancesList = maintenanceStatusEntity.getMaintenancesList();
+        this.maintenancesList = this.setMaintenancesList(maintenanceStatusEntity.getMaintenancesList());
+    }
+
+    public MaintenanceStatusDTO(final MaintenanceStatusEntity maintenanceStatusEntity, boolean needMaintenance) {
+        super();
+        this.id = maintenanceStatusEntity.getId();
+        this.name = maintenanceStatusEntity.getName();
+        if (needMaintenance) {
+            this.maintenancesList = this.setMaintenancesList(maintenanceStatusEntity.getMaintenancesList());
+        }
+    }
+
+    private List<MaintenanceDTO> setMaintenancesList(List<MaintenanceEntity> maintenances) {
+        List<MaintenanceDTO> list = new ArrayList<MaintenanceDTO>();
+        for (MaintenanceEntity maintenance : maintenances) {
+            list.add(new MaintenanceDTO(maintenance));
+        }
+        return list;
     }
 
 }

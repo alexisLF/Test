@@ -24,19 +24,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         List<MaintenanceEntity> lstMaintenancesEntity = maintenanceRepository.findAll();
         if (lstMaintenancesEntity != null && !lstMaintenancesEntity.isEmpty()) {
             for (MaintenanceEntity currentMaintenanceEntity : lstMaintenancesEntity) {
-                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity);
-                ResourceEntity resource = new ResourceEntity();
-                resource.setId(maintenanceDTO.getResource().getId());
-                maintenanceDTO.setResource(resource);
-                TypeOperationEntity typeOperation = new TypeOperationEntity();
-                typeOperation.setId(maintenanceDTO.getType().getId());
-                maintenanceDTO.setType(typeOperation);
-                UserEntity user = new UserEntity();
-                user.setId(maintenanceDTO.getUser().getId());
-                maintenanceDTO.setUser(user);
-                MaintenanceStatusEntity status = new MaintenanceStatusEntity();
-                status.setId(maintenanceDTO.getStatus().getId());
-                maintenanceDTO.setStatus(status);
+                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity, false);
                 lstMaintenancesDTO.add(maintenanceDTO);
             }
         }
@@ -69,10 +57,10 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
-    public final boolean removeMaintenance(final MaintenanceDTO dto) throws Exception {
+    public final boolean removeMaintenance(final long id) throws Exception {
         // TODO Auto-generated method stub
 
-        MaintenanceEntity entity = maintenanceRepository.findById(dto.getId());
+        MaintenanceEntity entity = maintenanceRepository.findById(id);
         if (entity != null) {
             maintenanceRepository.delete(entity);
             return true;
@@ -132,19 +120,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         List<MaintenanceEntity> lstMaintenancesEntity = maintenanceRepository.findByResourceId(idResource);
         if (lstMaintenancesEntity != null && !lstMaintenancesEntity.isEmpty()) {
             for (MaintenanceEntity currentMaintenanceEntity : lstMaintenancesEntity) {
-                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity);
-                ResourceEntity resource = new ResourceEntity();
-                resource.setId(maintenanceDTO.getResource().getId());
-                maintenanceDTO.setResource(resource);
-                TypeOperationEntity typeOperation = new TypeOperationEntity();
-                typeOperation.setId(maintenanceDTO.getType().getId());
-                maintenanceDTO.setType(typeOperation);
-                UserEntity user = new UserEntity();
-                user.setId(maintenanceDTO.getUser().getId());
-                maintenanceDTO.setUser(user);
-                MaintenanceStatusEntity status = new MaintenanceStatusEntity();
-                status.setId(maintenanceDTO.getStatus().getId());
-                maintenanceDTO.setStatus(status);
+                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity, false);
                 lstMaintenancesDTO.add(maintenanceDTO);
             }
         }

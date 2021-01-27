@@ -122,16 +122,16 @@ public class MaintenanceController {
     }
 
     @DeleteMapping(value = "/maintenance")
-    public ResponseEntity<Object> deleteMaintenance(@Valid @RequestBody final MaintenanceDTO maintenanceModel)
+    public ResponseEntity<Object> deleteMaintenance(@RequestParam(name = "id", defaultValue = "0") final int id)
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!maintenanceService.removeMaintenance(maintenanceModel)) {
+        if (!maintenanceService.removeMaintenance(id)) {
             response.put("ERROR", true);
             response.put("MESSAGE", "Delete failed");
         } else {
             response.put("ERROR", false);
-            response.put("DATA", maintenanceModel);
+            response.put("DATA", id);
         }
 
         return ResponseEntity.ok(response);
