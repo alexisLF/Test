@@ -7,7 +7,6 @@ import java.util.List;
 import org.cesi.fablab.api.entity.DocumentationEntity;
 import org.cesi.fablab.api.entity.FileEntity;
 import org.cesi.fablab.api.entity.PurchaseEntity;
-import org.cesi.fablab.api.entity.TypeFileEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,9 +22,9 @@ public class FileDTO {
     private String name;
     private String url;
     private Calendar dateUpload;
-    private TypeFileEntity type;
-    private List<DocumentationEntity> documentationsList = new ArrayList<DocumentationEntity>();
-    private List<PurchaseEntity> purchaseFilesList = new ArrayList<PurchaseEntity>();
+    private TypeFileDTO type;
+    private List<DocumentationDTO> documentationsList = new ArrayList<DocumentationDTO>();
+    private List<PurchaseDTO> purchaseFilesList = new ArrayList<PurchaseDTO>();
 
     public FileDTO(final FileEntity fileEntity) {
         super();
@@ -33,9 +32,38 @@ public class FileDTO {
         this.name = fileEntity.getName();
         this.url = fileEntity.getUrl();
         this.dateUpload = fileEntity.getDateUpload();
-        this.type = fileEntity.getType();
-        // this.documentationsList = fileEntity.getDocumentationsList();
-        // this.purchaseFilesList = fileEntity.getPurchaseFilesList();
+        this.type = new TypeFileDTO(fileEntity.getType());
+        this.documentationsList = this.setDocumentationsList(fileEntity.getDocumentationsList());
+        this.purchaseFilesList = this.setPurchaseFilesList(fileEntity.getPurchaseFilesList());
+    }
+
+    public FileDTO(final FileEntity fileEntity, boolean needType) {
+        super();
+        this.id = fileEntity.getId();
+        this.name = fileEntity.getName();
+        this.url = fileEntity.getUrl();
+        this.dateUpload = fileEntity.getDateUpload();
+        if (needType) {
+            this.type = new TypeFileDTO(fileEntity.getType());
+        }
+        this.documentationsList = this.setDocumentationsList(fileEntity.getDocumentationsList());
+        this.purchaseFilesList = this.setPurchaseFilesList(fileEntity.getPurchaseFilesList());
+    }
+
+    private List<DocumentationDTO> setDocumentationsList(List<DocumentationEntity> documentations) {
+        List<DocumentationDTO> list = new ArrayList<DocumentationDTO>();
+        for (DocumentationEntity documentation : documentations) {
+            list.add(new DocumentationDTO(documentation));
+        }
+        return list;
+    }
+
+    private List<PurchaseDTO> setPurchaseFilesList(List<PurchaseEntity> purchaseFiles) {
+        List<PurchaseDTO> list = new ArrayList<PurchaseDTO>();
+        for (PurchaseEntity purchase : purchaseFiles) {
+            list.add(new PurchaseDTO(purchase));
+        }
+        return list;
     }
 
 }

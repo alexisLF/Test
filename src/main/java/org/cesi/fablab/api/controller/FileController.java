@@ -76,7 +76,7 @@ public class FileController {
         Map<String, Object> response = new HashMap<>();
         try {
             FileEntity entity = fileService.getFileById(id);
-            FileDTO dto = new FileDTO(entity);
+            FileDTO dto = new FileDTO(entity, false);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {

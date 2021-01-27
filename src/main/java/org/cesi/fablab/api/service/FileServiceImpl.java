@@ -21,10 +21,7 @@ public class FileServiceImpl implements FileService {
         List<FileEntity> lstFilesEntity = fileRepository.findAll();
         if (lstFilesEntity != null && !lstFilesEntity.isEmpty()) {
             for (FileEntity currentFileEntity : lstFilesEntity) {
-                FileDTO fileDTO = new FileDTO(currentFileEntity);
-                TypeFileEntity typeFile = new TypeFileEntity();
-                typeFile.setId(fileDTO.getType().getId());
-                fileDTO.setType(typeFile);
+                FileDTO fileDTO = new FileDTO(currentFileEntity, false);
                 lstFilesDTO.add(fileDTO);
             }
         }
@@ -40,7 +37,7 @@ public class FileServiceImpl implements FileService {
         entity.setDateUpload(dto.getDateUpload());
         TypeFileEntity typeFile = new TypeFileEntity();
         typeFile.setId(dto.getType().getId());
-        dto.setType(typeFile);
+        entity.setType(typeFile);
         fileRepository.save(entity);
         dto.setId(entity.getId());
         return dto;
@@ -66,7 +63,7 @@ public class FileServiceImpl implements FileService {
         entity.setName(dto.getName());
         TypeFileEntity typeFile = new TypeFileEntity();
         typeFile.setId(dto.getType().getId());
-        dto.setType(typeFile);
+        entity.setType(typeFile);
         return fileRepository.save(entity);
     }
 
