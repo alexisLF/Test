@@ -39,10 +39,10 @@ public class SecurityGearServiceImpl implements SecurityGearService {
     }
 
     @Override
-    public final boolean removeSecurityGear(final SecurityGearDTO dto) throws Exception {
+    public final boolean removeSecurityGear(long id) throws Exception {
         // TODO Auto-generated method stub
 
-        SecurityGearEntity entity = securityGearRepository.findById(dto.getId());
+        SecurityGearEntity entity = securityGearRepository.findById(id);
         if (entity != null) {
             securityGearRepository.delete(entity);
             return true;

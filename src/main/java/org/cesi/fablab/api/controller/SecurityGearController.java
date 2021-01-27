@@ -105,16 +105,16 @@ public class SecurityGearController {
     }
 
     @DeleteMapping(value = "/securitygear")
-    public ResponseEntity<Object> deleteSecurityGear(@Valid @RequestBody final SecurityGearDTO securityGearModel)
+    public ResponseEntity<Object> deleteSecurityGear(@RequestParam(name = "id", defaultValue = "0") final int id)
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!securityGearService.removeSecurityGear(securityGearModel)) {
+        if (!securityGearService.removeSecurityGear(id)) {
             response.put("ERROR", true);
             response.put("MESSAGE", "Delete failed");
         } else {
             response.put("ERROR", false);
-            response.put("DATA", securityGearModel);
+            response.put("DATA", id);
         }
 
         return ResponseEntity.ok(response);

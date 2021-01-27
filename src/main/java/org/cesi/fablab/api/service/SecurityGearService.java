@@ -11,7 +11,7 @@ public interface SecurityGearService {
 
     SecurityGearDTO addSecurityGear(SecurityGearDTO dto) throws Exception;
 
-    boolean removeSecurityGear(SecurityGearDTO dto) throws Exception;
+    boolean removeSecurityGear(long id) throws Exception;
 
     SecurityGearEntity updateSecurityGear(SecurityGearDTO dto) throws Exception;
 
