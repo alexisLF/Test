@@ -2,7 +2,6 @@ package org.cesi.fablab.api.controller;
 
 import java.time.ZonedDateTime;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityNotFoundException;
@@ -70,23 +69,6 @@ public class DeliveryStatusController {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
 
-        return ResponseEntity.ok(response);
-    }
-
-    @GetMapping("/deliverystatus/allByName")
-    ResponseEntity<Map<String, Object>> getAllByName(@RequestParam(name = "name", defaultValue = "") final String name)
-            throws Exception {
-        List<DeliveryStatusDTO> entityList = deliveryStatusService.getDeliveryStatusByName(name);
-
-        Map<String, Object> response = new HashMap<>();
-        if (!entityList.isEmpty()) {
-            response.put("ERROR", false);
-            response.put("DATA", entityList);
-        } else {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "List not exist");
-        }
-        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
     }
 
