@@ -17,4 +17,6 @@ public interface ResourceService {
     ResourceEntity getResourceById(long id) throws Exception;
 
     List<ResourceDTO> getResourcesByStateId(long idState) throws Exception;
+
+    List<ResourceDTO> getResourcesBySiteId(long idState) throws Exception;
 }

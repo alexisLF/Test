@@ -12,4 +12,6 @@ public interface ResourceRepository extends JpaRepository<ResourceEntity, Long> 
     ResourceEntity findById(long id);
 
     List<ResourceEntity> findByStateId(long idState);
+
+    List<ResourceEntity> findByRoomSiteId(long idSite);
 }

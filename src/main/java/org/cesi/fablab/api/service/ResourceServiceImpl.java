@@ -168,4 +168,17 @@ public class ResourceServiceImpl implements ResourceService {
         return lstResourceDTO;
     }
 
+    @Override
+    public List<ResourceDTO> getResourcesBySiteId(long idSite) throws Exception {
+        List<ResourceDTO> lstResourceDTO = new ArrayList<ResourceDTO>();
+        List<ResourceEntity> lstResourceEntity = resourceRepository.findByRoomSiteId(idSite);
+        if (lstResourceEntity != null && !lstResourceEntity.isEmpty()) {
+            for (ResourceEntity currentResourceEntity : lstResourceEntity) {
+                ResourceDTO resourceDTO = new ResourceDTO(currentResourceEntity);
+                lstResourceDTO.add(resourceDTO);
+            }
+        }
+        return lstResourceDTO;
+    }
+
 }
