@@ -33,37 +33,35 @@ public class ResourceStateController {
         response.put("ERROR", false);
         response.put("DATA", resourceStateService.getAllResourceState());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/resourcestate")
-    public ResponseEntity<Object> addResourceState(@Valid @RequestBody final ResourceStateDTO resourceStateModel)
+    public ResponseEntity<Object> addResourceState(@Valid @RequestBody final ResourceStateDTO resourceState)
             throws Exception {
 
-        ResourceStateDTO dto = resourceStateService.addResourceState(resourceStateModel);
-        resourceStateModel.setId(dto.getId());
-
+        resourceStateService.addResourceState(resourceState);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", resourceStateModel);
+        response.put("DATA", resourceState);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/resourcestate")
-    public ResponseEntity<Object> updateResourceState(@Valid @RequestBody final ResourceStateDTO resourceStateModel)
+    public ResponseEntity<Object> updateResourceState(@Valid @RequestBody final ResourceStateDTO resourceState)
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            resourceStateService.updateResourceState(resourceStateModel);
+            resourceStateService.updateResourceState(resourceState);
             response.put("ERROR", false);
-            response.put("DATA", resourceStateModel);
+            response.put("DATA", resourceState);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Etat de ressource non trouvé, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -81,7 +79,7 @@ public class ResourceStateController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Etat de ressource non trouvé.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -96,10 +94,11 @@ public class ResourceStateController {
         Map<String, Object> response = new HashMap<>();
         if (!resourceStateService.removeResourceState(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Etat de ressource supprimé.");
         }
 
         return ResponseEntity.ok(response);

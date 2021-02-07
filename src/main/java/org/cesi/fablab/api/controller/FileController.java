@@ -33,35 +33,33 @@ public class FileController {
         response.put("ERROR", false);
         response.put("DATA", fileService.getAllFiles());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/file")
-    public ResponseEntity<Object> addFile(@Valid @RequestBody final FileDTO fileModel) throws Exception {
+    public ResponseEntity<Object> addFile(@Valid @RequestBody final FileDTO file) throws Exception {
 
-        FileDTO dto = fileService.addFile(fileModel);
-        fileModel.setId(dto.getId());
-
+        fileService.addFile(file);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", fileModel);
+        response.put("DATA", file);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/file")
-    public ResponseEntity<Object> updateFile(@Valid @RequestBody final FileDTO fileModel) throws Exception {
+    public ResponseEntity<Object> updateFile(@Valid @RequestBody final FileDTO file) throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            fileService.updateFile(fileModel);
+            fileService.updateFile(file);
             response.put("ERROR", false);
-            response.put("DATA", fileModel);
+            response.put("DATA", file);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Fichier non trouvé, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -79,7 +77,7 @@ public class FileController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Fichier non trouvé.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -94,10 +92,11 @@ public class FileController {
         Map<String, Object> response = new HashMap<>();
         if (!fileService.removeFile(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Fichier supprimé.");
         }
 
         return ResponseEntity.ok(response);

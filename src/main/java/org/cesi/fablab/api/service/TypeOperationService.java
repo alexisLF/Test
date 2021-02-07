@@ -3,7 +3,6 @@ package org.cesi.fablab.api.service;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.TypeOperationDTO;
-import org.cesi.fablab.api.entity.TypeOperationEntity;
 
 public interface TypeOperationService {
     List<TypeOperationDTO> getAllTypesOperation() throws Exception;

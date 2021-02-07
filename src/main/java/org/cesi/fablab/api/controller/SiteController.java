@@ -33,35 +33,32 @@ public class SiteController {
         response.put("ERROR", false);
         response.put("DATA", siteService.getAllSites());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/site")
-    public ResponseEntity<Object> addSite(@Valid @RequestBody final SiteDTO siteModel) throws Exception {
+    public ResponseEntity<Object> addSite(@Valid @RequestBody final SiteDTO site) throws Exception {
 
-        SiteDTO dto = siteService.addSite(siteModel);
-        siteModel.setId(dto.getId());
-
+        siteService.addSite(site);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", siteModel);
+        response.put("DATA", site);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/site")
-    public ResponseEntity<Object> updateSite(@Valid @RequestBody final SiteDTO siteModel) throws Exception {
+    public ResponseEntity<Object> updateSite(@Valid @RequestBody final SiteDTO site) throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            siteService.updateSite(siteModel);
+            siteService.updateSite(site);
             response.put("ERROR", false);
-            response.put("DATA", siteModel);
+            response.put("DATA", site);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Site non trouvé, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -79,7 +76,7 @@ public class SiteController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Site non trouvé.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -94,10 +91,11 @@ public class SiteController {
         Map<String, Object> response = new HashMap<>();
         if (!siteService.removeSite(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Site supprimé.");
         }
 
         return ResponseEntity.ok(response);

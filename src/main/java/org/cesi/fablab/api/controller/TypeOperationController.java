@@ -34,37 +34,35 @@ public class TypeOperationController {
         response.put("ERROR", false);
         response.put("DATA", typeOperationService.getAllTypesOperation());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/typeoperation")
-    public ResponseEntity<Object> addTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperationModel)
+    public ResponseEntity<Object> addTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperation)
             throws Exception {
 
-        TypeOperationDTO dto = typeOperationService.addTypeOperation(typeOperationModel);
-        typeOperationModel.setId(dto.getId());
-
+        typeOperationService.addTypeOperation(typeOperation);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", typeOperationModel);
+        response.put("DATA", typeOperation);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/typeoperation")
-    public ResponseEntity<Object> updateTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperationModel)
+    public ResponseEntity<Object> updateTypeOperation(@Valid @RequestBody final TypeOperationDTO typeOperation)
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            typeOperationService.updateTypeOperation(typeOperationModel);
+            typeOperationService.updateTypeOperation(typeOperation);
             response.put("ERROR", false);
-            response.put("DATA", typeOperationModel);
+            response.put("DATA", typeOperation);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Type d'opération non trouvé, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -75,15 +73,15 @@ public class TypeOperationController {
     @GetMapping("/typeoperation/allByName")
     ResponseEntity<Map<String, Object>> getAllByName(@RequestParam(name = "name", defaultValue = "") final String name)
             throws Exception {
-        List<TypeOperationDTO> entityList = typeOperationService.getTypeOperationByName(name);
+        List<TypeOperationDTO> typeOperations = typeOperationService.getTypeOperationByName(name);
 
         Map<String, Object> response = new HashMap<>();
-        if (!entityList.isEmpty()) {
+        if (!typeOperations.isEmpty()) {
             response.put("ERROR", false);
-            response.put("DATA", entityList);
+            response.put("DATA", typeOperations);
         } else {
             response.put("ERROR", true);
-            response.put("MESSAGE", "List not exist");
+            response.put("MESSAGE", "Il n'existe pas de type d'opération à ce nom.");
         }
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
@@ -99,7 +97,7 @@ public class TypeOperationController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Type d'opération non trouvé.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -114,10 +112,11 @@ public class TypeOperationController {
         Map<String, Object> response = new HashMap<>();
         if (!typeOperationService.removeTypeOperation(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Achat supprimé.");
         }
 
         return ResponseEntity.ok(response);

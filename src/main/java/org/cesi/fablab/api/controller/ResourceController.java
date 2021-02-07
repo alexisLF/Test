@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import org.cesi.fablab.api.dto.ResourceDTO;
 import org.cesi.fablab.api.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,47 +33,34 @@ public class ResourceController {
         response.put("ERROR", false);
         response.put("DATA", resourceService.getAllResources());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/resource")
-    public ResponseEntity<Object> addResource(@Valid @RequestBody final ResourceDTO resourceModel) throws Exception {
+    public ResponseEntity<Object> addResource(@Valid @RequestBody final ResourceDTO resource) throws Exception {
 
+        resourceService.addResource(resource);
         Map<String, Object> response = new HashMap<>();
-        try {
-            ResourceDTO dto = resourceService.addResource(resourceModel);
-            resourceModel.setId(dto.getId());
-            response.put("ERROR", false);
-            response.put("DATA", dto);
-            response.put("DATA", resourceModel);
-        } catch (EntityNotFoundException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
-        } catch (DataIntegrityViolationException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Data integrity violation");
-        } finally {
-            response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        }
+        response.put("ERROR", false);
+        response.put("DATA", resource);
+        response.put("MESSAGE", "Ajout réussi !");
+        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
 
     }
 
     @PutMapping(value = "/resource")
-    public ResponseEntity<Object> updateResource(@Valid @RequestBody final ResourceDTO resourceModel) throws Exception {
+    public ResponseEntity<Object> updateResource(@Valid @RequestBody final ResourceDTO resource) throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            resourceService.updateResource(resourceModel);
+            resourceService.updateResource(resource);
             response.put("ERROR", false);
-            response.put("DATA", resourceModel);
+            response.put("DATA", resource);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
-        } catch (DataIntegrityViolationException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Data integrity violation");
+            response.put("MESSAGE", "Ressource non trouvée, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -85,15 +71,15 @@ public class ResourceController {
     @GetMapping("/resource/allBySite")
     ResponseEntity<Map<String, Object>> getAllBySite(
             @RequestParam(name = "idSite", defaultValue = "") final long idSite) throws Exception {
-        List<ResourceDTO> entityList = resourceService.getResourcesBySiteId(idSite);
+        List<ResourceDTO> resources = resourceService.getResourcesBySiteId(idSite);
 
         Map<String, Object> response = new HashMap<>();
-        if (!entityList.isEmpty()) {
+        if (!resources.isEmpty()) {
             response.put("ERROR", false);
-            response.put("DATA", entityList);
+            response.put("DATA", resources);
         } else {
             response.put("ERROR", true);
-            response.put("MESSAGE", "List not exist");
+            response.put("MESSAGE", "Il n'y a pas de ressource pour ce site.");
         }
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
@@ -102,15 +88,15 @@ public class ResourceController {
     @GetMapping("/resource/allByState")
     ResponseEntity<Map<String, Object>> getAllByState(
             @RequestParam(name = "idState", defaultValue = "") final long idSite) throws Exception {
-        List<ResourceDTO> entityList = resourceService.getResourcesByStateId(idSite);
+        List<ResourceDTO> resources = resourceService.getResourcesByStateId(idSite);
 
         Map<String, Object> response = new HashMap<>();
-        if (!entityList.isEmpty()) {
+        if (!resources.isEmpty()) {
             response.put("ERROR", false);
-            response.put("DATA", entityList);
+            response.put("DATA", resources);
         } else {
             response.put("ERROR", true);
-            response.put("MESSAGE", "List not exist");
+            response.put("MESSAGE", "Il n'y a pas de ressource pour cet état.");
         }
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
@@ -126,7 +112,7 @@ public class ResourceController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Ressource non trouvée.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -141,10 +127,11 @@ public class ResourceController {
         Map<String, Object> response = new HashMap<>();
         if (!resourceService.removeResource(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Ressource supprimée.");
         }
 
         return ResponseEntity.ok(response);

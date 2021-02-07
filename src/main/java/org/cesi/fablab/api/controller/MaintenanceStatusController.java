@@ -34,37 +34,35 @@ public class MaintenanceStatusController {
         response.put("ERROR", false);
         response.put("DATA", maintenanceStatusService.getAllMaintenanceStatus());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/maintenancestatus")
-    public ResponseEntity<Object> addMaintenanceStatus(
-            @Valid @RequestBody final MaintenanceStatusDTO maintenanceStatusModel) throws Exception {
+    public ResponseEntity<Object> addMaintenanceStatus(@Valid @RequestBody final MaintenanceStatusDTO maintenanceStatus)
+            throws Exception {
 
-        MaintenanceStatusDTO dto = maintenanceStatusService.addMaintenanceStatus(maintenanceStatusModel);
-        maintenanceStatusModel.setId(dto.getId());
-
+        maintenanceStatusService.addMaintenanceStatus(maintenanceStatus);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", maintenanceStatusModel);
+        response.put("DATA", maintenanceStatus);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/maintenancestatus")
     public ResponseEntity<Object> updateMaintenanceStatus(
-            @Valid @RequestBody final MaintenanceStatusDTO maintenanceStatusModel) throws Exception {
+            @Valid @RequestBody final MaintenanceStatusDTO maintenanceStatus) throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            maintenanceStatusService.updateMaintenanceStatus(maintenanceStatusModel);
+            maintenanceStatusService.updateMaintenanceStatus(maintenanceStatus);
             response.put("ERROR", false);
-            response.put("DATA", maintenanceStatusModel);
+            response.put("DATA", maintenanceStatus);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Statut de maintenance non trouvé, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -75,15 +73,15 @@ public class MaintenanceStatusController {
     @GetMapping("/maintenancestatus/allByName")
     ResponseEntity<Map<String, Object>> getAllByName(@RequestParam(name = "name", defaultValue = "") final String name)
             throws Exception {
-        List<MaintenanceStatusDTO> entityList = maintenanceStatusService.getMaintenanceStatusByName(name);
+        List<MaintenanceStatusDTO> maintenanceStatuses = maintenanceStatusService.getMaintenanceStatusByName(name);
 
         Map<String, Object> response = new HashMap<>();
-        if (!entityList.isEmpty()) {
+        if (!maintenanceStatuses.isEmpty()) {
             response.put("ERROR", false);
-            response.put("DATA", entityList);
+            response.put("DATA", maintenanceStatuses);
         } else {
             response.put("ERROR", true);
-            response.put("MESSAGE", "List not exist");
+            response.put("MESSAGE", "Il n'y a pas de maintenance avec ce statut.");
         }
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
@@ -99,7 +97,7 @@ public class MaintenanceStatusController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Statut de maintenance non trouvé.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -114,10 +112,11 @@ public class MaintenanceStatusController {
         Map<String, Object> response = new HashMap<>();
         if (!maintenanceStatusService.removeMaintenanceStatus(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Statut de maintenance supprimé.");
         }
 
         return ResponseEntity.ok(response);

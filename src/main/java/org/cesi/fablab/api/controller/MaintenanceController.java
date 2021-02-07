@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import org.cesi.fablab.api.dto.MaintenanceDTO;
 import org.cesi.fablab.api.service.MaintenanceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,49 +33,36 @@ public class MaintenanceController {
         response.put("ERROR", false);
         response.put("DATA", maintenanceService.getAllMaintenances());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/maintenance")
-    public ResponseEntity<Object> addMaintenance(@Valid @RequestBody final MaintenanceDTO maintenanceModel)
+    public ResponseEntity<Object> addMaintenance(@Valid @RequestBody final MaintenanceDTO maintenance)
             throws Exception {
 
+        maintenanceService.addMaintenance(maintenance);
         Map<String, Object> response = new HashMap<>();
-        try {
-            MaintenanceDTO dto = maintenanceService.addMaintenance(maintenanceModel);
-            maintenanceModel.setId(dto.getId());
-            response.put("ERROR", false);
-            response.put("DATA", dto);
-            response.put("DATA", maintenanceModel);
-        } catch (EntityNotFoundException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
-        } catch (DataIntegrityViolationException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Data integrity violation");
-        } finally {
-            response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        }
+        response.put("ERROR", false);
+        response.put("DATA", maintenance);
+        response.put("MESSAGE", "Ajout réussi !");
+        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
 
     }
 
     @PutMapping(value = "/maintenance")
-    public ResponseEntity<Object> updateMaintenance(@Valid @RequestBody final MaintenanceDTO maintenanceModel)
+    public ResponseEntity<Object> updateMaintenance(@Valid @RequestBody final MaintenanceDTO maintenance)
             throws Exception {
 
+        maintenanceService.updateMaintenance(maintenance);
         Map<String, Object> response = new HashMap<>();
         try {
-            maintenanceService.updateMaintenance(maintenanceModel);
             response.put("ERROR", false);
-            response.put("DATA", maintenanceModel);
+            response.put("DATA", maintenance);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
-        } catch (DataIntegrityViolationException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Data integrity violation");
+            response.put("MESSAGE", "Maintenance non trouvée, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -87,15 +73,15 @@ public class MaintenanceController {
     @GetMapping("/maintenance/allByResource")
     ResponseEntity<Map<String, Object>> getAllByResource(
             @RequestParam(name = "idResource", defaultValue = "") final long idResource) throws Exception {
-        List<MaintenanceDTO> entityList = maintenanceService.getMaintenancesByResource(idResource);
 
+        List<MaintenanceDTO> maintenances = maintenanceService.getMaintenancesByResource(idResource);
         Map<String, Object> response = new HashMap<>();
-        if (!entityList.isEmpty()) {
+        if (!maintenances.isEmpty()) {
             response.put("ERROR", false);
-            response.put("DATA", entityList);
+            response.put("DATA", maintenances);
         } else {
             response.put("ERROR", true);
-            response.put("MESSAGE", "List not exist");
+            response.put("MESSAGE", "Il n'y a pas de maintenance pour cette ressource.");
         }
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
@@ -111,7 +97,7 @@ public class MaintenanceController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Maintenance non trouvée.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -126,10 +112,11 @@ public class MaintenanceController {
         Map<String, Object> response = new HashMap<>();
         if (!maintenanceService.removeMaintenance(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Maintenance supprimée.");
         }
 
         return ResponseEntity.ok(response);

@@ -33,7 +33,6 @@ public class ResourceCapacitationController {
         response.put("ERROR", false);
         response.put("DATA", resourceCapacitationService.getAllResourceCapacitation());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
@@ -41,14 +40,12 @@ public class ResourceCapacitationController {
     public ResponseEntity<Object> addResourceCapacitation(
             @Valid @RequestBody final ResourceCapacitationDTO resourceCapacitationModel) throws Exception {
 
-        ResourceCapacitationDTO dto = resourceCapacitationService.addResourceCapacitation(resourceCapacitationModel);
-        resourceCapacitationModel.setId(dto.getId());
-
+        resourceCapacitationService.addResourceCapacitation(resourceCapacitationModel);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
         response.put("DATA", resourceCapacitationModel);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
@@ -61,9 +58,10 @@ public class ResourceCapacitationController {
             resourceCapacitationService.updateResourceCapacitation(resourceCapacitationModel);
             response.put("ERROR", false);
             response.put("DATA", resourceCapacitationModel);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Association resource-habilitation non trouvée, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -81,7 +79,7 @@ public class ResourceCapacitationController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Association resource-habilitation non trouvée.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -96,10 +94,11 @@ public class ResourceCapacitationController {
         Map<String, Object> response = new HashMap<>();
         if (!resourceCapacitationService.removeResourceCapacitation(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Association resource-habilitation supprimée.");
         }
 
         return ResponseEntity.ok(response);

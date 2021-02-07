@@ -33,35 +33,33 @@ public class TypeFileController {
         response.put("ERROR", false);
         response.put("DATA", typeFileService.getAllTypeFile());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/typefile")
-    public ResponseEntity<Object> addTypeFile(@Valid @RequestBody final TypeFileDTO typeFileModel) throws Exception {
+    public ResponseEntity<Object> addTypeFile(@Valid @RequestBody final TypeFileDTO typeFile) throws Exception {
 
-        TypeFileDTO dto = typeFileService.addTypeFile(typeFileModel);
-        typeFileModel.setId(dto.getId());
-
+        typeFileService.addTypeFile(typeFile);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", typeFileModel);
+        response.put("DATA", typeFile);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/typefile")
-    public ResponseEntity<Object> updateTypeFile(@Valid @RequestBody final TypeFileDTO typeFileModel) throws Exception {
+    public ResponseEntity<Object> updateTypeFile(@Valid @RequestBody final TypeFileDTO typeFile) throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            typeFileService.updateTypeFile(typeFileModel);
+            typeFileService.updateTypeFile(typeFile);
             response.put("ERROR", false);
-            response.put("DATA", typeFileModel);
+            response.put("DATA", typeFile);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Type de fichier non trouvé, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -79,7 +77,7 @@ public class TypeFileController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Type de fichier non trouvé.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -94,10 +92,11 @@ public class TypeFileController {
         Map<String, Object> response = new HashMap<>();
         if (!typeFileService.removeTypeFile(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Type de fichier supprimé.");
         }
 
         return ResponseEntity.ok(response);

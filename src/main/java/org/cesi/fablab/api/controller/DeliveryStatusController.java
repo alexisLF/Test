@@ -33,37 +33,35 @@ public class DeliveryStatusController {
         response.put("ERROR", false);
         response.put("DATA", deliveryStatusService.getAllDeliveryStatus());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/deliverystatus")
-    public ResponseEntity<Object> addDeliveryStatus(@Valid @RequestBody final DeliveryStatusDTO deliveryStatusModel)
+    public ResponseEntity<Object> addDeliveryStatus(@Valid @RequestBody final DeliveryStatusDTO deliveryStatus)
             throws Exception {
 
-        DeliveryStatusDTO dto = deliveryStatusService.addDeliveryStatus(deliveryStatusModel);
-        deliveryStatusModel.setId(dto.getId());
-
+        deliveryStatusService.addDeliveryStatus(deliveryStatus);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", deliveryStatusModel);
+        response.put("DATA", deliveryStatus);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/deliverystatus")
-    public ResponseEntity<Object> updateDeliveryStatus(@Valid @RequestBody final DeliveryStatusDTO deliveryStatusModel)
+    public ResponseEntity<Object> updateDeliveryStatus(@Valid @RequestBody final DeliveryStatusDTO deliveryStatus)
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            deliveryStatusService.updateDeliveryStatus(deliveryStatusModel);
+            deliveryStatusService.updateDeliveryStatus(deliveryStatus);
             response.put("ERROR", false);
-            response.put("DATA", deliveryStatusModel);
+            response.put("DATA", deliveryStatus);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Statut de livraison non trouvé, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -81,7 +79,7 @@ public class DeliveryStatusController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Statut de livraison non trouvé.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -96,10 +94,11 @@ public class DeliveryStatusController {
         Map<String, Object> response = new HashMap<>();
         if (!deliveryStatusService.removeDeliveryStatus(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Statut de livraison supprimé.");
         }
 
         return ResponseEntity.ok(response);

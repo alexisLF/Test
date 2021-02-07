@@ -34,37 +34,35 @@ public class TypeResourceController {
         response.put("ERROR", false);
         response.put("DATA", typeResourceService.getAllTypesResource());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/typeresource")
-    public ResponseEntity<Object> addTypeResource(@Valid @RequestBody final TypeResourceDTO typeResourceModel)
+    public ResponseEntity<Object> addTypeResource(@Valid @RequestBody final TypeResourceDTO typeResource)
             throws Exception {
 
-        TypeResourceDTO dto = typeResourceService.addTypeResource(typeResourceModel);
-        typeResourceModel.setId(dto.getId());
-
+        typeResourceService.addTypeResource(typeResource);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", typeResourceModel);
+        response.put("DATA", typeResource);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/typeresource")
-    public ResponseEntity<Object> updateTypeResource(@Valid @RequestBody final TypeResourceDTO typeResourceModel)
+    public ResponseEntity<Object> updateTypeResource(@Valid @RequestBody final TypeResourceDTO typeResource)
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            typeResourceService.updateTypeResource(typeResourceModel);
+            typeResourceService.updateTypeResource(typeResource);
             response.put("ERROR", false);
-            response.put("DATA", typeResourceModel);
+            response.put("DATA", typeResource);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Type de ressource non trouvé, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -75,15 +73,15 @@ public class TypeResourceController {
     @GetMapping("/typeresource/allByName")
     ResponseEntity<Map<String, Object>> getAllByName(@RequestParam(name = "name", defaultValue = "") final String name)
             throws Exception {
-        List<TypeResourceDTO> entityList = typeResourceService.getTypeResourceByName(name);
+        List<TypeResourceDTO> typeResources = typeResourceService.getTypeResourceByName(name);
 
         Map<String, Object> response = new HashMap<>();
-        if (!entityList.isEmpty()) {
+        if (!typeResources.isEmpty()) {
             response.put("ERROR", false);
-            response.put("DATA", entityList);
+            response.put("DATA", typeResources);
         } else {
             response.put("ERROR", true);
-            response.put("MESSAGE", "List not exist");
+            response.put("MESSAGE", "Il n'existe pas de type de ressource avec ce nom.");
         }
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
@@ -99,7 +97,7 @@ public class TypeResourceController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Type de ressource non trouvé.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -114,10 +112,11 @@ public class TypeResourceController {
         Map<String, Object> response = new HashMap<>();
         if (!typeResourceService.removeTypeResource(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Type de ressource supprimé.");
         }
 
         return ResponseEntity.ok(response);

@@ -11,7 +11,6 @@ import javax.validation.Valid;
 import org.cesi.fablab.api.dto.RoomDTO;
 import org.cesi.fablab.api.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,47 +33,33 @@ public class RoomController {
         response.put("ERROR", false);
         response.put("DATA", roomService.getAllRooms());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/room")
-    public ResponseEntity<Object> addRoom(@Valid @RequestBody final RoomDTO roomModel) throws Exception {
-
+    public ResponseEntity<Object> addRoom(@Valid @RequestBody final RoomDTO room) throws Exception {
+        roomService.addRoom(room);
         Map<String, Object> response = new HashMap<>();
-        try {
-            RoomDTO dto = roomService.addRoom(roomModel);
-            roomModel.setId(dto.getId());
-            response.put("ERROR", false);
-            response.put("DATA", dto);
-            response.put("DATA", roomModel);
-        } catch (EntityNotFoundException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
-        } catch (DataIntegrityViolationException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Data integrity violation");
-        } finally {
-            response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        }
+        response.put("ERROR", false);
+        response.put("DATA", room);
+        response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
 
     }
 
     @PutMapping(value = "/room")
-    public ResponseEntity<Object> updateRoom(@Valid @RequestBody final RoomDTO roomModel) throws Exception {
+    public ResponseEntity<Object> updateRoom(@Valid @RequestBody final RoomDTO room) throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            roomService.updateRoom(roomModel);
+            roomService.updateRoom(room);
             response.put("ERROR", false);
-            response.put("DATA", roomModel);
+            response.put("DATA", room);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
-        } catch (DataIntegrityViolationException e) {
-            response.put("ERROR", true);
-            response.put("MESSAGE", "Data integrity violation");
+            response.put("MESSAGE", "Salle non trouvée, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -85,15 +70,15 @@ public class RoomController {
     @GetMapping("/room/allBySite")
     ResponseEntity<Map<String, Object>> getAllBySite(
             @RequestParam(name = "idSite", defaultValue = "") final long idSite) throws Exception {
-        List<RoomDTO> entityList = roomService.getRoomsBySite(idSite);
+        List<RoomDTO> rooms = roomService.getRoomsBySite(idSite);
 
         Map<String, Object> response = new HashMap<>();
-        if (!entityList.isEmpty()) {
+        if (!rooms.isEmpty()) {
             response.put("ERROR", false);
-            response.put("DATA", entityList);
+            response.put("DATA", rooms);
         } else {
             response.put("ERROR", true);
-            response.put("MESSAGE", "List not exist");
+            response.put("MESSAGE", "Il n'y a pas de salle pour ce site.");
         }
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
@@ -109,7 +94,7 @@ public class RoomController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Salle non trouvée.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -124,10 +109,11 @@ public class RoomController {
         Map<String, Object> response = new HashMap<>();
         if (!roomService.removeRoom(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Salle supprimée.");
         }
 
         return ResponseEntity.ok(response);

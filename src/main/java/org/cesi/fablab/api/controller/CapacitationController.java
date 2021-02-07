@@ -33,37 +33,35 @@ public class CapacitationController {
         response.put("ERROR", false);
         response.put("DATA", capacitationService.getAllCapacitation());
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
-        response.put("MESSAGE", "message d'erreur dans le cas ou d'une exception ou erreur");
         return ResponseEntity.ok(response);
     }
 
     @PostMapping(value = "/capacitation")
-    public ResponseEntity<Object> addCapacitation(@Valid @RequestBody final CapacitationDTO capacitationModel)
+    public ResponseEntity<Object> addCapacitation(@Valid @RequestBody final CapacitationDTO capacitation)
             throws Exception {
 
-        CapacitationDTO dto = capacitationService.addCapacitation(capacitationModel);
-        capacitationModel.setId(dto.getId());
-
+        capacitationService.addCapacitation(capacitation);
         Map<String, Object> response = new HashMap<>();
         response.put("ERROR", false);
-        response.put("DATA", dto);
-        response.put("DATA", capacitationModel);
+        response.put("DATA", capacitation);
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
+        response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
     }
 
     @PutMapping(value = "/capacitation")
-    public ResponseEntity<Object> updateCapacitation(@Valid @RequestBody final CapacitationDTO capacitationModel)
+    public ResponseEntity<Object> updateCapacitation(@Valid @RequestBody final CapacitationDTO capacitation)
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
         try {
-            capacitationService.updateCapacitation(capacitationModel);
+            capacitationService.updateCapacitation(capacitation);
             response.put("ERROR", false);
-            response.put("DATA", capacitationModel);
+            response.put("DATA", capacitation);
+            response.put("MESSAGE", "Mise à jour réussie !");
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Habilitation non trouvée, mise à jour impossible.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -81,7 +79,7 @@ public class CapacitationController {
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Entity not found");
+            response.put("MESSAGE", "Habilitation non trouvée.");
         } finally {
             response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         }
@@ -96,10 +94,11 @@ public class CapacitationController {
         Map<String, Object> response = new HashMap<>();
         if (!capacitationService.removeCapacitation(id)) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Delete failed");
+            response.put("MESSAGE", "Echec de la suppression.");
         } else {
             response.put("ERROR", false);
             response.put("DATA", id);
+            response.put("MESSAGE", "Habilitation supprimée.");
         }
 
         return ResponseEntity.ok(response);
