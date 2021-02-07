@@ -9,7 +9,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.TypeOperationDTO;
-import org.cesi.fablab.api.entity.TypeOperationEntity;
 import org.cesi.fablab.api.service.TypeOperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -95,8 +94,7 @@ public class TypeOperationController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            TypeOperationEntity entity = typeOperationService.getTypeOperationById(id);
-            TypeOperationDTO dto = new TypeOperationDTO(entity);
+            TypeOperationDTO dto = typeOperationService.getTypeOperationById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {

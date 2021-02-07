@@ -12,9 +12,9 @@ public interface TypeOperationService {
 
     boolean removeTypeOperation(long id) throws Exception;
 
-    TypeOperationEntity updateTypeOperation(TypeOperationDTO dto) throws Exception;
+    TypeOperationDTO updateTypeOperation(TypeOperationDTO dto) throws Exception;
 
-    TypeOperationEntity getTypeOperationById(long id) throws Exception;
+    TypeOperationDTO getTypeOperationById(long id) throws Exception;
 
     List<TypeOperationDTO> getTypeOperationByName(String name) throws Exception;
 }
