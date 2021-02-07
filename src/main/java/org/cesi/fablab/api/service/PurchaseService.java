@@ -3,7 +3,6 @@ package org.cesi.fablab.api.service;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.PurchaseDTO;
-import org.cesi.fablab.api.entity.PurchaseEntity;
 
 public interface PurchaseService {
     List<PurchaseDTO> getAllPurchase() throws Exception;
@@ -12,8 +11,8 @@ public interface PurchaseService {
 
     boolean removePurchase(long id) throws Exception;
 
-    PurchaseEntity updatePurchase(PurchaseDTO dto) throws Exception;
+    PurchaseDTO updatePurchase(PurchaseDTO dto) throws Exception;
 
-    PurchaseEntity getPurchaseById(long id) throws Exception;
+    PurchaseDTO getPurchaseById(long id) throws Exception;
 
 }

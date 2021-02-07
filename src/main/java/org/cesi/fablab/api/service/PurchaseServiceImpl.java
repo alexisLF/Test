@@ -66,9 +66,9 @@ public class PurchaseServiceImpl implements PurchaseService {
     }
 
     @Override
-    public final PurchaseEntity updatePurchase(final PurchaseDTO dto) throws Exception {
+    public final PurchaseDTO updatePurchase(final PurchaseDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        PurchaseEntity entity = this.getPurchaseById(dto.getId());
+        PurchaseEntity entity = purchaseRepository.getOne(dto.getId());
         entity.setName(dto.getName());
         entity.setPurchaseDate(dto.getPurchaseDate());
         ResourceEntity resource = new ResourceEntity();
@@ -77,11 +77,11 @@ public class PurchaseServiceImpl implements PurchaseService {
         DeliveryStatusEntity deliveryStatus = new DeliveryStatusEntity();
         deliveryStatus.setId(dto.getDelivery().getId());
         entity.setDelivery(deliveryStatus);
-        return purchaseRepository.save(entity);
+        return new PurchaseDTO(purchaseRepository.save(entity));
     }
 
     @Override
-    public final PurchaseEntity getPurchaseById(final long id) throws Exception {
+    public final PurchaseDTO getPurchaseById(final long id) throws Exception {
         // TODO Auto-generated method stub
         PurchaseEntity entity = purchaseRepository.getOne(id);
         ResourceEntity resource = new ResourceEntity();
@@ -90,7 +90,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         DeliveryStatusEntity deliveryStatus = new DeliveryStatusEntity();
         deliveryStatus.setId(entity.getDelivery().getId());
         entity.setDelivery(deliveryStatus);
-        return entity;
+        return new PurchaseDTO(entity);
     }
 
 }
