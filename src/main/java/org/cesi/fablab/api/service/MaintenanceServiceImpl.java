@@ -59,7 +59,6 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Override
     public final boolean removeMaintenance(final long id) throws Exception {
         // TODO Auto-generated method stub
-
         MaintenanceEntity entity = maintenanceRepository.findById(id);
         if (entity != null) {
             maintenanceRepository.delete(entity);
@@ -70,10 +69,9 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     }
 
     @Override
-    public final MaintenanceEntity updateMaintenance(final MaintenanceDTO dto) throws Exception {
+    public final MaintenanceDTO updateMaintenance(final MaintenanceDTO dto) throws Exception {
         // TODO Auto-generated method stub
-
-        MaintenanceEntity entity = this.getMaintenanceById(dto.getId());
+        MaintenanceEntity entity = maintenanceRepository.getOne(dto.getId());
         entity.setNote(dto.getNote());
         entity.setSuccess(dto.isSuccess());
         entity.setDateEnd(dto.getDateEnd());
@@ -90,13 +88,12 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         MaintenanceStatusEntity status = new MaintenanceStatusEntity();
         status.setId(dto.getStatus().getId());
         entity.setStatus(status);
-        return maintenanceRepository.save(entity);
+        return new MaintenanceDTO(maintenanceRepository.save(entity));
     }
 
     @Override
-    public final MaintenanceEntity getMaintenanceById(final long id) throws Exception {
+    public final MaintenanceDTO getMaintenanceById(final long id) throws Exception {
         // TODO Auto-generated method stub
-
         MaintenanceEntity maintenanceEntity = maintenanceRepository.getOne(id);
         ResourceEntity resource = new ResourceEntity();
         resource.setId(maintenanceEntity.getResource().getId());
@@ -110,7 +107,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         MaintenanceStatusEntity status = new MaintenanceStatusEntity();
         status.setId(maintenanceEntity.getStatus().getId());
         maintenanceEntity.setStatus(status);
-        return maintenanceEntity;
+        return new MaintenanceDTO(maintenanceEntity);
     }
 
     @Override
