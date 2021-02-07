@@ -100,9 +100,9 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public final ResourceEntity updateResource(final ResourceDTO dto) throws Exception {
+    public final ResourceDTO updateResource(final ResourceDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        ResourceEntity entity = this.getResourceById(dto.getId());
+        ResourceEntity entity = resourceRepository.getOne(dto.getId());
         entity.setRef(dto.getRef());
         entity.setName(dto.getName());
         entity.setDateInstallation(dto.getDateInstallation());
@@ -145,14 +145,13 @@ public class ResourceServiceImpl implements ResourceService {
             capacitationList.add(capacitation);
         }
         entity.setResourceCapacitationList(capacitationList);
-        return resourceRepository.save(entity);
+        return new ResourceDTO(resourceRepository.save(entity));
     }
 
     @Override
-    public final ResourceEntity getResourceById(final long id) throws Exception {
+    public final ResourceDTO getResourceById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        ResourceEntity entity = resourceRepository.getOne(id);
-        return entity;
+        return new ResourceDTO(resourceRepository.getOne(id));
     }
 
     @Override

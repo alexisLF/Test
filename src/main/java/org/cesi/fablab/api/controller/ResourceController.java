@@ -9,7 +9,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.ResourceDTO;
-import org.cesi.fablab.api.entity.ResourceEntity;
 import org.cesi.fablab.api.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -122,8 +121,7 @@ public class ResourceController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            ResourceEntity entity = resourceService.getResourceById(id);
-            ResourceDTO dto = new ResourceDTO(entity);
+            ResourceDTO dto = resourceService.getResourceById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
