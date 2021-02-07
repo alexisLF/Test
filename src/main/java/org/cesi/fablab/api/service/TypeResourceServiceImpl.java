@@ -51,17 +51,17 @@ public class TypeResourceServiceImpl implements TypeResourceService {
     }
 
     @Override
-    public final TypeResourceEntity updateTypeResource(final TypeResourceDTO dto) throws Exception {
+    public final TypeResourceDTO updateTypeResource(final TypeResourceDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        TypeResourceEntity entity = this.getTypeResourceById(dto.getId());
+        TypeResourceEntity entity = typeResourceRepository.getOne(dto.getId());
         entity.setName(dto.getName());
-        return typeResourceRepository.save(entity);
+        return new TypeResourceDTO(typeResourceRepository.save(entity));
     }
 
     @Override
-    public final TypeResourceEntity getTypeResourceById(final long id) throws Exception {
+    public final TypeResourceDTO getTypeResourceById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return typeResourceRepository.getOne(id);
+        return new TypeResourceDTO(typeResourceRepository.getOne(id));
     }
 
     @Override

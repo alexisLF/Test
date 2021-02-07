@@ -9,7 +9,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.TypeResourceDTO;
-import org.cesi.fablab.api.entity.TypeResourceEntity;
 import org.cesi.fablab.api.service.TypeResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -95,8 +94,7 @@ public class TypeResourceController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            TypeResourceEntity entity = typeResourceService.getTypeResourceById(id);
-            TypeResourceDTO dto = new TypeResourceDTO(entity);
+            TypeResourceDTO dto = typeResourceService.getTypeResourceById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
