@@ -60,27 +60,27 @@ public class RoomServiceImpl implements RoomService {
     }
 
     @Override
-    public final RoomEntity updateRoom(final RoomDTO dto) throws Exception {
+    public final RoomDTO updateRoom(final RoomDTO dto) throws Exception {
         // TODO Auto-generated method stub
 
-        RoomEntity entity = this.getRoomById(dto.getId());
+        RoomEntity entity = roomRepository.getOne(dto.getId());
         entity.setFloor(dto.getFloor());
         entity.setName(dto.getName());
         SiteEntity site = new SiteEntity();
         site.setId(dto.getSite().getId());
         entity.setSite(site);
-        return roomRepository.save(entity);
+        return new RoomDTO(roomRepository.save(entity));
     }
 
     @Override
-    public final RoomEntity getRoomById(final long id) throws Exception {
+    public final RoomDTO getRoomById(final long id) throws Exception {
         // TODO Auto-generated method stub
 
         RoomEntity roomEntity = roomRepository.getOne(id);
         SiteEntity site = new SiteEntity();
         site.setId(roomEntity.getSite().getId());
         roomEntity.setSite(site);
-        return roomEntity;
+        return new RoomDTO(roomEntity);
     }
 
     @Override

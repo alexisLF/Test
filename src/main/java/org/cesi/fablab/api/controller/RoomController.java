@@ -9,7 +9,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.RoomDTO;
-import org.cesi.fablab.api.entity.RoomEntity;
 import org.cesi.fablab.api.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -105,8 +104,7 @@ public class RoomController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            RoomEntity entity = roomService.getRoomById(id);
-            RoomDTO dto = new RoomDTO(entity);
+            RoomDTO dto = roomService.getRoomById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
