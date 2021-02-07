@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.http.entity.FileEntity;
 import org.cesi.fablab.api.entity.DeliveryStatusEntity;
 import org.cesi.fablab.api.entity.PurchaseEntity;
@@ -20,7 +22,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PurchaseDTO {
     private long id;
+    @NotNull
     private String name;
+    @NotNull
     private Date purchaseDate;
     private ResourceEntity resource;
     private DeliveryStatusEntity delivery;

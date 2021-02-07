@@ -1,5 +1,7 @@
 package org.cesi.fablab.api.dto;
 
+import javax.validation.constraints.NotNull;
+
 import org.cesi.fablab.api.entity.DocumentationEntity;
 
 import lombok.AllArgsConstructor;
@@ -13,6 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DocumentationDTO {
     private long id;
+    @NotNull
     private String description;
     private String useCondition;
     // private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();

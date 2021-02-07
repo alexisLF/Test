@@ -1,5 +1,7 @@
 package org.cesi.fablab.api.dto;
 
+import javax.validation.constraints.NotNull;
+
 import org.cesi.fablab.api.entity.ResourceCapacitationEntity;
 
 import lombok.AllArgsConstructor;
@@ -14,6 +16,7 @@ import lombok.Setter;
 public class ResourceCapacitationDTO {
 
     private long id;
+    @NotNull
     private String name;
     private String description;
     // private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();

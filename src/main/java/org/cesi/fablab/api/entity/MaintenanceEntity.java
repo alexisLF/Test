@@ -45,7 +45,7 @@ public class MaintenanceEntity {
     @JoinColumn(name = "userId", nullable = false)
     private UserEntity user;
 
-    @Column
+    @Column(nullable = false)
     private String note;
 
     @Column

@@ -2,6 +2,8 @@ package org.cesi.fablab.api.dto;
 
 import java.util.Calendar;
 
+import javax.validation.constraints.NotNull;
+
 import org.cesi.fablab.api.entity.MaintenanceEntity;
 
 import lombok.AllArgsConstructor;
@@ -15,10 +17,12 @@ import lombok.Setter;
 @NoArgsConstructor
 public class MaintenanceDTO {
     private long id;
+    @NotNull
     private Calendar dateStart;
     private Calendar dateEnd;
     private ResourceDTO resource;
     private UserDTO user;
+    @NotNull
     private String note;
     private boolean success;
     private TypeOperationDTO type;

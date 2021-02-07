@@ -3,6 +3,8 @@ package org.cesi.fablab.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.cesi.fablab.api.entity.RoomEntity;
 import org.cesi.fablab.api.entity.SiteEntity;
 
@@ -17,6 +19,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class SiteDTO {
     private long id;
+    @NotNull
     private String name;
     private String description;
     // private List<HolidayDTO> holidaysList = new ArrayList<HolidayDTO>();

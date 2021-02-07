@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.cesi.fablab.api.entity.CapacitationEntity;
 import org.cesi.fablab.api.entity.DocumentationEntity;
 import org.cesi.fablab.api.entity.MaintenanceEntity;
@@ -26,6 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class ResourceDTO {
     private long id;
+    @NotNull
     private String name;
     private String ref;
     private Date dateInstallation;

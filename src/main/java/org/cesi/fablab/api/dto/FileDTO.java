@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import org.cesi.fablab.api.entity.DocumentationEntity;
 import org.cesi.fablab.api.entity.FileEntity;
 import org.cesi.fablab.api.entity.PurchaseEntity;
@@ -19,7 +21,9 @@ import lombok.Setter;
 @NoArgsConstructor
 public class FileDTO {
     private long id;
+    @NotNull
     private String name;
+    @NotNull
     private String url;
     private Calendar dateUpload;
     private TypeFileDTO type;
