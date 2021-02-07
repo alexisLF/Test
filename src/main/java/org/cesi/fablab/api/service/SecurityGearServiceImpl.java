@@ -52,20 +52,20 @@ public class SecurityGearServiceImpl implements SecurityGearService {
     }
 
     @Override
-    public final SecurityGearEntity updateSecurityGear(final SecurityGearDTO dto) throws Exception {
+    public final SecurityGearDTO updateSecurityGear(final SecurityGearDTO dto) throws Exception {
         // TODO Auto-generated method stub
 
-        SecurityGearEntity entity = this.getSecurityGearById(dto.getId());
+        SecurityGearEntity entity = securityGearRepository.getOne(dto.getId());
         entity.setName(dto.getName());
-        return securityGearRepository.save(entity);
+        return new SecurityGearDTO(securityGearRepository.save(entity));
     }
 
     @Override
-    public final SecurityGearEntity getSecurityGearById(final long id) throws Exception {
+    public final SecurityGearDTO getSecurityGearById(final long id) throws Exception {
         // TODO Auto-generated method stub
 
         SecurityGearEntity securityGearEntity = securityGearRepository.getOne(id);
-        return securityGearEntity;
+        return new SecurityGearDTO(securityGearEntity);
     }
 
 }

@@ -3,7 +3,6 @@ package org.cesi.fablab.api.service;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.SecurityGearDTO;
-import org.cesi.fablab.api.entity.SecurityGearEntity;
 
 public interface SecurityGearService {
 
@@ -13,8 +12,8 @@ public interface SecurityGearService {
 
     boolean removeSecurityGear(long id) throws Exception;
 
-    SecurityGearEntity updateSecurityGear(SecurityGearDTO dto) throws Exception;
+    SecurityGearDTO updateSecurityGear(SecurityGearDTO dto) throws Exception;
 
-    SecurityGearEntity getSecurityGearById(long id) throws Exception;
+    SecurityGearDTO getSecurityGearById(long id) throws Exception;
 
 }

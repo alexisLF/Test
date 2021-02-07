@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.SecurityGearDTO;
-import org.cesi.fablab.api.entity.SecurityGearEntity;
 import org.cesi.fablab.api.service.SecurityGearService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -90,8 +89,7 @@ public class SecurityGearController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            SecurityGearEntity entity = securityGearService.getSecurityGearById(id);
-            SecurityGearDTO dto = new SecurityGearDTO(entity);
+            SecurityGearDTO dto = securityGearService.getSecurityGearById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
