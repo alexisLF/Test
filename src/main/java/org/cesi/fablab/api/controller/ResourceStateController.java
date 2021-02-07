@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.ResourceStateDTO;
-import org.cesi.fablab.api.entity.ResourceStateEntity;
 import org.cesi.fablab.api.service.ResourceStateService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,8 +76,7 @@ public class ResourceStateController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            ResourceStateEntity entity = resourceStateService.getResourceStateById(id);
-            ResourceStateDTO dto = new ResourceStateDTO(entity);
+            ResourceStateDTO dto = resourceStateService.getResourceStateById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {

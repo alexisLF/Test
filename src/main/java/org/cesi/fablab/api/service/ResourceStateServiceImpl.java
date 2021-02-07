@@ -44,7 +44,6 @@ public class ResourceStateServiceImpl implements ResourceStateService {
     @Override
     public final boolean removeResourceState(final long id) throws Exception {
         // TODO Auto-generated method stub
-
         ResourceStateEntity entity = resourceStateRepository.findById(id);
         if (entity != null) {
             List<ResourceEntity> resourceList = resourceRepository.findByStateId(entity.getId());
@@ -60,17 +59,17 @@ public class ResourceStateServiceImpl implements ResourceStateService {
     }
 
     @Override
-    public final ResourceStateEntity updateResourceState(final ResourceStateDTO dto) throws Exception {
+    public final ResourceStateDTO updateResourceState(final ResourceStateDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        ResourceStateEntity entity = this.getResourceStateById(dto.getId());
+        ResourceStateEntity entity = resourceStateRepository.getOne(dto.getId());
         entity.setName(dto.getName());
-        return resourceStateRepository.save(entity);
+        return new ResourceStateDTO(resourceStateRepository.save(entity));
     }
 
     @Override
-    public final ResourceStateEntity getResourceStateById(final long id) throws Exception {
+    public final ResourceStateDTO getResourceStateById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return resourceStateRepository.getOne(id);
+        return new ResourceStateDTO(resourceStateRepository.getOne(id));
     }
 
 }
