@@ -23,7 +23,6 @@ import lombok.Setter;
 @Entity
 @Table(name = "holiday")
 public class HolidayEntity {
-// Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

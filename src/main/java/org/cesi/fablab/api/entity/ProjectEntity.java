@@ -32,7 +32,8 @@ public class ProjectEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String title;
 
     @Column(columnDefinition = "TEXT")
@@ -40,6 +41,7 @@ public class ProjectEntity {
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private java.util.Calendar dateStart;
 
     @Basic

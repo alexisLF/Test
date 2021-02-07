@@ -23,11 +23,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "typeResource")
 public class TypeResourceEntity {
-// Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "type")

@@ -26,8 +26,10 @@ public class MaintenanceStatusEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String name;
+
     @OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "status")
     private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 }

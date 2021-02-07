@@ -25,12 +25,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "skill")
 public class SkillEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany

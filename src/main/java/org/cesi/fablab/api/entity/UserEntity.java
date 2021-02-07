@@ -31,20 +31,28 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String mail;
+
     @Column
     private String password;
-    @Column
+
+    @Column(nullable = false)
     private String firstname;
+
     @Column
     private String lastname;
+
     @Column
     private boolean active;
+
     @Column(name = "date_active")
     private LocalDateTime dateActive;
+
     @Column
     private String avatar;
+
     @Column
     private int credit;
 

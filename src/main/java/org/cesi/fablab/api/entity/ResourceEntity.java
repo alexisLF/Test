@@ -28,18 +28,22 @@ import lombok.Setter;
 @Entity
 @Table(name = "resource")
 public class ResourceEntity {
-// Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String name;
+
     @Column
     private String ref;
+
     @Basic
     private java.sql.Date dateInstallation;
+
     @Column
     private int stock;
+
     @Column
     private Boolean isActive;
 

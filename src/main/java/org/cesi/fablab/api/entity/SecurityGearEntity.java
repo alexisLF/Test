@@ -25,11 +25,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "securitygear")
 public class SecurityGearEntity {
-    // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany

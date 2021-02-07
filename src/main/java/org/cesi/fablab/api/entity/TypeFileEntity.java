@@ -23,11 +23,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "typeFile")
 public class TypeFileEntity {
-// Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String name;
 
     @OneToMany(targetEntity = FileEntity.class, mappedBy = "type")

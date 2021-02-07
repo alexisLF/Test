@@ -27,14 +27,17 @@ import lombok.Setter;
 @Entity
 @Table(name = "purchase")
 public class PurchaseEntity {
-    // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String name;
+
     @Basic
+    @Column(nullable = false)
     private java.sql.Date purchaseDate;
+
     @ManyToOne
     @JoinColumn(name = "resourceId", nullable = false)
     private ResourceEntity resource;

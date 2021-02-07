@@ -30,13 +30,13 @@ public class DocumentEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column
+    @Column(nullable = false)
     private String path;
 
     @ManyToMany

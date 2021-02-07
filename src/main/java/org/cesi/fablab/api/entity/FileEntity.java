@@ -29,14 +29,16 @@ import lombok.Setter;
 @Entity
 @Table(name = "file")
 public class FileEntity {
-    // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String name;
-    @Column
+
+    @Column(nullable = false)
     private String url;
+
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Calendar dateUpload;

@@ -28,8 +28,10 @@ public class ResourceCapacitationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Column
+
+    @Column(nullable = false)
     private String name;
+
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 

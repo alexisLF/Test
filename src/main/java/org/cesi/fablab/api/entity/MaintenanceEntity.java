@@ -24,13 +24,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "Maintenance")
 public class MaintenanceEntity {
-    // Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private java.util.Calendar dateStart;
 
     @Basic

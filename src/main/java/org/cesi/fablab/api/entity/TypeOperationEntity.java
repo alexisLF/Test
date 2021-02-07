@@ -23,12 +23,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "TypeOperation")
 public class TypeOperationEntity {
-// Propriété
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column
+    @Column(nullable = false)
     private String name;
 
     @Column
