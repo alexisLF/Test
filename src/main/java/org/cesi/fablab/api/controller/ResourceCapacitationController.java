@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.ResourceCapacitationDTO;
-import org.cesi.fablab.api.entity.ResourceCapacitationEntity;
 import org.cesi.fablab.api.service.ResourceCapacitationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,8 +76,7 @@ public class ResourceCapacitationController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            ResourceCapacitationEntity entity = resourceCapacitationService.getResourceCapacitationById(id);
-            ResourceCapacitationDTO dto = new ResourceCapacitationDTO(entity);
+            ResourceCapacitationDTO dto = resourceCapacitationService.getResourceCapacitationById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {

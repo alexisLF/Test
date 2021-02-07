@@ -53,19 +53,19 @@ public class ResourceCapacitationServiceImpl implements ResourceCapacitationServ
     }
 
     @Override
-    public final ResourceCapacitationEntity updateResourceCapacitation(final ResourceCapacitationDTO dto)
+    public final ResourceCapacitationDTO updateResourceCapacitation(final ResourceCapacitationDTO dto)
             throws Exception {
         // TODO Auto-generated method stub
-        ResourceCapacitationEntity entity = this.getResourceCapacitationById(dto.getId());
+        ResourceCapacitationEntity entity = resourceCapacitationRepository.getOne(dto.getId());
         entity.setDescription(dto.getDescription());
         entity.setName(dto.getName());
-        return resourceCapacitationRepository.save(entity);
+        return new ResourceCapacitationDTO(resourceCapacitationRepository.save(entity));
     }
 
     @Override
-    public final ResourceCapacitationEntity getResourceCapacitationById(final long id) throws Exception {
+    public final ResourceCapacitationDTO getResourceCapacitationById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return resourceCapacitationRepository.getOne(id);
+        return new ResourceCapacitationDTO(resourceCapacitationRepository.getOne(id));
     }
 
 }
