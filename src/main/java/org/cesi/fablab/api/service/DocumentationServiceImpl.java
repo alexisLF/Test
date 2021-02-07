@@ -54,7 +54,7 @@ public class DocumentationServiceImpl implements DocumentationService {
     @Override
     public final DocumentationDTO updateDocumentation(final DocumentationDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        DocumentationEntity entity = documentationRepository.findById(dto.getId());
+        DocumentationEntity entity = documentationRepository.getOne(dto.getId());
         entity.setDescription(dto.getDescription());
         entity.setUseCondition(dto.getUseCondition());
         return new DocumentationDTO(documentationRepository.save(entity));

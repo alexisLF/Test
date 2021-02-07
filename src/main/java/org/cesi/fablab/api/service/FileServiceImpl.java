@@ -59,7 +59,7 @@ public class FileServiceImpl implements FileService {
     @Override
     public final FileDTO updateFile(final FileDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        FileEntity entity = fileRepository.findById(dto.getId());
+        FileEntity entity = fileRepository.getOne(dto.getId());
         entity.setName(dto.getName());
         TypeFileEntity typeFile = new TypeFileEntity();
         typeFile.setId(dto.getType().getId());
