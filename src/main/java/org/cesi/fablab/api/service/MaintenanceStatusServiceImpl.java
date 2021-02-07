@@ -51,17 +51,17 @@ public class MaintenanceStatusServiceImpl implements MaintenanceStatusService {
     }
 
     @Override
-    public final MaintenanceStatusEntity updateMaintenanceStatus(final MaintenanceStatusDTO dto) throws Exception {
+    public final MaintenanceStatusDTO updateMaintenanceStatus(final MaintenanceStatusDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        MaintenanceStatusEntity entity = this.getMaintenanceStatusById(dto.getId());
+        MaintenanceStatusEntity entity = maintenanceStatusRepository.getOne(dto.getId());
         entity.setName(dto.getName());
-        return maintenanceStatusRepository.save(entity);
+        return new MaintenanceStatusDTO(maintenanceStatusRepository.save(entity));
     }
 
     @Override
-    public final MaintenanceStatusEntity getMaintenanceStatusById(final long id) throws Exception {
+    public final MaintenanceStatusDTO getMaintenanceStatusById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return maintenanceStatusRepository.getOne(id);
+        return new MaintenanceStatusDTO(maintenanceStatusRepository.getOne(id));
     }
 
     @Override

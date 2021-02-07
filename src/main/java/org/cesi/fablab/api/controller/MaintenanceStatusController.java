@@ -9,7 +9,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.MaintenanceStatusDTO;
-import org.cesi.fablab.api.entity.MaintenanceStatusEntity;
 import org.cesi.fablab.api.service.MaintenanceStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -95,8 +94,7 @@ public class MaintenanceStatusController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            MaintenanceStatusEntity entity = maintenanceStatusService.getMaintenanceStatusById(id);
-            MaintenanceStatusDTO dto = new MaintenanceStatusDTO(entity);
+            MaintenanceStatusDTO dto = maintenanceStatusService.getMaintenanceStatusById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
