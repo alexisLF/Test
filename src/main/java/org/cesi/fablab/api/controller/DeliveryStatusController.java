@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.DeliveryStatusDTO;
-import org.cesi.fablab.api.entity.DeliveryStatusEntity;
 import org.cesi.fablab.api.service.DeliveryStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,8 +76,7 @@ public class DeliveryStatusController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            DeliveryStatusEntity entity = deliveryStatusService.getDeliveryStatusById(id);
-            DeliveryStatusDTO dto = new DeliveryStatusDTO(entity);
+            DeliveryStatusDTO dto = deliveryStatusService.getDeliveryStatusById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {

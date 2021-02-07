@@ -51,17 +51,17 @@ public class DeliveryStatusServiceImpl implements DeliveryStatusService {
     }
 
     @Override
-    public final DeliveryStatusEntity updateDeliveryStatus(final DeliveryStatusDTO dto) throws Exception {
+    public final DeliveryStatusDTO updateDeliveryStatus(final DeliveryStatusDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        DeliveryStatusEntity entity = this.getDeliveryStatusById(dto.getId());
+        DeliveryStatusEntity entity = deliveryStatusRepository.getOne(dto.getId());
         entity.setName(dto.getName());
-        return deliveryStatusRepository.save(entity);
+        return new DeliveryStatusDTO(deliveryStatusRepository.save(entity));
     }
 
     @Override
-    public final DeliveryStatusEntity getDeliveryStatusById(final long id) throws Exception {
+    public final DeliveryStatusDTO getDeliveryStatusById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return deliveryStatusRepository.getOne(id);
+        return new DeliveryStatusDTO(deliveryStatusRepository.getOne(id));
     }
 
     @Override
