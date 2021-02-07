@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.TypeFileDTO;
-import org.cesi.fablab.api.entity.TypeFileEntity;
 import org.cesi.fablab.api.service.TypeFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -75,8 +74,7 @@ public class TypeFileController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            TypeFileEntity entity = typeFileService.getTypeFileById(id);
-            TypeFileDTO dto = new TypeFileDTO(entity);
+            TypeFileDTO dto = typeFileService.getTypeFileById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {

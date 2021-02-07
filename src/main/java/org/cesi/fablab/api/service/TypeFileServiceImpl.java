@@ -51,17 +51,17 @@ public class TypeFileServiceImpl implements TypeFileService {
     }
 
     @Override
-    public final TypeFileEntity updateTypeFile(final TypeFileDTO dto) throws Exception {
+    public final TypeFileDTO updateTypeFile(final TypeFileDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        TypeFileEntity entity = this.getTypeFileById(dto.getId());
+        TypeFileEntity entity = typeFileRepository.getOne(dto.getId());
         entity.setName(dto.getName());
-        return typeFileRepository.save(entity);
+        return new TypeFileDTO(typeFileRepository.save(entity));
     }
 
     @Override
-    public final TypeFileEntity getTypeFileById(final long id) throws Exception {
+    public final TypeFileDTO getTypeFileById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return typeFileRepository.getOne(id);
+        return new TypeFileDTO(typeFileRepository.getOne(id));
     }
 
 }
