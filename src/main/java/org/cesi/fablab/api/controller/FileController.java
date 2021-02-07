@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.FileDTO;
-import org.cesi.fablab.api.entity.FileEntity;
 import org.cesi.fablab.api.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -75,8 +74,7 @@ public class FileController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            FileEntity entity = fileService.getFileById(id);
-            FileDTO dto = new FileDTO(entity, false);
+            FileDTO dto = fileService.getFileById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
