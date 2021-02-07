@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.DocumentationDTO;
-import org.cesi.fablab.api.entity.DocumentationEntity;
 import org.cesi.fablab.api.service.DocumentationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -77,8 +76,7 @@ public class DocumentationController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            DocumentationEntity entity = documentationService.getDocumentationById(id);
-            DocumentationDTO dto = new DocumentationDTO(entity);
+            DocumentationDTO dto = documentationService.getDocumentationById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {

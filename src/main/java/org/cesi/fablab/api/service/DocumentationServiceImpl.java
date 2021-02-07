@@ -52,18 +52,18 @@ public class DocumentationServiceImpl implements DocumentationService {
     }
 
     @Override
-    public final DocumentationEntity updateDocumentation(final DocumentationDTO dto) throws Exception {
+    public final DocumentationDTO updateDocumentation(final DocumentationDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        DocumentationEntity entity = this.getDocumentationById(dto.getId());
+        DocumentationEntity entity = documentationRepository.findById(dto.getId());
         entity.setDescription(dto.getDescription());
         entity.setUseCondition(dto.getUseCondition());
-        return documentationRepository.save(entity);
+        return new DocumentationDTO(documentationRepository.save(entity));
     }
 
     @Override
-    public final DocumentationEntity getDocumentationById(final long id) throws Exception {
+    public final DocumentationDTO getDocumentationById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return documentationRepository.getOne(id);
+        return new DocumentationDTO(documentationRepository.getOne(id));
     }
 
 }
