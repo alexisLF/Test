@@ -3,7 +3,6 @@ package org.cesi.fablab.api.service;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.CapacitationDTO;
-import org.cesi.fablab.api.entity.CapacitationEntity;
 
 public interface CapacitationService {
     List<CapacitationDTO> getAllCapacitation() throws Exception;
@@ -12,8 +11,8 @@ public interface CapacitationService {
 
     boolean removeCapacitation(long id) throws Exception;
 
-    CapacitationEntity updateCapacitation(CapacitationDTO dto) throws Exception;
+    CapacitationDTO updateCapacitation(CapacitationDTO dto) throws Exception;
 
-    CapacitationEntity getCapacitationById(long id) throws Exception;
+    CapacitationDTO getCapacitationById(long id) throws Exception;
 
 }

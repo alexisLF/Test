@@ -52,18 +52,18 @@ public class CapacitationServiceImpl implements CapacitationService {
     }
 
     @Override
-    public final CapacitationEntity updateCapacitation(final CapacitationDTO dto) throws Exception {
+    public final CapacitationDTO updateCapacitation(final CapacitationDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        CapacitationEntity entity = this.getCapacitationById(dto.getId());
+        CapacitationEntity entity = capacitationRepository.getOne(dto.getId());
         entity.setDescription(dto.getDescription());
         entity.setName(dto.getName());
-        return capacitationRepository.save(entity);
+        return new CapacitationDTO(capacitationRepository.save(entity));
     }
 
     @Override
-    public final CapacitationEntity getCapacitationById(final long id) throws Exception {
+    public final CapacitationDTO getCapacitationById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return capacitationRepository.getOne(id);
+        return new CapacitationDTO(capacitationRepository.getOne(id));
     }
 
 }
