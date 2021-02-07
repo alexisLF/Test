@@ -52,18 +52,18 @@ public class SiteServiceImpl implements SiteService {
     }
 
     @Override
-    public final SiteEntity updateSite(final SiteDTO dto) throws Exception {
+    public final SiteDTO updateSite(final SiteDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        SiteEntity entity = this.getSiteById(dto.getId());
+        SiteEntity entity = siteRepository.getOne(dto.getId());
         entity.setDescription(dto.getDescription());
         entity.setName(dto.getName());
-        return siteRepository.save(entity);
+        return new SiteDTO(siteRepository.save(entity));
     }
 
     @Override
-    public final SiteEntity getSiteById(final long id) throws Exception {
+    public final SiteDTO getSiteById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        return siteRepository.getOne(id);
+        return new SiteDTO(siteRepository.getOne(id));
     }
 
 }

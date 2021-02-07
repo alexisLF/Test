@@ -8,7 +8,6 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.SiteDTO;
-import org.cesi.fablab.api.entity.SiteEntity;
 import org.cesi.fablab.api.service.SiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -75,8 +74,7 @@ public class SiteController {
             throws Exception {
         Map<String, Object> response = new HashMap<>();
         try {
-            SiteEntity entity = siteService.getSiteById(id);
-            SiteDTO dto = new SiteDTO(entity);
+            SiteDTO dto = siteService.getSiteById(id);
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
