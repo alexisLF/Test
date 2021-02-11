@@ -14,6 +14,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.cesi.fablab.api.dto.DocumentationDTO;
+import org.cesi.fablab.api.dto.FileDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -26,6 +29,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "documentation")
 public class DocumentationEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -43,4 +47,14 @@ public class DocumentationEntity {
     @JoinTable(name = "documentationFiles", joinColumns = @JoinColumn(name = "documentationId"), inverseJoinColumns = @JoinColumn(name = "fileId"))
     private List<FileEntity> filesList = new ArrayList<FileEntity>();
 
+    public DocumentationEntity(DocumentationDTO documentation) {
+        // TODO Auto-generated constructor stub
+        super();
+        this.id = documentation.getId();
+        this.description = documentation.getDescription();
+        this.useCondition = documentation.getUseCondition();
+        for (FileDTO entity : documentation.getFilesList()) {
+            filesList.add(new FileEntity(entity));
+        }
+    }
 }

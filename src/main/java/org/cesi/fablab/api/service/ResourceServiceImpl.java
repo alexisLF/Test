@@ -3,11 +3,11 @@ package org.cesi.fablab.api.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.cesi.fablab.api.dto.CapacitationDTO;
 import org.cesi.fablab.api.dto.ResourceDTO;
+import org.cesi.fablab.api.dto.SecurityGearDTO;
 import org.cesi.fablab.api.entity.CapacitationEntity;
 import org.cesi.fablab.api.entity.DocumentationEntity;
-import org.cesi.fablab.api.entity.MaintenanceEntity;
-import org.cesi.fablab.api.entity.ReservationEntity;
 import org.cesi.fablab.api.entity.ResourceEntity;
 import org.cesi.fablab.api.entity.ResourceStateEntity;
 import org.cesi.fablab.api.entity.RoomEntity;
@@ -57,28 +57,24 @@ public class ResourceServiceImpl implements ResourceService {
         documentation.setId(dto.getDocumentation().getId());
         entity.setDocumentation(documentation);
         List<SecurityGearEntity> securityList = new ArrayList<SecurityGearEntity>();
-        for (SecurityGearEntity securityGear : dto.getSecuritysList()) {
-            securityList.add(securityGear);
+        for (SecurityGearDTO securityGear : dto.getSecuritysList()) {
+            securityList.add(new SecurityGearEntity(securityGear));
         }
         entity.setSecuritysList(securityList);
-        List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
-        for (ReservationEntity reservation : dto.getReservationsList()) {
-            reservationList.add(reservation);
-        }
-        entity.setReservationsList(reservationList);
-        List<MaintenanceEntity> maintenanceList = new ArrayList<MaintenanceEntity>();
-        for (MaintenanceEntity maintenance : dto.getMaintenancesList()) {
-            maintenanceList.add(maintenance);
-        }
-        entity.setMaintenancesList(maintenanceList);
+        /*
+         * List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
+         * for (ReservationEntity reservation : dto.getReservationsList()) {
+         * reservationList.add(reservation); }
+         * entity.setReservationsList(reservationList);
+         */
         List<ResourceEntity> consumableList = new ArrayList<ResourceEntity>();
-        for (ResourceEntity consumable : dto.getConsumableResources()) {
-            consumableList.add(consumable);
+        for (ResourceDTO consumable : dto.getConsumableResources()) {
+            consumableList.add(new ResourceEntity(consumable));
         }
         entity.setConsumableResources(consumableList);
         List<CapacitationEntity> capacitationList = new ArrayList<CapacitationEntity>();
-        for (CapacitationEntity capacitation : dto.getResourceCapacitationList()) {
-            capacitationList.add(capacitation);
+        for (CapacitationDTO capacitation : dto.getResourceCapacitationList()) {
+            capacitationList.add(new CapacitationEntity(capacitation));
         }
         entity.setResourceCapacitationList(capacitationList);
         resourceRepository.save(entity);
@@ -121,28 +117,24 @@ public class ResourceServiceImpl implements ResourceService {
         documentation.setId(dto.getDocumentation().getId());
         entity.setDocumentation(documentation);
         List<SecurityGearEntity> securityList = new ArrayList<SecurityGearEntity>();
-        for (SecurityGearEntity securityGear : dto.getSecuritysList()) {
-            securityList.add(securityGear);
+        for (SecurityGearDTO securityGear : dto.getSecuritysList()) {
+            securityList.add(new SecurityGearEntity(securityGear));
         }
         entity.setSecuritysList(securityList);
-        List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
-        for (ReservationEntity reservation : dto.getReservationsList()) {
-            reservationList.add(reservation);
-        }
-        entity.setReservationsList(reservationList);
-        List<MaintenanceEntity> maintenanceList = new ArrayList<MaintenanceEntity>();
-        for (MaintenanceEntity maintenance : dto.getMaintenancesList()) {
-            maintenanceList.add(maintenance);
-        }
-        entity.setMaintenancesList(maintenanceList);
+        /*
+         * List<ReservationEntity> reservationList = new ArrayList<ReservationEntity>();
+         * for (ReservationEntity reservation : dto.getReservationsList()) {
+         * reservationList.add(reservation); }
+         * entity.setReservationsList(reservationList);
+         */
         List<ResourceEntity> consumableList = new ArrayList<ResourceEntity>();
-        for (ResourceEntity consumable : dto.getConsumableResources()) {
-            consumableList.add(consumable);
+        for (ResourceDTO consumable : dto.getConsumableResources()) {
+            consumableList.add(new ResourceEntity(consumable));
         }
         entity.setConsumableResources(consumableList);
         List<CapacitationEntity> capacitationList = new ArrayList<CapacitationEntity>();
-        for (CapacitationEntity capacitation : dto.getResourceCapacitationList()) {
-            capacitationList.add(capacitation);
+        for (CapacitationDTO capacitation : dto.getResourceCapacitationList()) {
+            capacitationList.add(new CapacitationEntity(capacitation));
         }
         entity.setResourceCapacitationList(capacitationList);
         return new ResourceDTO(resourceRepository.save(entity));

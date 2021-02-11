@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.cesi.fablab.api.dto.RoomDTO;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -28,6 +30,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "room")
 public class RoomEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -46,4 +49,14 @@ public class RoomEntity {
     @JsonBackReference
     @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "room")
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+
+    public RoomEntity(RoomDTO room) {
+        // TODO Auto-generated constructor stub
+        super();
+        this.id = room.getId();
+        this.name = room.getName();
+        this.floor = room.getFloor();
+        this.site = room.getSite();
+    }
+
 }

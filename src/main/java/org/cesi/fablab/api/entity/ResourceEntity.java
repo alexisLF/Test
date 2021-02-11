@@ -16,6 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.cesi.fablab.api.dto.CapacitationDTO;
+import org.cesi.fablab.api.dto.ResourceDTO;
+import org.cesi.fablab.api.dto.SecurityGearDTO;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
@@ -30,6 +34,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "resource")
 public class ResourceEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -91,4 +96,32 @@ public class ResourceEntity {
     @ManyToMany
     @JoinTable(name = "machineCapacitation", joinColumns = @JoinColumn(name = "resourceId"), inverseJoinColumns = @JoinColumn(name = "resourceCapacitationId"))
     private List<CapacitationEntity> resourceCapacitationList = new ArrayList<CapacitationEntity>();
+
+    public ResourceEntity(ResourceDTO resource) {
+        // TODO Auto-generated constructor stub
+        super();
+        this.id = resource.getId();
+        this.name = resource.getName();
+        this.ref = resource.getRef();
+        this.dateInstallation = resource.getDateInstallation();
+        this.stock = resource.getStock();
+        this.isActive = resource.getIsActive();
+        this.type = new TypeResourceEntity(resource.getType());
+        this.room = new RoomEntity(resource.getRoom());
+        this.state = new ResourceStateEntity(resource.getState());
+        this.documentation = new DocumentationEntity(resource.getDocumentation());
+        for (SecurityGearDTO dto : resource.getSecuritysList()) {
+            securitysList.add(new SecurityGearEntity(dto));
+        }
+        // this.projectList = resourceEntity.getProjectList();
+        // this.reservationsList = resourceEntity.getReservationsList();
+        // this.maintenancesList = resourceEntity.getMaintenancesList();
+        // this.parentResources = resourceEntity.getParentResources();
+        for (ResourceDTO dto : resource.getConsumableResources()) {
+            consumableResources.add(new ResourceEntity(dto));
+        }
+        for (CapacitationDTO dto : resource.getResourceCapacitationList()) {
+            resourceCapacitationList.add(new CapacitationEntity(dto));
+        }
+    }
 }

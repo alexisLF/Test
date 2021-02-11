@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.cesi.fablab.api.dto.TypeFileDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,6 +25,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "typeFile")
 public class TypeFileEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -32,4 +35,11 @@ public class TypeFileEntity {
 
     @OneToMany(targetEntity = FileEntity.class, mappedBy = "type")
     private List<FileEntity> filesList = new ArrayList<FileEntity>();
+
+    public TypeFileEntity(TypeFileDTO type) {
+        // TODO Auto-generated constructor stub
+        super();
+        this.id = type.getId();
+        this.name = type.getName();
+    }
 }

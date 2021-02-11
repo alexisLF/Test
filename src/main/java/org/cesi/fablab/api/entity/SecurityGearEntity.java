@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.cesi.fablab.api.dto.SecurityGearDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "securitygear")
 public class SecurityGearEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -35,4 +38,11 @@ public class SecurityGearEntity {
     @ManyToMany
     @JoinTable(name = "resourceSecurityGear", joinColumns = @JoinColumn(name = "securityGearId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
+
+    public SecurityGearEntity(SecurityGearDTO securityGear) {
+        // TODO Auto-generated constructor stub
+        super();
+        this.id = securityGear.getId();
+        this.name = securityGear.getName();
+    }
 }

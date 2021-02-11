@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.cesi.fablab.api.dto.CapacitationDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,6 +27,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "capacitation")
 public class CapacitationEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -38,4 +41,12 @@ public class CapacitationEntity {
     @ManyToMany
     @JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "capacitationId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private List<RoleEntity> rolesList = new ArrayList<RoleEntity>();
+
+    public CapacitationEntity(CapacitationDTO capacitation) {
+        // TODO Auto-generated constructor stub
+        super();
+        this.id = capacitation.getId();
+        this.name = capacitation.getName();
+        this.description = capacitation.getDescription();
+    }
 }
