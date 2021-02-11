@@ -7,15 +7,8 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 
 import org.cesi.fablab.api.entity.CapacitationEntity;
-import org.cesi.fablab.api.entity.DocumentationEntity;
-import org.cesi.fablab.api.entity.MaintenanceEntity;
-import org.cesi.fablab.api.entity.ProjectEntity;
-import org.cesi.fablab.api.entity.ReservationEntity;
 import org.cesi.fablab.api.entity.ResourceEntity;
-import org.cesi.fablab.api.entity.ResourceStateEntity;
-import org.cesi.fablab.api.entity.RoomEntity;
 import org.cesi.fablab.api.entity.SecurityGearEntity;
-import org.cesi.fablab.api.entity.TypeResourceEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -34,17 +27,17 @@ public class ResourceDTO {
     private Date dateInstallation;
     private int stock;
     private Boolean isActive;
-    private TypeResourceEntity type;
-    private RoomEntity room;
-    private ResourceStateEntity state;
-    private DocumentationEntity documentation;
-    private List<SecurityGearEntity> securitysList = new ArrayList<SecurityGearEntity>();
-    private List<ProjectEntity> projectList = new ArrayList<ProjectEntity>();
-    private List<ReservationEntity> reservationsList = new ArrayList<ReservationEntity>();
-    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
-    private List<ResourceEntity> parentResources = new ArrayList<ResourceEntity>();
-    private List<ResourceEntity> consumableResources = new ArrayList<ResourceEntity>();
-    private List<CapacitationEntity> resourceCapacitationList = new ArrayList<CapacitationEntity>();
+    private TypeResourceDTO type;
+    private RoomDTO room;
+    private ResourceStateDTO state;
+    private DocumentationDTO documentation;
+    private List<SecurityGearDTO> securitysList = new ArrayList<SecurityGearDTO>();
+    // private List<ProjectDTO> projectList = new ArrayList<ProjectDTO>();
+    // private List<ReservationDTO> reservationsList = new
+    // ArrayList<ReservationDTO>();
+    // private List<ResourceDTO> parentResources = new ArrayList<ResourceDTO>();
+    private List<ResourceDTO> consumableResources = new ArrayList<ResourceDTO>();
+    private List<CapacitationDTO> resourceCapacitationList = new ArrayList<CapacitationDTO>();
 
     public ResourceDTO(final ResourceEntity resourceEntity) {
         super();
@@ -54,17 +47,23 @@ public class ResourceDTO {
         this.dateInstallation = resourceEntity.getDateInstallation();
         this.stock = resourceEntity.getStock();
         this.isActive = resourceEntity.getIsActive();
-        this.type = resourceEntity.getType();
-        this.room = resourceEntity.getRoom();
-        this.state = resourceEntity.getState();
-        this.documentation = resourceEntity.getDocumentation();
-        this.securitysList = resourceEntity.getSecuritysList();
+        this.type = new TypeResourceDTO(resourceEntity.getType());
+        this.room = new RoomDTO(resourceEntity.getRoom());
+        this.state = new ResourceStateDTO(resourceEntity.getState());
+        this.documentation = new DocumentationDTO(resourceEntity.getDocumentation());
+        for (SecurityGearEntity entity : resourceEntity.getSecuritysList()) {
+            securitysList.add(new SecurityGearDTO(entity));
+        }
         // this.projectList = resourceEntity.getProjectList();
-        this.reservationsList = resourceEntity.getReservationsList();
-        this.maintenancesList = resourceEntity.getMaintenancesList();
+        // this.reservationsList = resourceEntity.getReservationsList();
+        // this.maintenancesList = resourceEntity.getMaintenancesList();
         // this.parentResources = resourceEntity.getParentResources();
-        this.consumableResources = resourceEntity.getConsumableResources();
-        this.resourceCapacitationList = resourceEntity.getResourceCapacitationList();
+        for (ResourceEntity entity : resourceEntity.getConsumableResources()) {
+            consumableResources.add(new ResourceDTO(entity));
+        }
+        for (CapacitationEntity entity : resourceEntity.getResourceCapacitationList()) {
+            resourceCapacitationList.add(new CapacitationDTO(entity));
+        }
     }
 
 }

@@ -24,7 +24,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         List<MaintenanceEntity> lstMaintenancesEntity = maintenanceRepository.findAll();
         if (lstMaintenancesEntity != null && !lstMaintenancesEntity.isEmpty()) {
             for (MaintenanceEntity currentMaintenanceEntity : lstMaintenancesEntity) {
-                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity, false);
+                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity);
                 lstMaintenancesDTO.add(maintenanceDTO);
             }
         }
@@ -117,7 +117,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         List<MaintenanceEntity> lstMaintenancesEntity = maintenanceRepository.findByResourceId(idResource);
         if (lstMaintenancesEntity != null && !lstMaintenancesEntity.isEmpty()) {
             for (MaintenanceEntity currentMaintenanceEntity : lstMaintenancesEntity) {
-                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity, false);
+                MaintenanceDTO maintenanceDTO = new MaintenanceDTO(currentMaintenanceEntity);
                 lstMaintenancesDTO.add(maintenanceDTO);
             }
         }

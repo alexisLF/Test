@@ -1,8 +1,12 @@
 package org.cesi.fablab.api.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import org.cesi.fablab.api.entity.DocumentationEntity;
+import org.cesi.fablab.api.entity.FileEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,16 +22,17 @@ public class DocumentationDTO {
     @NotNull
     private String description;
     private String useCondition;
-    // private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
-    // private List<FileEntity> filesList = new ArrayList<FileEntity>();
+    private List<FileDTO> filesList = new ArrayList<FileDTO>();
 
     public DocumentationDTO(final DocumentationEntity documentationEntity) {
         super();
         this.id = documentationEntity.getId();
         this.description = documentationEntity.getDescription();
         this.useCondition = documentationEntity.getUseCondition();
-        // this.resourcesList = documentationEntity.getResourcesList();
-        // this.filesList = documentationEntity.getFilesList();
+        for (FileEntity entity : documentationEntity.getFilesList()) {
+            filesList.add(new FileDTO(entity));
+        }
+
     }
 
 }

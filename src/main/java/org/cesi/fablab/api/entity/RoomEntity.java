@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -35,10 +38,12 @@ public class RoomEntity {
     @Column
     private String floor;
 
+    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "siteId", nullable = false)
     private SiteEntity site;
 
+    @JsonBackReference
     @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "room")
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 }

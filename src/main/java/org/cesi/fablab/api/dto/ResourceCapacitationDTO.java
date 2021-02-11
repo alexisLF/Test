@@ -19,7 +19,6 @@ public class ResourceCapacitationDTO {
     @NotNull
     private String name;
     private String description;
-    // private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
     // private List<UserEntity> userCapacitationList = new ArrayList<UserEntity>();
 
     public ResourceCapacitationDTO(final ResourceCapacitationEntity resourceCapacitorEntity) {
@@ -28,8 +27,6 @@ public class ResourceCapacitationDTO {
         this.name = resourceCapacitorEntity.getName();
         this.description = resourceCapacitorEntity.getDescription();
         // this.resourceList = resourceCapacitorEntity.getResourceList();
-        // this.userCapacitationList =
-        // resourceCapacitorEntity.getUserCapacitationList();
     }
 
 }

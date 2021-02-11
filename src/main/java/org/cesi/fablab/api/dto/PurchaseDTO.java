@@ -6,8 +6,8 @@ import java.util.List;
 
 import javax.validation.constraints.NotNull;
 
-import org.apache.http.entity.FileEntity;
 import org.cesi.fablab.api.entity.DeliveryStatusEntity;
+import org.cesi.fablab.api.entity.FileEntity;
 import org.cesi.fablab.api.entity.PurchaseEntity;
 import org.cesi.fablab.api.entity.ResourceEntity;
 
@@ -28,7 +28,7 @@ public class PurchaseDTO {
     private Date purchaseDate;
     private ResourceEntity resource;
     private DeliveryStatusEntity delivery;
-    private List<FileEntity> filesList = new ArrayList<FileEntity>();
+    private List<FileDTO> filesList = new ArrayList<FileDTO>();
 
     public PurchaseDTO(final PurchaseEntity purchaseEntity) {
         super();
@@ -37,7 +37,10 @@ public class PurchaseDTO {
         this.purchaseDate = purchaseEntity.getPurchaseDate();
         this.resource = purchaseEntity.getResource();
         this.delivery = purchaseEntity.getDelivery();
-        // this.filesList = userEntity.getFilesList();
+        for (FileEntity entity : purchaseEntity.getFilesList()) {
+            filesList.add(new FileDTO(entity));
+        }
+
     }
 
 }

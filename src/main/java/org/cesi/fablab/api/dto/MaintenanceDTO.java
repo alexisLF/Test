@@ -41,19 +41,4 @@ public class MaintenanceDTO {
         this.status = new MaintenanceStatusDTO(maintenanceEntity.getStatus());
     }
 
-    public MaintenanceDTO(final MaintenanceEntity maintenanceEntity, boolean needType) {
-        super();
-        this.id = maintenanceEntity.getId();
-        this.dateStart = maintenanceEntity.getDateStart();
-        this.dateEnd = maintenanceEntity.getDateEnd();
-        if (needType) {
-            this.resource = new ResourceDTO(maintenanceEntity.getResource());
-        }
-        this.user = new UserDTO(maintenanceEntity.getUser());
-        this.note = maintenanceEntity.getNote();
-        this.success = maintenanceEntity.isSuccess();
-        this.type = new TypeOperationDTO(maintenanceEntity.getType());
-        this.status = new MaintenanceStatusDTO(maintenanceEntity.getStatus(), needType);
-    }
-
 }

@@ -1,11 +1,7 @@
 package org.cesi.fablab.api.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
-import org.cesi.fablab.api.entity.ResourceEntity;
 import org.cesi.fablab.api.entity.ResourceStateEntity;
 
 import lombok.AllArgsConstructor;
@@ -21,13 +17,11 @@ public class ResourceStateDTO {
     private long id;
     @NotNull
     private String name;
-    private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 
     public ResourceStateDTO(final ResourceStateEntity resourceStateEntity) {
         super();
         this.id = resourceStateEntity.getId();
         this.name = resourceStateEntity.getName();
-        // this.resourceList = resourceStateEntity.getResourceList();
     }
 
 }

@@ -12,6 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +36,11 @@ public class SiteEntity {
     @Column
     private String description;
 
+    @JsonBackReference
     @OneToMany(targetEntity = HolidayEntity.class, mappedBy = "site")
     private List<HolidayEntity> holidaysList = new ArrayList<HolidayEntity>();
 
+    @JsonBackReference
     @OneToMany(targetEntity = RoomEntity.class, mappedBy = "site", cascade = CascadeType.REMOVE)
     private List<RoomEntity> roomsList = new ArrayList<RoomEntity>();
 }

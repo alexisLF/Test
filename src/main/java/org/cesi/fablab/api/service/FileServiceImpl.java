@@ -21,7 +21,7 @@ public class FileServiceImpl implements FileService {
         List<FileEntity> lstFilesEntity = fileRepository.findAll();
         if (lstFilesEntity != null && !lstFilesEntity.isEmpty()) {
             for (FileEntity currentFileEntity : lstFilesEntity) {
-                FileDTO fileDTO = new FileDTO(currentFileEntity, false);
+                FileDTO fileDTO = new FileDTO(currentFileEntity);
                 lstFilesDTO.add(fileDTO);
             }
         }

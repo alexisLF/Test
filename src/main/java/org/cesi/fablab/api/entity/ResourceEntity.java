@@ -16,6 +16,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -74,6 +76,7 @@ public class ResourceEntity {
     @OneToMany(targetEntity = ReservationEntity.class, mappedBy = "resource")
     private List<ReservationEntity> reservationsList = new ArrayList<ReservationEntity>();
 
+    @JsonBackReference
     @OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "resource")
     private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
 

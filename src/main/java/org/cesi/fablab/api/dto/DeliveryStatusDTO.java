@@ -1,12 +1,8 @@
 package org.cesi.fablab.api.dto;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.validation.constraints.NotNull;
 
 import org.cesi.fablab.api.entity.DeliveryStatusEntity;
-import org.cesi.fablab.api.entity.PurchaseEntity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,13 +17,11 @@ public class DeliveryStatusDTO {
     private long id;
     @NotNull
     private String name;
-    private List<PurchaseEntity> purchasesList = new ArrayList<PurchaseEntity>();
 
     public DeliveryStatusDTO(final DeliveryStatusEntity deliveryStatusEntity) {
         super();
         this.id = deliveryStatusEntity.getId();
         this.name = deliveryStatusEntity.getName();
-        // this.purchasesList = deliveryStatusEntity.getPurchasesList();
     }
 
 }
