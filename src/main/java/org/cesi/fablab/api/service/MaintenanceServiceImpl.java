@@ -45,8 +45,12 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         TypeOperationEntity typeOperation = new TypeOperationEntity();
         typeOperation.setId(dto.getType().getId());
         entity.setType(typeOperation);
+        /*
+         * UserEntity user = new UserEntity(); user.setId(dto.getUser().getId());
+         * entity.setUser(user);
+         */
         UserEntity user = new UserEntity();
-        user.setId(dto.getUser().getId());
+        user.setId(1);
         entity.setUser(user);
         MaintenanceStatusEntity status = new MaintenanceStatusEntity();
         status.setId(dto.getStatus().getId());
@@ -71,7 +75,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Override
     public final MaintenanceDTO updateMaintenance(final MaintenanceDTO dto) throws Exception {
         // TODO Auto-generated method stub
-        MaintenanceEntity entity = maintenanceRepository.getOne(dto.getId());
+        MaintenanceEntity entity = maintenanceRepository.findById(dto.getId());
         entity.setNote(dto.getNote());
         entity.setSuccess(dto.isSuccess());
         entity.setDateEnd(dto.getDateEnd());
@@ -82,8 +86,12 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         TypeOperationEntity typeOperation = new TypeOperationEntity();
         typeOperation.setId(dto.getType().getId());
         entity.setType(typeOperation);
+        /*
+         * UserEntity user = new UserEntity(); user.setId(dto.getUser().getId());
+         * entity.setUser(user);
+         */
         UserEntity user = new UserEntity();
-        user.setId(dto.getUser().getId());
+        user.setId(1);
         entity.setUser(user);
         MaintenanceStatusEntity status = new MaintenanceStatusEntity();
         status.setId(dto.getStatus().getId());
@@ -94,20 +102,7 @@ public class MaintenanceServiceImpl implements MaintenanceService {
     @Override
     public final MaintenanceDTO getMaintenanceById(final long id) throws Exception {
         // TODO Auto-generated method stub
-        MaintenanceEntity maintenanceEntity = maintenanceRepository.getOne(id);
-        ResourceEntity resource = new ResourceEntity();
-        resource.setId(maintenanceEntity.getResource().getId());
-        maintenanceEntity.setResource(resource);
-        TypeOperationEntity typeOperation = new TypeOperationEntity();
-        typeOperation.setId(maintenanceEntity.getType().getId());
-        maintenanceEntity.setType(typeOperation);
-        UserEntity user = new UserEntity();
-        user.setId(maintenanceEntity.getUser().getId());
-        maintenanceEntity.setUser(user);
-        MaintenanceStatusEntity status = new MaintenanceStatusEntity();
-        status.setId(maintenanceEntity.getStatus().getId());
-        maintenanceEntity.setStatus(status);
-        return new MaintenanceDTO(maintenanceEntity);
+        return new MaintenanceDTO(maintenanceRepository.getOne(id));
     }
 
     @Override

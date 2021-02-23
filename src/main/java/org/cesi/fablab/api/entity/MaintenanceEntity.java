@@ -12,8 +12,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,7 +37,6 @@ public class MaintenanceEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Calendar dateEnd;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "resourceId", nullable = false)
     private ResourceEntity resource;

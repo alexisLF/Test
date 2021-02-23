@@ -34,7 +34,7 @@ public class MaintenanceDTO {
         this.dateStart = maintenanceEntity.getDateStart();
         this.dateEnd = maintenanceEntity.getDateEnd();
         this.resource = new ResourceDTO(maintenanceEntity.getResource());
-        this.user = new UserDTO(maintenanceEntity.getUser());
+        // this.user = new UserDTO(maintenanceEntity.getUser());
         this.note = maintenanceEntity.getNote();
         this.success = maintenanceEntity.isSuccess();
         this.type = new TypeOperationDTO(maintenanceEntity.getType());
