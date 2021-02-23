@@ -17,5 +17,5 @@ public interface ResourceService {
 
     List<ResourceDTO> getResourcesByStateId(long idState) throws Exception;
 
-    List<ResourceDTO> getResourcesBySiteId(long idState) throws Exception;
+    List<ResourceDTO> getResourcesByRoomId(long idRoom) throws Exception;
 }

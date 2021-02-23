@@ -147,7 +147,7 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<ResourceDTO> getResourcesByStateId(long idState) throws Exception {
+    public List<ResourceDTO> getResourcesByStateId(final long idState) throws Exception {
         List<ResourceDTO> lstResourceDTO = new ArrayList<ResourceDTO>();
         List<ResourceEntity> lstResourceEntity = resourceRepository.findByStateId(idState);
         if (lstResourceEntity != null && !lstResourceEntity.isEmpty()) {
@@ -160,9 +160,9 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public List<ResourceDTO> getResourcesBySiteId(long idSite) throws Exception {
+    public List<ResourceDTO> getResourcesByRoomId(final long idRoom) throws Exception {
         List<ResourceDTO> lstResourceDTO = new ArrayList<ResourceDTO>();
-        List<ResourceEntity> lstResourceEntity = resourceRepository.findByRoomSiteId(idSite);
+        List<ResourceEntity> lstResourceEntity = resourceRepository.findByRoomId(idRoom);
         if (lstResourceEntity != null && !lstResourceEntity.isEmpty()) {
             for (ResourceEntity currentResourceEntity : lstResourceEntity) {
                 ResourceDTO resourceDTO = new ResourceDTO(currentResourceEntity);

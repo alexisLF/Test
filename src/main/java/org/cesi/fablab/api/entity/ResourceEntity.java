@@ -20,8 +20,6 @@ import org.cesi.fablab.api.dto.CapacitationDTO;
 import org.cesi.fablab.api.dto.ResourceDTO;
 import org.cesi.fablab.api.dto.SecurityGearDTO;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -81,10 +79,6 @@ public class ResourceEntity {
     @OneToMany(targetEntity = ReservationEntity.class, mappedBy = "resource")
     private List<ReservationEntity> reservationsList = new ArrayList<ReservationEntity>();
 
-    @JsonBackReference
-    @OneToMany(targetEntity = MaintenanceEntity.class, mappedBy = "resource")
-    private List<MaintenanceEntity> maintenancesList = new ArrayList<MaintenanceEntity>();
-
     @ManyToMany
     @JoinTable(name = "consumable", joinColumns = @JoinColumn(name = "resourceId"), inverseJoinColumns = @JoinColumn(name = "consumableId"))
     private List<ResourceEntity> parentResources = new ArrayList<ResourceEntity>();
@@ -97,7 +91,7 @@ public class ResourceEntity {
     @JoinTable(name = "machineCapacitation", joinColumns = @JoinColumn(name = "resourceId"), inverseJoinColumns = @JoinColumn(name = "resourceCapacitationId"))
     private List<CapacitationEntity> resourceCapacitationList = new ArrayList<CapacitationEntity>();
 
-    public ResourceEntity(ResourceDTO resource) {
+    public ResourceEntity(final ResourceDTO resource) {
         // TODO Auto-generated constructor stub
         super();
         this.id = resource.getId();

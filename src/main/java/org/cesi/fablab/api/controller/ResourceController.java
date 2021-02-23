@@ -68,10 +68,10 @@ public class ResourceController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping("/resource/allBySite")
-    ResponseEntity<Map<String, Object>> getAllBySite(
-            @RequestParam(name = "idSite", defaultValue = "") final long idSite) throws Exception {
-        List<ResourceDTO> resources = resourceService.getResourcesBySiteId(idSite);
+    @GetMapping("/resource/allByRoom")
+    ResponseEntity<Map<String, Object>> getAllByRoom(
+            @RequestParam(name = "idRoom", defaultValue = "") final long idRoom) throws Exception {
+        List<ResourceDTO> resources = resourceService.getResourcesByRoomId(idRoom);
 
         Map<String, Object> response = new HashMap<>();
         if (!resources.isEmpty()) {
@@ -79,7 +79,7 @@ public class ResourceController {
             response.put("DATA", resources);
         } else {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Il n'y a pas de ressource pour ce site.");
+            response.put("MESSAGE", "Il n'y a pas de ressource pour cette salle.");
         }
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         return ResponseEntity.ok(response);
