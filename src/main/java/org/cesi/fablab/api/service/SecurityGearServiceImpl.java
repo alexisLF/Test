@@ -39,7 +39,7 @@ public class SecurityGearServiceImpl implements SecurityGearService {
     }
 
     @Override
-    public final boolean removeSecurityGear(long id) throws Exception {
+    public final boolean removeSecurityGear(final long id) throws Exception {
         // TODO Auto-generated method stub
 
         SecurityGearEntity entity = securityGearRepository.findById(id);
