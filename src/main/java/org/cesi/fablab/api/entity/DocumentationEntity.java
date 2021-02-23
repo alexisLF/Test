@@ -47,7 +47,7 @@ public class DocumentationEntity {
     @JoinTable(name = "documentationFiles", joinColumns = @JoinColumn(name = "documentationId"), inverseJoinColumns = @JoinColumn(name = "fileId"))
     private List<FileEntity> filesList = new ArrayList<FileEntity>();
 
-    public DocumentationEntity(DocumentationDTO documentation) {
+    public DocumentationEntity(final DocumentationDTO documentation) {
         // TODO Auto-generated constructor stub
         super();
         this.id = documentation.getId();

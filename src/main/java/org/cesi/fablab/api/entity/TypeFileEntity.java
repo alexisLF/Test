@@ -36,7 +36,7 @@ public class TypeFileEntity {
     @OneToMany(targetEntity = FileEntity.class, mappedBy = "type")
     private List<FileEntity> filesList = new ArrayList<FileEntity>();
 
-    public TypeFileEntity(TypeFileDTO type) {
+    public TypeFileEntity(final TypeFileDTO type) {
         // TODO Auto-generated constructor stub
         super();
         this.id = type.getId();

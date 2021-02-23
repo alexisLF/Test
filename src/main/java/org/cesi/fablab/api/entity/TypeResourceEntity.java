@@ -36,7 +36,7 @@ public class TypeResourceEntity {
     @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "type")
     private List<ResourceEntity> roomsList = new ArrayList<ResourceEntity>();
 
-    public TypeResourceEntity(TypeResourceDTO type) {
+    public TypeResourceEntity(final TypeResourceDTO type) {
         // TODO Auto-generated constructor stub
         super();
         this.id = type.getId();

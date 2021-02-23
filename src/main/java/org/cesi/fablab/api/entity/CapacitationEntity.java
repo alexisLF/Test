@@ -42,7 +42,7 @@ public class CapacitationEntity {
     @JoinTable(name = "userRoleCapacitation", joinColumns = @JoinColumn(name = "capacitationId"), inverseJoinColumns = @JoinColumn(name = "roleId"))
     private List<RoleEntity> rolesList = new ArrayList<RoleEntity>();
 
-    public CapacitationEntity(CapacitationDTO capacitation) {
+    public CapacitationEntity(final CapacitationDTO capacitation) {
         // TODO Auto-generated constructor stub
         super();
         this.id = capacitation.getId();

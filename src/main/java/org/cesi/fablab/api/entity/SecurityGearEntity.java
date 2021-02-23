@@ -39,7 +39,7 @@ public class SecurityGearEntity {
     @JoinTable(name = "resourceSecurityGear", joinColumns = @JoinColumn(name = "securityGearId"), inverseJoinColumns = @JoinColumn(name = "resourceId"))
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
-    public SecurityGearEntity(SecurityGearDTO securityGear) {
+    public SecurityGearEntity(final SecurityGearDTO securityGear) {
         // TODO Auto-generated constructor stub
         super();
         this.id = securityGear.getId();

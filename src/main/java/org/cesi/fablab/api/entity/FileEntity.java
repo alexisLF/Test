@@ -58,7 +58,7 @@ public class FileEntity {
     @JoinTable(name = "purchaseFiles", joinColumns = @JoinColumn(name = "fileId"), inverseJoinColumns = @JoinColumn(name = "purchaseId"))
     private List<PurchaseEntity> purchaseFilesList = new ArrayList<PurchaseEntity>();
 
-    public FileEntity(FileDTO file) {
+    public FileEntity(final FileDTO file) {
         // TODO Auto-generated constructor stub
         super();
         this.id = file.getId();

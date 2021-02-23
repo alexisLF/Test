@@ -36,7 +36,7 @@ public class ResourceStateEntity {
     @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "state")
     private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 
-    public ResourceStateEntity(ResourceStateDTO state) {
+    public ResourceStateEntity(final ResourceStateDTO state) {
         // TODO Auto-generated constructor stub
         super();
         this.id = state.getId();
