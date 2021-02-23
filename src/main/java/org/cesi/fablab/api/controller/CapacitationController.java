@@ -92,15 +92,19 @@ public class CapacitationController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!capacitationService.removeCapacitation(id)) {
+        try {
+            if (!capacitationService.removeCapacitation(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Habilitation supprimée.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Habilitation supprimée.");
+            response.put("MESSAGE", "Cet habilitation est utilisé, vous ne pouvez pas le supprimer");
         }
-
         return ResponseEntity.ok(response);
     }
 

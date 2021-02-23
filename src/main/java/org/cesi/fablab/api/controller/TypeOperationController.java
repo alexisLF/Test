@@ -110,15 +110,19 @@ public class TypeOperationController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!typeOperationService.removeTypeOperation(id)) {
+        try {
+            if (!typeOperationService.removeTypeOperation(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Achat supprimé.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Achat supprimé.");
+            response.put("MESSAGE", "Ce type d'opération est utilisé, vous ne pouvez pas le supprimer");
         }
-
         return ResponseEntity.ok(response);
     }
 

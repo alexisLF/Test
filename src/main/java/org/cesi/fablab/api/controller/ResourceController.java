@@ -125,15 +125,19 @@ public class ResourceController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!resourceService.removeResource(id)) {
+        try {
+            if (!resourceService.removeResource(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Ressource supprimée.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Ressource supprimée.");
+            response.put("MESSAGE", "Cette resource est utilisée, vous ne pouvez pas la supprimer");
         }
-
         return ResponseEntity.ok(response);
     }
 

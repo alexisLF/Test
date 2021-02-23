@@ -92,13 +92,18 @@ public class ResourceCapacitationController {
             @RequestParam(name = "id", defaultValue = "0") final long id) throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!resourceCapacitationService.removeResourceCapacitation(id)) {
+        try {
+            if (!resourceCapacitationService.removeResourceCapacitation(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Association resource-habilitation supprimée.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Association resource-habilitation supprimée.");
+            response.put("MESSAGE", "Cette habilitation est utilisée, vous ne pouvez pas la supprimer");
         }
 
         return ResponseEntity.ok(response);

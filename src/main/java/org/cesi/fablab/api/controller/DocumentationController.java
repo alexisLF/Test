@@ -92,13 +92,18 @@ public class DocumentationController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!documentationService.removeDocumentation(id)) {
+        try {
+            if (!documentationService.removeDocumentation(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Documentation supprimée.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Documentation supprimée.");
+            response.put("MESSAGE", "Cette documentation est utilisée, vous ne pouvez pas la supprimer");
         }
 
         return ResponseEntity.ok(response);

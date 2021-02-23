@@ -110,13 +110,18 @@ public class MaintenanceController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!maintenanceService.removeMaintenance(id)) {
+        try {
+            if (!maintenanceService.removeMaintenance(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Maintenance supprimée.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Maintenance supprimée.");
+            response.put("MESSAGE", "Cette maintenance est utilisée, vous ne pouvez pas la supprimer");
         }
 
         return ResponseEntity.ok(response);

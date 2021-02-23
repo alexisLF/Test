@@ -89,13 +89,18 @@ public class SiteController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!siteService.removeSite(id)) {
+        try {
+            if (!siteService.removeSite(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Site supprimé.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Site supprimé.");
+            response.put("MESSAGE", "Ce site est utilisé, vous ne pouvez pas le supprimer");
         }
 
         return ResponseEntity.ok(response);

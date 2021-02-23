@@ -110,13 +110,18 @@ public class TypeResourceController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!typeResourceService.removeTypeResource(id)) {
+        try {
+            if (!typeResourceService.removeTypeResource(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Type de ressource supprimé.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Type de ressource supprimé.");
+            response.put("MESSAGE", "Ce type de resource est utilisé, vous ne pouvez pas le supprimer");
         }
 
         return ResponseEntity.ok(response);

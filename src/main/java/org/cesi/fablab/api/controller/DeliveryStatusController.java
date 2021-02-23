@@ -92,13 +92,18 @@ public class DeliveryStatusController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!deliveryStatusService.removeDeliveryStatus(id)) {
+        try {
+            if (!deliveryStatusService.removeDeliveryStatus(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Statut de livraison supprimé.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Statut de livraison supprimé.");
+            response.put("MESSAGE", "Ce statut de livraison est utilisé, vous ne pouvez pas le supprimer");
         }
 
         return ResponseEntity.ok(response);

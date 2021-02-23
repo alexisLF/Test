@@ -92,13 +92,18 @@ public class ResourceStateController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!resourceStateService.removeResourceState(id)) {
+        try {
+            if (!resourceStateService.removeResourceState(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Etat de ressource supprimé.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Etat de ressource supprimé.");
+            response.put("MESSAGE", "Cet état de resource est utilisé, vous ne pouvez pas le supprimer");
         }
 
         return ResponseEntity.ok(response);

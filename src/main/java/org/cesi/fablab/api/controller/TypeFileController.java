@@ -90,15 +90,19 @@ public class TypeFileController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!typeFileService.removeTypeFile(id)) {
+        try {
+            if (!typeFileService.removeTypeFile(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Type de fichier supprimé.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Type de fichier supprimé.");
+            response.put("MESSAGE", "Ce type de fichier est utilisé, vous ne pouvez pas le supprimer");
         }
-
         return ResponseEntity.ok(response);
     }
 

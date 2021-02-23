@@ -93,15 +93,19 @@ public class SecurityGearController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!securityGearService.removeSecurityGear(id)) {
+        try {
+            if (!securityGearService.removeSecurityGear(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Equipement de sécurité supprimé.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Equipement de sécurité supprimé.");
+            response.put("MESSAGE", "Cet équipement de sécurité est utilisé, vous ne pouvez pas le supprimer");
         }
-
         return ResponseEntity.ok(response);
     }
 }

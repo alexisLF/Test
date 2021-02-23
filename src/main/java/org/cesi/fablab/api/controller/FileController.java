@@ -90,13 +90,18 @@ public class FileController {
             throws Exception {
 
         Map<String, Object> response = new HashMap<>();
-        if (!fileService.removeFile(id)) {
+        try {
+            if (!fileService.removeFile(id)) {
+                response.put("ERROR", true);
+                response.put("MESSAGE", "Echec de la suppression.");
+            } else {
+                response.put("ERROR", false);
+                response.put("DATA", id);
+                response.put("MESSAGE", "Fichier supprimé.");
+            }
+        } catch (Exception exception) {
             response.put("ERROR", true);
-            response.put("MESSAGE", "Echec de la suppression.");
-        } else {
-            response.put("ERROR", false);
-            response.put("DATA", id);
-            response.put("MESSAGE", "Fichier supprimé.");
+            response.put("MESSAGE", "Ce fichier est utilisé, vous ne pouvez pas le supprimer");
         }
 
         return ResponseEntity.ok(response);
