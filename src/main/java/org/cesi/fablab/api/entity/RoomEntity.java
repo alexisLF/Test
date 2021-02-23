@@ -16,7 +16,6 @@ import javax.persistence.Table;
 import org.cesi.fablab.api.dto.RoomDTO;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -41,7 +40,6 @@ public class RoomEntity {
     @Column
     private String floor;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "siteId", nullable = false)
     private SiteEntity site;
@@ -50,7 +48,7 @@ public class RoomEntity {
     @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "room")
     private List<ResourceEntity> resourcesList = new ArrayList<ResourceEntity>();
 
-    public RoomEntity(RoomDTO room) {
+    public RoomEntity(final RoomDTO room) {
         // TODO Auto-generated constructor stub
         super();
         this.id = room.getId();

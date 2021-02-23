@@ -3,7 +3,6 @@ package org.cesi.fablab.api.entity;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,7 +39,4 @@ public class SiteEntity {
     @OneToMany(targetEntity = HolidayEntity.class, mappedBy = "site")
     private List<HolidayEntity> holidaysList = new ArrayList<HolidayEntity>();
 
-    @JsonBackReference
-    @OneToMany(targetEntity = RoomEntity.class, mappedBy = "site", cascade = CascadeType.REMOVE)
-    private List<RoomEntity> roomsList = new ArrayList<RoomEntity>();
 }
