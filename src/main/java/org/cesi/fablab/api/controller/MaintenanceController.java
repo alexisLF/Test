@@ -54,9 +54,9 @@ public class MaintenanceController {
     public ResponseEntity<Object> updateMaintenance(@Valid @RequestBody final MaintenanceDTO maintenance)
             throws Exception {
 
-        maintenanceService.updateMaintenance(maintenance);
         Map<String, Object> response = new HashMap<>();
         try {
+            maintenanceService.updateMaintenance(maintenance);
             response.put("ERROR", false);
             response.put("DATA", maintenance);
             response.put("MESSAGE", "Mise à jour réussie !");

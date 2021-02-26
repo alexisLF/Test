@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.MaintenanceDTO;
+import org.cesi.fablab.api.entity.DocumentationEntity;
 import org.cesi.fablab.api.entity.MaintenanceEntity;
 import org.cesi.fablab.api.entity.MaintenanceStatusEntity;
 import org.cesi.fablab.api.entity.ResourceEntity;
+import org.cesi.fablab.api.entity.ResourceStateEntity;
+import org.cesi.fablab.api.entity.RoomEntity;
 import org.cesi.fablab.api.entity.TypeOperationEntity;
+import org.cesi.fablab.api.entity.TypeResourceEntity;
 import org.cesi.fablab.api.entity.UserEntity;
 import org.cesi.fablab.api.repository.MaintenanceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,6 +86,18 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         entity.setDateStart(dto.getDateStart());
         ResourceEntity resource = new ResourceEntity();
         resource.setId(dto.getResource().getId());
+        TypeResourceEntity typeResource = new TypeResourceEntity();
+        typeResource.setId(dto.getResource().getType().getId());
+        resource.setType(typeResource);
+        ResourceStateEntity stateResource = new ResourceStateEntity();
+        stateResource.setId(dto.getResource().getState().getId());
+        resource.setState(stateResource);
+        RoomEntity room = new RoomEntity();
+        room.setId(dto.getResource().getRoom().getId());
+        resource.setRoom(room);
+        DocumentationEntity documentation = new DocumentationEntity();
+        documentation.setId(dto.getResource().getDocumentation().getId());
+        resource.setDocumentation(documentation);
         entity.setResource(resource);
         TypeOperationEntity typeOperation = new TypeOperationEntity();
         typeOperation.setId(dto.getType().getId());
@@ -96,7 +112,8 @@ public class MaintenanceServiceImpl implements MaintenanceService {
         MaintenanceStatusEntity status = new MaintenanceStatusEntity();
         status.setId(dto.getStatus().getId());
         entity.setStatus(status);
-        return new MaintenanceDTO(maintenanceRepository.save(entity));
+        MaintenanceDTO result = new MaintenanceDTO(maintenanceRepository.save(entity));
+        return result;
     }
 
     @Override
