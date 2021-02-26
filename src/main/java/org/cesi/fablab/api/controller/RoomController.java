@@ -9,6 +9,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.RoomDTO;
+import org.cesi.fablab.api.service.ResourceService;
 import org.cesi.fablab.api.service.RoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class RoomController {
     @Autowired(required = true)
     private RoomService roomService;
+
+    @Autowired(required = true)
+    private ResourceService resourceService;
 
     @GetMapping("/room/all")
     ResponseEntity<Map<String, Object>> all() throws Exception {
@@ -45,7 +49,6 @@ public class RoomController {
         response.put("TIMESTAMP", ZonedDateTime.now().toEpochSecond());
         response.put("MESSAGE", "Ajout réussi !");
         return ResponseEntity.ok(response);
-
     }
 
     @PutMapping(value = "/room")
@@ -90,6 +93,7 @@ public class RoomController {
         Map<String, Object> response = new HashMap<>();
         try {
             RoomDTO dto = roomService.getRoomById(id);
+            dto.setResourceList(resourceService.getResourcesByRoomId(id));
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {
