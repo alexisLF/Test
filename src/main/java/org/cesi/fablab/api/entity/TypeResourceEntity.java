@@ -34,7 +34,7 @@ public class TypeResourceEntity {
     private String name;
 
     @OneToMany(targetEntity = ResourceEntity.class, mappedBy = "type")
-    private List<ResourceEntity> roomsList = new ArrayList<ResourceEntity>();
+    private List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 
     public TypeResourceEntity(final TypeResourceDTO type) {
         // TODO Auto-generated constructor stub
