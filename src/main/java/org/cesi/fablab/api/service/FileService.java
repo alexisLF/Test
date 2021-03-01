@@ -21,6 +21,8 @@ public interface FileService {
 
     List<FileDTO> getFilesByDocumentationId(long idDocumentation) throws Exception;
 
+    List<FileDTO> getFilesByPurchaseId(long idPurchase) throws Exception;
+
     FileDTO getFileById(long id) throws Exception;
 
     boolean removeFile(long id) throws Exception;

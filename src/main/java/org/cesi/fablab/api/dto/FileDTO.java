@@ -33,8 +33,9 @@ public class FileDTO {
         this.type = new TypeFileDTO(fileEntity.getType());
     }
 
-    public FileDTO(final String nameRef, final String urlRef) {
+    public FileDTO(long idRef, final String nameRef, final String urlRef) {
         super();
+        this.id = idRef;
         this.name = nameRef;
         this.url = urlRef;
     }

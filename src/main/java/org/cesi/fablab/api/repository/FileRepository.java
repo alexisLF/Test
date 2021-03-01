@@ -13,4 +13,7 @@ public interface FileRepository extends JpaRepository<FileEntity, Long> {
 
     @Query("SELECT d.filesList FROM DocumentationEntity d where d.id = :idDocumentation")
     List<FileEntity> findFilesByDocumentationId(long idDocumentation);
+
+    @Query("SELECT d.filesList FROM PurchaseEntity d where d.id = :idPurchase")
+    List<FileEntity> findFilesByPurchaseId(long idPurchase);
 }

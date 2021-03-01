@@ -1,12 +1,17 @@
 package org.cesi.fablab.api.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import org.cesi.fablab.api.dto.FileDTO;
 import org.cesi.fablab.api.dto.PurchaseDTO;
 import org.cesi.fablab.api.entity.DeliveryStatusEntity;
+import org.cesi.fablab.api.entity.FileEntity;
 import org.cesi.fablab.api.entity.PurchaseEntity;
 import org.cesi.fablab.api.entity.ResourceEntity;
+import org.cesi.fablab.api.entity.TypeFileEntity;
+import org.cesi.fablab.api.repository.FileRepository;
 import org.cesi.fablab.api.repository.PurchaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +20,9 @@ import org.springframework.stereotype.Service;
 public class PurchaseServiceImpl implements PurchaseService {
     @Autowired
     private PurchaseRepository purchaseRepository;
+
+    @Autowired
+    private FileRepository fileRepository;
 
     @Override
     public List<PurchaseDTO> getAllPurchase() throws Exception {
@@ -48,6 +56,23 @@ public class PurchaseServiceImpl implements PurchaseService {
         deliveryStatus.setId(dto.getDelivery().getId());
         entity.setDelivery(deliveryStatus);
         purchaseRepository.save(entity);
+
+        TypeFileEntity type = new TypeFileEntity();
+        type.setId(1);
+        List<PurchaseEntity> purchaseEntity = new ArrayList<PurchaseEntity>();
+        purchaseEntity.add(entity);
+
+        List<FileDTO> lstFilesDTO = dto.getFilesList();
+        for (FileDTO currentFileDTO : lstFilesDTO) {
+            FileEntity currentFileEntity = new FileEntity();
+            currentFileEntity.setName(currentFileDTO.getName());
+            currentFileEntity.setUrl(currentFileDTO.getUrl());
+            currentFileEntity.setDateUpload(Calendar.getInstance());
+            currentFileEntity.setType(type);
+            currentFileEntity.setPurchaseFilesList(purchaseEntity);
+            fileRepository.save(currentFileEntity);
+        }
+
         dto.setId(entity.getId());
         return dto;
     }
@@ -77,6 +102,24 @@ public class PurchaseServiceImpl implements PurchaseService {
         DeliveryStatusEntity deliveryStatus = new DeliveryStatusEntity();
         deliveryStatus.setId(dto.getDelivery().getId());
         entity.setDelivery(deliveryStatus);
+        purchaseRepository.save(entity);
+
+        TypeFileEntity type = new TypeFileEntity();
+        type.setId(1);
+        List<PurchaseEntity> purchaseEntity = new ArrayList<PurchaseEntity>();
+        purchaseEntity.add(entity);
+
+        List<FileDTO> lstFilesDTO = dto.getFilesList();
+        for (FileDTO currentFileDTO : lstFilesDTO) {
+            FileEntity currentFileEntity = new FileEntity();
+            currentFileEntity.setName(currentFileDTO.getName());
+            currentFileEntity.setUrl(currentFileDTO.getUrl());
+            currentFileEntity.setDateUpload(Calendar.getInstance());
+            currentFileEntity.setType(type);
+            currentFileEntity.setPurchaseFilesList(purchaseEntity);
+            fileRepository.save(currentFileEntity);
+        }
+
         return new PurchaseDTO(purchaseRepository.save(entity));
     }
 

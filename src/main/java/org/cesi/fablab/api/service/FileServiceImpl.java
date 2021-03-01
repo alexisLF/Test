@@ -96,6 +96,19 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
+    public List<FileDTO> getFilesByPurchaseId(final long idPurchase) throws Exception {
+        List<FileDTO> lstFileDTO = new ArrayList<FileDTO>();
+        List<FileEntity> lstFileEntity = fileRepository.findFilesByPurchaseId(idPurchase);
+        if (lstFileEntity != null && !lstFileEntity.isEmpty()) {
+            for (FileEntity currentFileEntity : lstFileEntity) {
+                FileDTO fileDTO = new FileDTO(currentFileEntity);
+                lstFileDTO.add(fileDTO);
+            }
+        }
+        return lstFileDTO;
+    }
+
+    @Override
     public final FileDTO getFileById(final long id) throws Exception {
         // TODO Auto-generated method stub
         return new FileDTO(fileRepository.getOne(id));
