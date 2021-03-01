@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.cesi.fablab.api.dto.ResourceStateDTO;
-import org.cesi.fablab.api.entity.ResourceEntity;
 import org.cesi.fablab.api.entity.ResourceStateEntity;
 import org.cesi.fablab.api.repository.ResourceRepository;
 import org.cesi.fablab.api.repository.ResourceStateRepository;
@@ -46,13 +45,8 @@ public class ResourceStateServiceImpl implements ResourceStateService {
         // TODO Auto-generated method stub
         ResourceStateEntity entity = resourceStateRepository.findById(id);
         if (entity != null) {
-            List<ResourceEntity> resourceList = resourceRepository.findByStateId(entity.getId());
-            if (resourceList.isEmpty()) {
-                resourceStateRepository.delete(entity);
-                return true;
-            } else {
-                return false;
-            }
+            resourceStateRepository.delete(entity);
+            return true;
         } else {
             return false;
         }

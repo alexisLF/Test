@@ -8,6 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.validation.Valid;
 
 import org.cesi.fablab.api.dto.SiteDTO;
+import org.cesi.fablab.api.service.RoomService;
 import org.cesi.fablab.api.service.SiteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,9 @@ public class SiteController {
 
     @Autowired(required = true)
     private SiteService siteService;
+
+    @Autowired(required = true)
+    private RoomService roomService;
 
     @GetMapping("/site/all")
     ResponseEntity<Map<String, Object>> all() throws Exception {
@@ -72,6 +76,7 @@ public class SiteController {
         Map<String, Object> response = new HashMap<>();
         try {
             SiteDTO dto = siteService.getSiteById(id);
+            dto.setRoomList(roomService.getRoomsBySite(id));
             response.put("ERROR", false);
             response.put("DATA", dto);
         } catch (EntityNotFoundException e) {

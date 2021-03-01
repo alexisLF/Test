@@ -1,5 +1,7 @@
 package org.cesi.fablab.api.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import org.cesi.fablab.api.entity.SiteEntity;
@@ -18,6 +20,7 @@ public class SiteDTO {
     @NotNull
     private String name;
     private String description;
+    private List<RoomDTO> roomList;
     // private List<HolidayDTO> holidaysList = new ArrayList<HolidayDTO>();
 
     public SiteDTO(final SiteEntity siteEntity) {

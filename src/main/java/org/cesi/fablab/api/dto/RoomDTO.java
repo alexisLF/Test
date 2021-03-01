@@ -1,5 +1,7 @@
 package org.cesi.fablab.api.dto;
 
+import java.util.List;
+
 import javax.validation.constraints.NotNull;
 
 import org.cesi.fablab.api.entity.RoomEntity;
@@ -20,6 +22,7 @@ public class RoomDTO {
     private String name;
     private String floor;
     private SiteEntity site;
+    private List<ResourceDTO> resourceList;
 
     public RoomDTO(final RoomEntity roomEntity) {
         super();
